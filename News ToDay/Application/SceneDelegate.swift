@@ -18,14 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let window = UIWindow(windowScene: windowScene)
-        
-        let feedVC = NewsFeedVC(collectionViewLayout: UICollectionViewFlowLayout()) // Pass in an empty layout for now
-        let navigationController = UINavigationController(rootViewController: feedVC)
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
-        
-        self.window = window
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = NTDTabBarController()
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
