@@ -8,42 +8,42 @@
 import UIKit
 
 class NTDTabBarController: UITabBarController {
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       viewControllers = [createHomeNC(), createCategoriesNC(), createBookmarksNC(), createProfileNC()]
+        viewControllers = [createHomeNC(), createCategoriesNC(), createBookmarksNC(), createProfileNC()]
     }
-
+    
     
     func createHomeNC() -> UINavigationController {
         let homeVC        = HomeViewController()
-        homeVC.title      = ScreenTitles.home
-        homeVC.tabBarItem = UITabBarItem(title: nil, image: TabBarImages.home, selectedImage: TabBarSelectedImages.home)
+        homeVC.title      = ScreenTitle.home
+        homeVC.tabBarItem = UITabBarItem(title: nil, image: TabBarImage.home, selectedImage: TabBarSelectedImage.home)
         return UINavigationController(rootViewController: homeVC)
     }
     
     
     func createCategoriesNC() -> UINavigationController {
         let categoriesVC         = CategoriesViewController()
-        categoriesVC.title       = ScreenTitles.categories
-        categoriesVC.tabBarItem  = UITabBarItem(title: nil, image: TabBarImages.categories, selectedImage: TabBarSelectedImages.categories)
+        categoriesVC.title       = ScreenTitle.categories
+        categoriesVC.tabBarItem  = UITabBarItem(title: nil, image: TabBarImage.categories, selectedImage: TabBarSelectedImage.categories)
         return UINavigationController(rootViewController: categoriesVC)
     }
-
+    
     
     func createBookmarksNC() -> UINavigationController {
         let bookmarksVC         = BookmarksViewController()
-        bookmarksVC.title       = ScreenTitles.bookmarks
-        bookmarksVC.tabBarItem  = UITabBarItem(title: nil, image: TabBarImages.bookmarks, selectedImage: TabBarSelectedImages.bookmarks)
+        bookmarksVC.title       = ScreenTitle.bookmarks
+        bookmarksVC.tabBarItem  = UITabBarItem(title: nil, image: TabBarImage.bookmarks, selectedImage: TabBarSelectedImage.bookmarks)
         return UINavigationController(rootViewController: bookmarksVC)
     }
     
     
     func createProfileNC() -> UINavigationController {
         let profileVC         = ProfileViewController()
-        profileVC.title       = ScreenTitles.user
-        profileVC.tabBarItem  = UITabBarItem(title: nil, image: TabBarImages.user, selectedImage: TabBarSelectedImages.user)
+        profileVC.title       = ScreenTitle.user
+        profileVC.tabBarItem  = UITabBarItem(title: nil, image: TabBarImage.user, selectedImage: TabBarSelectedImage.user)
         return UINavigationController(rootViewController: profileVC)
     }
 }
