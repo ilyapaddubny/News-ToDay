@@ -55,9 +55,10 @@ class HomeViewController: BaseController {
             
             let section = self.sections[sectionIndex]
             switch section {
+                
             case .categories:
                 let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(100),
+                    widthDimension: .estimated(90),
                     heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
@@ -66,12 +67,18 @@ class HomeViewController: BaseController {
                     widthDimension: .fractionalWidth(1),
                     heightDimension: .absolute(56.0))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                
+                group.contentInsets = .init(top: 12,
+                                            leading: 0,
+                                            bottom: 0,
+                                            trailing: 0)
+                group.interItemSpacing = .fixed(12)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuous // horizontal scroolling
                 section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 0)
                 return section
+                
+                
             case .promoted:
                 // MARK: Promoted Section Layout
                 let itemSize = NSCollectionLayoutSize(
@@ -92,23 +99,25 @@ class HomeViewController: BaseController {
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
                 return section
                 
+                
             case.recommended:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .fractionalHeight(1))
+                                                      heightDimension: .absolute(112))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 2)
                 
-                
-                let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(1),
-                                                        heightDimension: .estimated(112))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.interItemSpacing = .fixed(16)
-                
+
+                let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(0.9),
+                                                        heightDimension: .estimated(336))
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 3)
+                group.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                             leading: 1,
+                                                             bottom: 0,
+                                                             trailing: 1)
                 
                 let section = NSCollectionLayoutSection(group: group)
-//                section.orthogonalScrollingBehavior = .groupPaging // horizontal scroolling
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
+                section.orthogonalScrollingBehavior = .groupPagingCentered
                 return section
-                
             }
         }
         return layout

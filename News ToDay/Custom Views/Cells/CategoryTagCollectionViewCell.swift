@@ -11,38 +11,39 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CategoryTagCollectionViewCell"
     
-    let categoryButton: TwoStateButton = {
-        let button = TwoStateButton(normalBackgroundColor: .buttonActive, highlightedBackgroundColor: .buttonActive)
-        button.layer.cornerRadius = 20
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private let label = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        setup()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
-    private func configure() {
-        contentView.addSubview(categoryButton)
+    private func setup() {
+        backgroundColor = .buttonDisabledColor
+        label.textColor = .textOnDisabledButton
         
-        // Apply Constraints
+        layer.cornerRadius = 20
+        
+        contentView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            categoryButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            categoryButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            categoryButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            categoryButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
         ])
     }
     
     
     func configureCellWith(_ category: NewsCategory) {
-        categoryButton.setTitle(category.toString(), for: .normal)
-        categoryButton.setTitleColor(.textOnActiveButtonColor, for: .normal)
+        label.text = category.toString()
+        label.sizeToFit()
+    }
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
     }
     
 }
