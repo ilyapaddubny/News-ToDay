@@ -43,13 +43,7 @@ class HomeViewController: BaseController {
         
         configureDataSource()
         
-        
-//        // Initialize collection view layout
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .vertical // Set the scroll direction
-        
-        // Initialize collection view
-        
+        testAPI()
         
         self.view.addSubview(collectionView)
     }
@@ -206,8 +200,7 @@ class HomeViewController: BaseController {
         dataSource.apply(snapshot)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func testAPI() {
         
         let healthCategory = Category.health.rawValue
         let business = Category.business.rawValue
