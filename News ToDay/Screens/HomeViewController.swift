@@ -30,6 +30,10 @@ class HomeViewController: BaseController {
         
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
         
+        collectionView.register(CollectionHeaderReusableView.self,
+                                forSupplementaryViewOfKind: SupplemenntaryViewKind.header,
+                                withReuseIdentifier: CollectionHeaderReusableView.reuseIdentifire)
+        
         collectionView.register(CategoryTagCollectionViewCell.self,
                                 forCellWithReuseIdentifier: CategoryTagCollectionViewCell.reuseIdentifier)
         collectionView.register(PromotedArticleCollectionViewCell.self,
@@ -53,25 +57,47 @@ class HomeViewController: BaseController {
     func createLayout() -> UICollectionViewLayout  {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             
+            let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.92),
+                                                        heightDimension: .estimated(44))
+            
+            let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize,
+                                                                         elementKind: SupplemenntaryViewKind.header,
+                                                                         alignment: .top)
+            headerItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4)
+            
             let section = self.sections[sectionIndex]
+            
+            let supplementaryItemContentInsets = NSDirectionalEdgeInsets(
+                top: 0,
+                leading: 4,
+                bottom: 0,
+                trailing: 4)
+            headerItem.contentInsets = supplementaryItemContentInsets
+            
             switch section {
             case .categories:
                 let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(100),
+                    widthDimension: .estimated(90),
                     heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1),
-                    heightDimension: .absolute(56.0))
+                    heightDimension: .absolute(52.0))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                
+                group.contentInsets = .init(top: 12,
+                                            leading: 0,
+                                            bottom: 0,
+                                            trailing: 0)
+                group.interItemSpacing = .fixed(12)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuous // horizontal scroolling
-                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 0)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 30, trailing: 0)
                 return section
+                
+                
             case .promoted:
                 // MARK: Promoted Section Layout
                 let itemSize = NSCollectionLayoutSize(
@@ -89,26 +115,30 @@ class HomeViewController: BaseController {
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .groupPaging // horizontal scroolling
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 40, trailing: 0)
                 return section
+                
                 
             case.recommended:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .fractionalHeight(1))
+                                                      heightDimension: .absolute(112))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 2)
                 
-                
-                let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(1),
-                                                        heightDimension: .estimated(112))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.interItemSpacing = .fixed(16)
-                
+
+                let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(0.9),
+                                                        heightDimension: .estimated(336))
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 3)
+                group.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                             leading: 1,
+                                                             bottom: 0,
+                                                             trailing: 1)
                 
                 let section = NSCollectionLayoutSection(group: group)
-//                section.orthogonalScrollingBehavior = .groupPaging // horizontal scroolling
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
-                return section
+                section.orthogonalScrollingBehavior = .groupPagingCentered
+                section.boundarySupplementaryItems = [headerItem]
                 
+                return section
             }
         }
         return layout
@@ -137,6 +167,31 @@ class HomeViewController: BaseController {
             }
         });
         
+        // MARK: Supplementary View Provider
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+            switch kind {
+            case SupplemenntaryViewKind.header:
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: SupplemenntaryViewKind.header,
+                                                                                 withReuseIdentifier: CollectionHeaderReusableView.reuseIdentifire,
+                                                                                 for: indexPath) as! CollectionHeaderReusableView
+                let section = self.sections[indexPath.section]
+                let sectionName: String
+                    switch section {
+                    case .recommended:
+                        sectionName = "Recommended for you"
+                    default:
+                        return nil
+                    }
+                
+                
+                headerView.setTitle(sectionName)
+                return headerView
+            default:
+                return nil
+            }
+        }
+        
+        // MARK: Snapshot Definition
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.categories])
         snapshot.appendItems(Item.categories, toSection: .categories)
