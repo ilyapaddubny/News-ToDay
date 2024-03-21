@@ -28,6 +28,22 @@ class HomeViewController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let category = Category.entertainment.rawValue
+        let country = Country.USA
+        
+        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
+        }
+    
+        Task {
+            let news = try? await NetworkManager.shared.retrieveNews(from: url)
+            guard let news = news else { return }
+            let category = "entertainment".capitalized
+            let article = news.articles[0]
+            let destinationVC = NewsViewController(category: category, article: article)
+            navigationController?.pushViewController(destinationVC, animated: true)
+        }
+        
+        
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
         
         collectionView.register(CategoryTagCollectionViewCell.self,
@@ -149,26 +165,6 @@ class HomeViewController: BaseController {
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let healthCategory = Category.health.rawValue
-        let business = Category.business.rawValue
-        let uSA = Country.USA
-        let gB = Country.GreatBritain
-        
-        guard let url = Endpoint.searchTopHeadlines(categories: [healthCategory, business], countries: [uSA, gB]).url else { return
-        }
-    
-        Task {
-            let news = try? await NetworkManager.shared.retrieveNews(from: url)
-            guard let news = news else { return }
-            news.articles.forEach {
-                print($0.title ?? "")
-            }
-        }
     }
     
 }

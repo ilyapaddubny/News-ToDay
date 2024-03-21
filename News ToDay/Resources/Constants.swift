@@ -23,6 +23,14 @@ enum TabBarSelectedImage {
 }
 
 
+enum Image {
+    static let placeholder = UIImage(named: "placeholder-image")
+    static let arrowBackWhite = UIImage(named: "BackWhiteIcon")
+    static let bookmarkWhite = UIImage(named: "BookmarkWhiteIcon")
+    static let shareArrow = UIImage(named: "ForwardWhiteIcon")
+}
+
+
 enum ScreenTitle {
     static let home = "Browse"
     static let categories = "Categories"
@@ -38,4 +46,19 @@ enum Key {
 
 enum httpHeaderField {
     static let xApiKey = "X-Api-Key"
+}
+
+
+enum Font {
+    static func interRegular(with size: CGFloat) -> UIFont {
+        UIFont(name: "Inter-Regular", size: size) ?? UIFont()
+    }
+    
+    static func interSemiBold(with size: CGFloat) -> UIFont {
+        UIFont(name: "Inter-SemiBold", size: size) ?? UIFont()
+    }
+    
+    static func interBold(with size: CGFloat) -> UIFont {
+        UIFont(name: "Inter-Bold", size: size) ?? UIFont()
+    }
 }

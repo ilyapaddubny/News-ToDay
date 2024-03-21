@@ -12,7 +12,7 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "CategoryTagCollectionViewCell"
     
     let categoryButton: TwoStateButton = {
-        let button = TwoStateButton(normalBackgroundColor: .buttonActive, highlightedBackgroundColor: .buttonActive)
+        let button = TwoStateButton(normalBackgroundColor: .buttonActiveColor, highlightedBackgroundColor: .buttonActiveColor)
         button.layer.cornerRadius = 20
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
