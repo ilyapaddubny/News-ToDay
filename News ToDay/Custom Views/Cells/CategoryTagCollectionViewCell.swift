@@ -27,7 +27,7 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
             let backgroundColor = isChosen ? UIColor.buttonActiveColor : UIColor.buttonDisabledColor
             self.backgroundColor = backgroundColor
             
-            let labelColor = isChosen ? UIColor.textOnActiveButtonColor : UIColor.textOnDisabledButton
+            let labelColor = isChosen ? UIColor.textOnActiveButtonColor : UIColor.textOnDisabledButtonColor
             label.textColor = labelColor
             
         }
@@ -35,7 +35,7 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     
     private func setup() {
         backgroundColor = .buttonDisabledColor
-        label.textColor = .textOnDisabledButton
+        label.textColor = .textOnDisabledButtonColor
         
         layer.cornerRadius = 20
         

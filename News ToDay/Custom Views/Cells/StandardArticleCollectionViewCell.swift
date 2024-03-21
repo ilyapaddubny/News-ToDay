@@ -34,7 +34,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let headlineLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-SemiBold", size: 17)
-        label.textColor = .textPrimary
+        label.textColor = .textPrimaryColor
         label.numberOfLines = 2
         
         return label
@@ -43,7 +43,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-Regular", size: 15)
-        label.textColor = .textSecondary
+        label.textColor = .textSecondaryColor
         label.numberOfLines = 1
         
         return label

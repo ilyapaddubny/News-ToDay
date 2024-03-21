@@ -41,7 +41,7 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     let headlineLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-SemiBold", size: 17)
-        label.textColor = .textOnImageSecondary
+        label.textColor = .textOnImageSecondaryColor
         label.numberOfLines = 2
         
         return label
@@ -50,7 +50,7 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-Regular", size: 13)
-        label.textColor = .textOnImageSecondary
+        label.textColor = .textOnImageSecondaryColor
         label.numberOfLines = 1
         
         return label
