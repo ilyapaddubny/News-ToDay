@@ -102,7 +102,6 @@
 		2DA7FFC12BA8691B00B21A03 /* News ToDay */ = {
 			isa = PBXGroup;
 			children = (
-
 				83E5FABF2BAA0F92003D99ED /* Utilities */,
 				83E5FABC2BAA0F45003D99ED /* Models */,
 				83E5FAB92BAA0ED9003D99ED /* Managers */,
@@ -318,13 +317,10 @@
 				83E5FAAF2BA8BC3C003D99ED /* ProfileViewController.swift in Sources */,
 				83E5FABE2BAA0F52003D99ED /* News.swift in Sources */,
 				83E5FAA62BA8B8D5003D99ED /* Constants.swift in Sources */,
-
 				83E5FAC12BAA0FA0003D99ED /* Category.swift in Sources */,
-
 				2D0ED7142BA9E71300DFF4DC /* StandardArticleCollectionViewCell.swift in Sources */,
 				2D05B0242BAB106300BFE868 /* CollectionHeaderReusableView.swift in Sources */,
 				2DA7FFEE2BA9C7B500B21A03 /* Extensions.swift in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

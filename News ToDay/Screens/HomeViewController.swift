@@ -43,10 +43,16 @@ class HomeViewController: BaseController {
         
         configureDataSource()
         
-        testAPI()
+//        testAPI()
         
         self.view.addSubview(collectionView)
     }
+    
+//    override func configureViews() {
+//        super.configureViews()
+//        descriptionLabel.text = "Discover things of this world"
+//        view.backgroundColor = .systemBackground
+//    }
     
     func createLayout() -> UICollectionViewLayout  {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
