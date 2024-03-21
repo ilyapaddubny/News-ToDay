@@ -39,6 +39,11 @@ enum ScreenTitle {
 }
 
 
+enum Subtitle {
+    static let categories = "Thousands of articles in each category"
+}
+
+
 enum Key {
     static let apiKey = "ddbae45c2e33483d9cec5e18eaa5a82c"
 }

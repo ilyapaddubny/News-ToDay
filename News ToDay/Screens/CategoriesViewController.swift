@@ -9,4 +9,9 @@ import UIKit
 
 class CategoriesViewController: BaseController {
  
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setSubtitleText(text: Subtitle.categories)
+    }
+    
 }
