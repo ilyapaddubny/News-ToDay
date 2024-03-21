@@ -77,7 +77,10 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
         ])
+        
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
