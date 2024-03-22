@@ -20,6 +20,9 @@
 		2DA7FFDD2BA876AB00B21A03 /* Inter-Bold-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DA7FFDC2BA876AB00B21A03 /* Inter-Bold-700.ttf */; };
 		2DA7FFE02BA8870E00B21A03 /* NTDTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA7FFDF2BA8870E00B21A03 /* NTDTabBarController.swift */; };
 		2DA7FFEE2BA9C7B500B21A03 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA7FFED2BA9C7B500B21A03 /* Extensions.swift */; };
+		53499B392BADA1CF00836203 /* Terms&Conditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53499B382BADA1CF00836203 /* Terms&Conditions.swift */; };
+		53499B3B2BADA25100836203 /* TermsConditionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53499B3A2BADA25100836203 /* TermsConditionsController.swift */; };
+		53499B402BADBAED00836203 /* LanduageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53499B3F2BADBAED00836203 /* LanduageViewController.swift */; };
 		83E5FAA62BA8B8D5003D99ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAA52BA8B8D5003D99ED /* Constants.swift */; };
 		83E5FAA92BA8BBBE003D99ED /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAA82BA8BBBE003D99ED /* HomeViewController.swift */; };
 		83E5FAAB2BA8BBD6003D99ED /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAAA2BA8BBD6003D99ED /* CategoriesViewController.swift */; };
@@ -44,6 +47,9 @@
 		2DA7FFDC2BA876AB00B21A03 /* Inter-Bold-700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold-700.ttf"; sourceTree = "<group>"; };
 		2DA7FFDF2BA8870E00B21A03 /* NTDTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTDTabBarController.swift; sourceTree = "<group>"; };
 		2DA7FFED2BA9C7B500B21A03 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		53499B382BADA1CF00836203 /* Terms&Conditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Terms&Conditions.swift"; path = "News ToDay/Screens/Terms&Conditions.swift"; sourceTree = SOURCE_ROOT; };
+		53499B3A2BADA25100836203 /* TermsConditionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionsController.swift; sourceTree = "<group>"; };
+		53499B3F2BADBAED00836203 /* LanduageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanduageViewController.swift; sourceTree = "<group>"; };
 		83E5FAA52BA8B8D5003D99ED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		83E5FAA82BA8BBBE003D99ED /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		83E5FAAA2BA8BBD6003D99ED /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +117,8 @@
 				83E5FAAA2BA8BBD6003D99ED /* CategoriesViewController.swift */,
 				83E5FAAC2BA8BC17003D99ED /* BookmarksViewController.swift */,
 				83E5FAAE2BA8BC3C003D99ED /* ProfileViewController.swift */,
+				53499B3A2BADA25100836203 /* TermsConditionsController.swift */,
+				53499B3F2BADBAED00836203 /* LanduageViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -118,6 +126,7 @@
 		2DA7FFE22BA8874C00B21A03 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				53499B382BADA1CF00836203 /* Terms&Conditions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -263,11 +272,14 @@
 				83E5FAAD2BA8BC17003D99ED /* BookmarksViewController.swift in Sources */,
 				83E5FAB22BA8BD25003D99ED /* BaseController.swift in Sources */,
 				83E5FAA92BA8BBBE003D99ED /* HomeViewController.swift in Sources */,
+				53499B3B2BADA25100836203 /* TermsConditionsController.swift in Sources */,
 				2DA7FFC32BA8691B00B21A03 /* AppDelegate.swift in Sources */,
 				83E5FAAB2BA8BBD6003D99ED /* CategoriesViewController.swift in Sources */,
 				2DA7FFE02BA8870E00B21A03 /* NTDTabBarController.swift in Sources */,
+				53499B402BADBAED00836203 /* LanduageViewController.swift in Sources */,
 				2DA7FFC52BA8691B00B21A03 /* SceneDelegate.swift in Sources */,
 				2D0ED7122BA9E70B00DFF4DC /* CategoryTagCollectionViewCell.swift in Sources */,
+				53499B392BADA1CF00836203 /* Terms&Conditions.swift in Sources */,
 				2D0ED7102BA9E6FE00DFF4DC /* PromotedArticleCollectionViewCell.swift in Sources */,
 				83E5FAAF2BA8BC3C003D99ED /* ProfileViewController.swift in Sources */,
 				83E5FAA62BA8B8D5003D99ED /* Constants.swift in Sources */,
