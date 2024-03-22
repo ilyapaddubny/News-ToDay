@@ -25,6 +25,7 @@ enum TabBarSelectedImage {
 enum Icons {
     static let bookmarkStroke = UIImage(named: "BookmarkWhiteIcon")
     static let bookmarkFilled = UIImage(named: "BookmarkFilledWhiteIcon2")
+    static let search = UIImage(named: "SearchIcon")
 }
 
 

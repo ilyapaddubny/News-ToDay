@@ -86,9 +86,9 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCellWith(_ article: NewsArticle) {
-        headlineLabel.text = article.headline
-        categoryLabel.text = article.category?.toString()
+    func configureCellWith(_ article: Article) {
+        headlineLabel.text = article.title
+        categoryLabel.text = article.description ?? "no description"
     }
     
 }

@@ -7,14 +7,24 @@
 
 import Foundation
 
-enum Category: String {
-    case business
-    case entertainment
-    case general
-    case health
-    case science
-    case sports
-    case technology
+enum Category: String, Hashable, CaseIterable {
+    case general = "General"
+    case business = "Business"
+    case sports = "Sports"
+    case entertainment = "Leisure"
+    case science = "Science"
+    case health = " Health "
+    case technology = "Digital"
+    
+    
+    
+    func toString() -> String {
+        return self.rawValue
+    }
+    
+    static var categories: [Category] {
+        return Array(self.allCases)
+    }
 }
 
 

@@ -14,7 +14,7 @@ struct News: Codable {
 }
 
 
-struct Article: Codable {
+struct Article: Codable, Hashable {
     let source: Source?
     let author: String?
     let title: String?
@@ -26,6 +26,6 @@ struct Article: Codable {
 }
 
 
-struct Source: Codable {
+struct Source: Codable, Hashable {
     let name: String
 }
