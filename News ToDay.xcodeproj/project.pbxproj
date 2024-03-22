@@ -21,6 +21,7 @@
 		2DA7FFDD2BA876AB00B21A03 /* Inter-Bold-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DA7FFDC2BA876AB00B21A03 /* Inter-Bold-700.ttf */; };
 		2DA7FFE02BA8870E00B21A03 /* NTDTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA7FFDF2BA8870E00B21A03 /* NTDTabBarController.swift */; };
 		2DA7FFEE2BA9C7B500B21A03 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA7FFED2BA9C7B500B21A03 /* Extensions.swift */; };
+		2DDDA6432BADA24500357F44 /* NTDSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDDA6422BADA24500357F44 /* NTDSearchView.swift */; };
 		83E5FAA62BA8B8D5003D99ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAA52BA8B8D5003D99ED /* Constants.swift */; };
 		83E5FAA92BA8BBBE003D99ED /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAA82BA8BBBE003D99ED /* HomeViewController.swift */; };
 		83E5FAAB2BA8BBD6003D99ED /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAAA2BA8BBD6003D99ED /* CategoriesViewController.swift */; };
@@ -51,6 +52,7 @@
 		2DA7FFDC2BA876AB00B21A03 /* Inter-Bold-700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold-700.ttf"; sourceTree = "<group>"; };
 		2DA7FFDF2BA8870E00B21A03 /* NTDTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTDTabBarController.swift; sourceTree = "<group>"; };
 		2DA7FFED2BA9C7B500B21A03 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2DDDA6422BADA24500357F44 /* NTDSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTDSearchView.swift; sourceTree = "<group>"; };
 		83E5FAA52BA8B8D5003D99ED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		83E5FAA82BA8BBBE003D99ED /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		83E5FAAA2BA8BBD6003D99ED /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				2DA7FFDF2BA8870E00B21A03 /* NTDTabBarController.swift */,
+				2DDDA6422BADA24500357F44 /* NTDSearchView.swift */,
 			);
 			path = TabBarControllers;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				83E5FAB22BA8BD25003D99ED /* BaseController.swift in Sources */,
 				83E5FAA92BA8BBBE003D99ED /* HomeViewController.swift in Sources */,
 				83E5FAC62BAA0FF9003D99ED /* NetworkManager.swift in Sources */,
+				2DDDA6432BADA24500357F44 /* NTDSearchView.swift in Sources */,
 				2DA7FFC32BA8691B00B21A03 /* AppDelegate.swift in Sources */,
 				83E5FAC32BAA0FA7003D99ED /* Country.swift in Sources */,
 				83E5FAAB2BA8BBD6003D99ED /* CategoriesViewController.swift in Sources */,
