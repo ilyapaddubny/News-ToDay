@@ -80,7 +80,7 @@ class BookmarksViewController: BaseController {
         // MARK: Snapshot Definition
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.recommended])
-        snapshot.appendItems(Item.reccomendedNews, toSection: .recommended)
+        snapshot.appendItems(Item.recommendedNews, toSection: .recommended)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
