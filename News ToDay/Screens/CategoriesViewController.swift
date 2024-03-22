@@ -8,5 +8,9 @@
 import UIKit
 
 class CategoriesViewController: BaseController {
- 
+    
+//    override func configureViews() {
+//        super.configureViews()
+//        descriptionLabel.text = "Thousands of articles in each category"
+//    }
 }

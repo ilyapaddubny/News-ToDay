@@ -11,69 +11,67 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CategoryTagCollectionViewCell"
     
-    let categoryButton: TwoStateButton = {
-        let button = TwoStateButton(normalBackgroundColor: .buttonActive, highlightedBackgroundColor: .buttonActive)
-        button.layer.cornerRadius = 20
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private let label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Inter-Regular", size: 17)
+        label.numberOfLines = 1
+        
+        return label
     }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configure() {
-        contentView.addSubview(categoryButton)
+        setup()
         
-        // Apply Constraints
+        self.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(categoryTagTapped))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    var isChosen: Bool = false {
+        didSet {
+            let backgroundColor = isChosen ? UIColor.buttonActiveColor : UIColor.buttonDisabledColor
+            self.backgroundColor = backgroundColor
+            
+            let labelColor = isChosen ? UIColor.textOnActiveButtonColor : UIColor.textOnDisabledButtonColor
+            label.textColor = labelColor
+            
+        }
+    }
+    
+    private func setup() {
+        backgroundColor = .buttonDisabledColor
+        label.textColor = .textOnDisabledButtonColor
+        
+        layer.cornerRadius = 20
+        
+        contentView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            categoryButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            categoryButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            categoryButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            categoryButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -22),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     }
     
-    
-    func configureCellWith(_ category: NewsCategory) {
-        categoryButton.setTitle(category.toString(), for: .normal)
-        categoryButton.setTitleColor(.textOnActiveButtonColor, for: .normal)
+    @objc func categoryTagTapped() {
+        //TODO: implement category selected here
+        
+        isChosen.toggle() 
     }
     
-}
-
-
-
-class TwoStateButton: UIButton {
     
-    // Define the two background colors for the button's states
-    private let normalBackgroundColor: UIColor
-    private let highlightedBackgroundColor: UIColor
-    
-    // Initialize the button with its normal and highlighted background colors
-    init(normalBackgroundColor: UIColor, highlightedBackgroundColor: UIColor) {
-        self.normalBackgroundColor = normalBackgroundColor
-        self.highlightedBackgroundColor = highlightedBackgroundColor
-        super.init(frame: .zero)
-        configureButton()
+    func configureCellWith(_ category: Category) {
+        label.text = category.toString()
+//        label.sizeToFit()
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     
-    private func configureButton() {
-        self.backgroundColor = normalBackgroundColor
-        self.addTarget(self, action: #selector(buttonTouchUp), for: .touchUpInside)
-    }
-    
-    @objc func buttonTouchUp() {
-        //TODO: make background swichable
-        self.backgroundColor = highlightedBackgroundColor
-    }
 }
+
