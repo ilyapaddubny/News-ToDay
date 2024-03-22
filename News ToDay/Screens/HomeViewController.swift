@@ -30,21 +30,6 @@ class HomeViewController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let category = Category.entertainment.rawValue
-        let country = Country.USA
-        
-        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
-        }
-    
-        Task {
-            let news = try? await NetworkManager.shared.retrieveNews(from: url)
-            guard let news = news else { return }
-            let category = "entertainment".capitalized
-            let article = news.articles[0]
-            let destinationVC = NewsViewController(category: category, article: article)
-            navigationController?.pushViewController(destinationVC, animated: true)
-        }
-        
         configureSearchBar()
         
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
