@@ -19,6 +19,8 @@ class HomeViewController: BaseController {
         static let header = "header"
     }
     
+    var recommendedArticles: [Item] = Item.recommendedNews
+    
     let searchController = UISearchController()
     
     var collectionView: UICollectionView!
@@ -47,7 +49,7 @@ class HomeViewController: BaseController {
         
         configureDataSource()
         
-//        testAPI()
+        testAPI()
         
         self.view.addSubview(collectionView)
     }
@@ -209,7 +211,7 @@ class HomeViewController: BaseController {
         snapshot.appendItems(Item.promotedNews, toSection: .promoted)
         
         snapshot.appendSections([.recommended])
-        snapshot.appendItems(Item.recommendedNews, toSection: .recommended)
+        snapshot.appendItems(recommendedArticles, toSection: .recommended)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
@@ -229,8 +231,9 @@ class HomeViewController: BaseController {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
             //TODO: reload data
-            let items = news.articles.map { Item.news($0) }
-            Item.recommendedNews = items
+            let items = news.articles.map { Item.news($0, UUID()) }
+            print(items.isEmpty ? "⚠️ No items from API" : "\(items.count) articles retrived from API")
+            recommendedArticles = items
             DispatchQueue.main.async {
                 
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
@@ -241,7 +244,7 @@ class HomeViewController: BaseController {
                 snapshot.appendItems(Item.promotedNews, toSection: .promoted)
                 
                 snapshot.appendSections([.recommended])
-                snapshot.appendItems(Item.recommendedNews, toSection: .recommended)
+                snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
                 
                 self.sections = snapshot.sectionIdentifiers
                 self.dataSource.apply(snapshot)
@@ -318,13 +321,10 @@ extension HomeViewController: UISearchResultsUpdating {
         ]
 
         let maxWidth = categories.map {
-            $0.toString().size(withAttributes: textAttributes).width
+            $0.getButtonName().size(withAttributes: textAttributes).width
         }.max() ?? 0
 
-        print(maxWidth )
         return maxWidth - 15
-        
-        
     }
     
 }
@@ -333,11 +333,11 @@ extension HomeViewController: UISearchResultsUpdating {
 // MARK: - Model
 
 enum Item: Hashable {
-    case news(Article)
+    case news(Article, UUID)
     case category(Category)
     
     var news: Article? {
-        if case .news(let article) = self {
+        if case .news(let article, _) = self {
             return article
         } else {
             return nil
@@ -353,8 +353,8 @@ enum Item: Hashable {
     }
     
     static let categories: [Item] = Category.categories.map { Item.category($0) }
-    static var promotedNews: [Item] = Article.promotedNews.map { Item.news($0) }
-    static var recommendedNews: [Item] = Article.recommendedNews.map { Item.news($0) }
+    static var promotedNews: [Item] = Article.promotedNews.map { Item.news($0, UUID()) }
+    static var recommendedNews: [Item] = Article.recommendedNews.map { Item.news($0, UUID()) }
     
 }
 
