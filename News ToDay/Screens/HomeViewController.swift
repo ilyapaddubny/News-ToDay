@@ -231,7 +231,7 @@ class HomeViewController: BaseController {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
             //TODO: reload data
-            let items = news.articles.map { Item.news($0) }
+            let items = news.articles.map { Item.news($0, UUID()) }
             print(items.isEmpty ? "⚠️ No items from API" : "\(items.count) articles retrived from API")
             recommendedArticles = items
             DispatchQueue.main.async {
@@ -321,7 +321,7 @@ extension HomeViewController: UISearchResultsUpdating {
         ]
 
         let maxWidth = categories.map {
-            $0.toString().size(withAttributes: textAttributes).width
+            $0.getButtonName().size(withAttributes: textAttributes).width
         }.max() ?? 0
 
         return maxWidth - 15
@@ -333,11 +333,11 @@ extension HomeViewController: UISearchResultsUpdating {
 // MARK: - Model
 
 enum Item: Hashable {
-    case news(Article)
+    case news(Article, UUID)
     case category(Category)
     
     var news: Article? {
-        if case .news(let article) = self {
+        if case .news(let article, _) = self {
             return article
         } else {
             return nil
@@ -353,8 +353,8 @@ enum Item: Hashable {
     }
     
     static let categories: [Item] = Category.categories.map { Item.category($0) }
-    static var promotedNews: [Item] = Article.promotedNews.map { Item.news($0) }
-    static var recommendedNews: [Item] = Article.recommendedNews.map { Item.news($0) }
+    static var promotedNews: [Item] = Article.promotedNews.map { Item.news($0, UUID()) }
+    static var recommendedNews: [Item] = Article.recommendedNews.map { Item.news($0, UUID()) }
     
 }
 
