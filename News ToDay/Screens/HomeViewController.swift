@@ -19,6 +19,8 @@ class HomeViewController: BaseController {
         static let header = "header"
     }
     
+    var recommendedArticles: [Item] = Item.recommendedNews
+    
     let searchController = UISearchController()
     
     var collectionView: UICollectionView!
@@ -29,21 +31,6 @@ class HomeViewController: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let category = Category.entertainment.rawValue
-        let country = Country.USA
-        
-        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
-        }
-    
-        Task {
-            let news = try? await NetworkManager.shared.retrieveNews(from: url)
-            guard let news = news else { return }
-            let category = "entertainment".capitalized
-            let article = news.articles[0]
-            let destinationVC = NewsViewController(category: category, article: article)
-            navigationController?.pushViewController(destinationVC, animated: true)
-        }
         
         configureSearchBar()
         
@@ -62,7 +49,7 @@ class HomeViewController: BaseController {
         
         configureDataSource()
         
-//        testAPI()
+        testAPI()
         
         self.view.addSubview(collectionView)
     }
@@ -224,7 +211,7 @@ class HomeViewController: BaseController {
         snapshot.appendItems(Item.promotedNews, toSection: .promoted)
         
         snapshot.appendSections([.recommended])
-        snapshot.appendItems(Item.recommendedNews, toSection: .recommended)
+        snapshot.appendItems(recommendedArticles, toSection: .recommended)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
@@ -245,7 +232,8 @@ class HomeViewController: BaseController {
             guard let news = news else { return }
             //TODO: reload data
             let items = news.articles.map { Item.news($0) }
-            Item.recommendedNews = items
+            print(items.isEmpty ? "⚠️ No items from API" : "\(items.count) articles retrived from API")
+            recommendedArticles = items
             DispatchQueue.main.async {
                 
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
@@ -256,7 +244,7 @@ class HomeViewController: BaseController {
                 snapshot.appendItems(Item.promotedNews, toSection: .promoted)
                 
                 snapshot.appendSections([.recommended])
-                snapshot.appendItems(Item.recommendedNews, toSection: .recommended)
+                snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
                 
                 self.sections = snapshot.sectionIdentifiers
                 self.dataSource.apply(snapshot)
@@ -336,10 +324,7 @@ extension HomeViewController: UISearchResultsUpdating {
             $0.toString().size(withAttributes: textAttributes).width
         }.max() ?? 0
 
-        print(maxWidth )
         return maxWidth - 15
-        
-        
     }
     
 }
