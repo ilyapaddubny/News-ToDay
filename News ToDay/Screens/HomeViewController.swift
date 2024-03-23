@@ -20,6 +20,7 @@ class HomeViewController: BaseController {
     }
     
     var recommendedArticles: [Item] = Item.recommendedNews
+    var promotedArticles: [Item] = Item.promotedNews
     
     private let searchBar       = UISearchBar()
     private let scrollView      = UIScrollView()
@@ -242,9 +243,39 @@ class HomeViewController: BaseController {
         dataSource.apply(snapshot)
     }
     
+    // MARK: - Retriving data
     
     func getNews() {
+        getPromotedSectionArticles()
+        getRecommendedSectionArticles()
+    }
+    
+    func getPromotedSectionArticles() {
+        let category = Category.business.rawValue
+        let country = Country.USA
         
+        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
+        }
+        
+        Task {
+            let news = try? await NetworkManager.shared.retrieveNews(from: url)
+            guard let news = news else { return }
+            //TODO: reload data
+            let items = news.articles.map { Item.news($0, UUID()) }
+            
+            print(items.isEmpty ? "⚠️ No promoted articles from API" : "\(items.count) promoted articles retrived from API")
+            promotedArticles = items
+            DispatchQueue.main.async {
+                // Update existing data source snapshot with new promoted articles
+                var snapshot = self.dataSource.snapshot()
+                snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .promoted))
+                snapshot.appendItems(self.promotedArticles, toSection: .promoted)
+                self.dataSource.apply(snapshot, animatingDifferences: true)
+            }
+        }
+    }
+    
+    func getRecommendedSectionArticles() {
         let category = Category.entertainment.rawValue
         let country = Country.USA
         
@@ -257,23 +288,14 @@ class HomeViewController: BaseController {
             //TODO: reload data
             let items = news.articles.map { Item.news($0, UUID()) }
             
-            print(items.isEmpty ? "⚠️ No items from API" : "\(items.count) articles retrived from API")
+            print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
             recommendedArticles = items
             DispatchQueue.main.async {
-                
-                var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-                snapshot.appendSections([.categories])
-                snapshot.appendItems(Item.categories, toSection: .categories)
-                
-                snapshot.appendSections([.promoted])
-                snapshot.appendItems(Item.promotedNews, toSection: .promoted)
-                
-                snapshot.appendSections([.recommended])
-                snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
-                
-                self.sections = snapshot.sectionIdentifiers
-                self.dataSource.apply(snapshot)
-                
+                    // Update existing data source snapshot with new recommended articles
+                    var snapshot = self.dataSource.snapshot()
+                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .recommended))
+                    snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
+                    self.dataSource.apply(snapshot, animatingDifferences: true)
                 
                 // Or, if you want to reload specific sections:
                 //                 collectionView.reloadSections(IndexSet(integer: sectionIndex))

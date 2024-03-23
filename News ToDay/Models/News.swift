@@ -25,11 +25,11 @@ struct Article: Codable, Hashable {
     let content: String?
     
     static let promotedNews: [Article] = [
-        Article(source: nil, author: "John Doe", title: "Study Shows Benefits of Meditation", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Alice Johnson", title: "New Technology Aids in Environmental Conservation", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "David Brown", title: "Health Experts Recommend Plant-Based Diet for Longevity", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Sarah Miller", title: "Breakthrough Discovery in Cancer Treatment", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Emma Taylor", title: "Innovations in Renewable Energy Technology", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil)
+//        Article(source: nil, author: "John Doe", title: "Study Shows Benefits of Meditation", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Alice Johnson", title: "New Technology Aids in Environmental Conservation", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "David Brown", title: "Health Experts Recommend Plant-Based Diet for Longevity", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Sarah Miller", title: "Breakthrough Discovery in Cancer Treatment", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Emma Taylor", title: "Innovations in Renewable Energy Technology", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil)
     ]
     
     static var recommendedNews: [Article] = [
