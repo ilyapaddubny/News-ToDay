@@ -50,7 +50,7 @@ extension UIColor {
         return UIColor(named: "TextSecondaryColor") ?? .clear
     }
     
-    static var textGreyLight: UIColor {
+    static var textGreyLightColor: UIColor {
         return UIColor(named: "TextGreyLight") ?? .clear
     }
 }

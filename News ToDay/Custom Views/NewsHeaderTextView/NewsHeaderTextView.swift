@@ -15,7 +15,7 @@ class NewsHeaderTextView: BaseView {
     let authorLabel     = NTDLabel(font: Font.interRegular(with: 14), textColor: .textGreyLight)
     
     func configure(category: String, article: Article) {
-        categoryLabel.text        = category
+        categoryLabel.text        = category.capitalized
         categoryLabel.sizeToFit()
         titleLabel.text           = article.title
         authorNameLabel.text      = article.author

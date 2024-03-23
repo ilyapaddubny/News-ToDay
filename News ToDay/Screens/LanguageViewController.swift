@@ -1,5 +1,5 @@
 //
-//  LanduageViewController.swift
+//  LanguageViewController.swift
 //  News ToDay
 //
 //  Created by Дарья Большакова on 22.03.2024.
