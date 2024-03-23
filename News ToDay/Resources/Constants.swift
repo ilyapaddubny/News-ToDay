@@ -34,6 +34,7 @@ enum Image {
     static let arrowBackWhite = UIImage(named: "BackWhiteIcon")
     static let bookmarkWhite = UIImage(named: "BookmarkWhiteIcon")
     static let shareArrow = UIImage(named: "ForwardWhiteIcon")
+    static let searchIcon = UIImage(named: "searchIcon")
 }
 
 
@@ -47,6 +48,12 @@ enum ScreenTitle {
 
 enum Subtitle {
     static let categories = "Thousands of articles in each category"
+    static let browse = "Discover things of the world"
+}
+
+
+enum Placeholder {
+    static let search = "Search"
 }
 
 

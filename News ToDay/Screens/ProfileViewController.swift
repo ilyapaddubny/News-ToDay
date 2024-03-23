@@ -38,7 +38,7 @@ class ProfileViewController: BaseController {
         image.heightAnchor.constraint(equalToConstant: view.frame.height/10).isActive = true
         image.widthAnchor.constraint(equalToConstant: view.frame.height/10).isActive = true
         image.layer.borderWidth = 0.5
-        image.layer.borderColor = UIColor.textSecondary.cgColor
+        image.layer.borderColor = UIColor.textSecondaryColor.cgColor
         image.layer.masksToBounds = false
         image.layer.cornerRadius = view.frame.height/20
         image.clipsToBounds = true

@@ -1,5 +1,5 @@
 //
-//  LanduageViewController.swift
+//  LanguageViewController.swift
 //  News ToDay
 //
 //  Created by Дарья Большакова on 22.03.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LanduageViewController: UIView {
+class LanguageViewController: UIView {
     let logoLabel = UILabel()
     let backButton = UIButton()
     
@@ -123,12 +123,12 @@ class LanduageViewController: UIView {
 
 import SwiftUI
 
-struct Landuage: PreviewProvider {
+struct Language: PreviewProvider {
     static var previews: some View {
         ContainerView().ignoresSafeArea()
     }
     struct ContainerView: UIViewRepresentable {
-        let view = LanduageViewController()
+        let view = LanguageViewController()
         
         func makeUIView(context: Context) -> some UIView {
             return view

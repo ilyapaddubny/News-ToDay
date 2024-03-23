@@ -13,6 +13,7 @@ class NTDTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewControllers = [createHomeNC(), createCategoriesNC(), createBookmarksNC(), createProfileNC()]
+        tabBar.backgroundColor = .systemGray6
     }
     
     
