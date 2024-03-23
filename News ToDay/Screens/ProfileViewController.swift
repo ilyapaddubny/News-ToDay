@@ -76,12 +76,15 @@ class ProfileViewController: BaseController {
         ])
     }
     
+    
+    
     private func setBtn() {
-        self.view.addSubview(btnStack)
         
-        let langBtn = createButton()
-        let termsBtn = createButton()
-        let signOutBtn = createButton()
+        let langBtn = createButton(action: langAct())
+        let termsBtn = createButton(action: termsAct())
+        let signOutBtn = createButton(action: signAct())
+        
+        self.view.addSubview(btnStack)
         
         let langLabel = createLabel(size: 20, font: "Inter-SemiBold", text: "Language", color: .textOnDisabledButtonColor)
         let termsLabel = createLabel(size: 20, font: "Inter-SemiBold", text: "Terms & Conditions", color: .textOnDisabledButtonColor)
@@ -151,9 +154,9 @@ class ProfileViewController: BaseController {
         return label
     }
     
-    private func createButton() -> UIButton {
+    private func createButton(action: UIAction) -> UIButton {
         
-        let button = UIButton()
+        let button = UIButton(primaryAction: action)
 //        button.setTitleColor(.textOnDisabledButtonColor, for: .normal)
 //        button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
@@ -165,6 +168,30 @@ class ProfileViewController: BaseController {
         
     }
     
+    func langAct() -> UIAction {
+        let act = UIAction { _ in
+            print(1)
+            let vc = LanduageViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        return act
+    }
+    
+    func termsAct() -> UIAction {
+        let act = UIAction { _ in
+            print(2)
+            let vc = TermsConditionsController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        return act
+    }
+    
+    func signAct() -> UIAction {
+        let act = UIAction { _ in
+            print(3)
+            //допишу как появится онбординг
+        }
+        return act
+    }
+    
 }
-
-

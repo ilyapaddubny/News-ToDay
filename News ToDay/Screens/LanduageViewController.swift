@@ -7,26 +7,29 @@
 
 import UIKit
 
-class LanduageViewController: UIView {
+class LanduageViewController: UIViewController {
     let logoLabel = UILabel()
-    let backButton = UIButton()
     
+    lazy var backButton: UIButton = {
+        let button = UIButton(primaryAction: back())
+        button.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
+        button.tintColor = .textSecondaryColor
+        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        return button
+    }()
     
-    
-    
-    init() {
-        super.init(frame: CGRect())
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         setUI()
         setBtn()
-        
+        view.backgroundColor = .white
     }
     
     
     func setUI() {
-        backButton.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
-        backButton.tintColor = .textSecondaryColor
-        backButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
         
         logoLabel.text = ("Language")
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
@@ -38,48 +41,72 @@ class LanduageViewController: UIView {
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(logoLabel)
-        addSubview(backButton)
+        view.addSubview(logoLabel)
+        view.addSubview(backButton)
         
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 18),
-            backButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
-            logoLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            logoLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            logoLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
         ])
         
     }
     
+    lazy var englishBtn: UIButton = {
+        let button = createButton(action: engLang())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    lazy var russianBtn: UIButton = {
+        let button = createButton(action: rusLang())
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    lazy var englishLabel: UILabel = {
+        let label = createLabel(size: 20, font: "Inter-SemiBold", text: "English", color: .textOnDisabledButtonColor)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    lazy var russianLabel: UILabel = {
+        let label = createLabel(size: 20, font: "Inter-SemiBold", text: "Russian", color: .textOnDisabledButtonColor)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    
     func setBtn() {
-        let englishBtn = createButton()
-        let russianBtn = createButton()
-        let englishLabel = createLabel(size: 20, font: "Inter-SemiBold", text: "English", color: .textOnDisabledButtonColor)
-        let russianLabel = createLabel(size: 20, font: "Inter-SemiBold", text: "Russian", color: .textOnDisabledButtonColor)
         
         englishBtn.backgroundColor = .buttonActiveColor
         englishLabel.textColor = .textOnActiveButtonColor
         
-        addSubview(englishBtn)
-        addSubview(russianBtn)
-        addSubview(englishLabel)
-        addSubview(russianLabel)
+        view.addSubview(englishBtn)
+        view.addSubview(russianBtn)
+        view.addSubview(englishLabel)
+        view.addSubview(russianLabel)
         
-        englishBtn.translatesAutoresizingMaskIntoConstraints = false
-        russianBtn.translatesAutoresizingMaskIntoConstraints = false
+        
         englishLabel.translatesAutoresizingMaskIntoConstraints = false
         russianLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
             englishBtn.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 20),
-            englishBtn.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            englishBtn.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            englishBtn.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            englishBtn.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             
             russianBtn.topAnchor.constraint(equalTo: englishBtn.bottomAnchor, constant: 20),
-            russianBtn.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            russianBtn.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            russianBtn.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            russianBtn.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
         
             englishLabel.leadingAnchor.constraint(equalTo: englishBtn.leadingAnchor, constant: 20),
             englishLabel.topAnchor.constraint(equalTo: englishBtn.topAnchor, constant: 18),
@@ -90,14 +117,11 @@ class LanduageViewController: UIView {
     }
     
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     
-    private func createButton() -> UIButton {
+    private func createButton(action: UIAction) -> UIButton {
         
-        let button = UIButton()
+        let button = UIButton(primaryAction: action)
 //        button.setTitleColor(.textOnDisabledButtonColor, for: .normal)
 //        button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
@@ -119,20 +143,53 @@ class LanduageViewController: UIView {
         
         return label
     }
-}
-
-import SwiftUI
-
-struct Landuage: PreviewProvider {
-    static var previews: some View {
-        ContainerView().ignoresSafeArea()
-    }
-    struct ContainerView: UIViewRepresentable {
-        let view = LanduageViewController()
-        
-        func makeUIView(context: Context) -> some UIView {
-            return view
+    
+    func back() -> UIAction {
+        let act = UIAction { _ in
+            print(7)
+            self.navigationController?.popViewController(animated: true)
+//            let vc = ProfileViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
         }
-        func updateUIView(_ uiView: UIViewType, context: Context) { }
+        return act
     }
+    
+    func engLang() -> UIAction {
+        let act = UIAction { _ in
+            print(5)
+            self.englishBtn.backgroundColor = .buttonActiveColor
+            self.englishLabel.textColor = .textOnActiveButtonColor
+            self.russianBtn.backgroundColor = .buttonDisabledColor
+            self.russianLabel.textColor = .textOnDisabledButtonColor
+        }
+        return act
+    }
+    
+    func rusLang() -> UIAction {
+        let act = UIAction { _ in
+            print(6)
+            self.russianBtn.backgroundColor = .buttonActiveColor
+            self.russianLabel.textColor = .textOnActiveButtonColor
+            self.englishBtn.backgroundColor = .buttonDisabledColor
+            self.englishLabel.textColor = .textOnDisabledButtonColor
+        }
+        return act
+    }
+    
 }
+//
+////import SwiftUI
+////
+////struct Landuage: PreviewProvider {
+////    static var previews: some View {
+////        ContainerView().ignoresSafeArea()
+////    }
+////    struct ContainerView: UIViewRepresentable {
+////        let view = LanduageViewController()
+////        
+////        func makeUIView(context: Context) -> some UIView {
+////            return view
+////        }
+////        func updateUIView(_ uiView: UIViewType, context: Context) { }
+////    }
+////}
