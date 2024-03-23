@@ -11,7 +11,14 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CategoryTagCollectionViewCell"
     
-    private let label = UILabel()
+    private let label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Inter-Regular", size: 17)
+        label.numberOfLines = 1
+        
+        return label
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,9 +63,9 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func configureCellWith(_ category: NewsCategory) {
-        label.text = category.toString()
-        label.sizeToFit()
+    func configureCellWith(_ category: Category) {
+        label.text = category.getButtonName()
+//        label.sizeToFit()
     }
     
     

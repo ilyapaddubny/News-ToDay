@@ -24,6 +24,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12.0
+        imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalToConstant: 96).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 96).isActive = true
         imageView.backgroundColor = UIColor.random
@@ -86,9 +87,17 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCellWith(_ article: NewsArticle) {
-        headlineLabel.text = article.headline
-        categoryLabel.text = article.category?.toString()
+    func configureCellWith(_ article: Article) {
+        headlineLabel.text = article.title
+        categoryLabel.text = article.description ?? "no description"
+        
+        guard let imageUrl = article.urlToImage else {return}
+        Task {
+            imageView.image = await NetworkManager.shared.downloadImage(from: imageUrl)
+            imageView.contentMode = .scaleAspectFill
+            imageView.layer.cornerRadius = 12.0
+        }
+       
     }
     
 }

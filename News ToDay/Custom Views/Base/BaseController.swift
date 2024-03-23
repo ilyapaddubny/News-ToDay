@@ -7,8 +7,9 @@
 import UIKit
 
 class BaseController: UIViewController {
-    var descriptionLabel: UILabel!
-
+    
+    let subtitle = NTDLabel(font: Font.interRegular(with: 16), textColor: .textSecondaryColor)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addViews()
@@ -16,35 +17,34 @@ class BaseController: UIViewController {
         configureViews()
     }
     
-
+    func setSubtitleText(text: String) {
+        subtitle.text = text
+    }
 }
 
 
 @objc extension BaseController {
     
     func addViews() {
-//        descriptionLabel = UILabel()
-//        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(descriptionLabel)
+        view.addSubviews(subtitle)
     }
     
     func constraintViews() {
-//        NSLayoutConstraint.activate([
-//            descriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-//            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-//            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-//        ])
+        let offset: CGFloat = 20
+        
+        NSLayoutConstraint.activate([
+            subtitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            subtitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: offset),
+            subtitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: offset)
+        ])
     }
     
     func configureViews() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-//        descriptionLabel.textAlignment = .left
-//        descriptionLabel.numberOfLines = 0
-//        descriptionLabel.textColor = .textSecondary
-//        descriptionLabel.font = UIFont(name: "Inter-SemiBold", size: 17)
+        subtitle.numberOfLines = 2
+        subtitle.text = ""
     }
 }
- 
+
 

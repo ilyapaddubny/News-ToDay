@@ -122,9 +122,9 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func configureCellWith(_ article: NewsArticle) {
-        categoryLabel.text = article.category?.toString().uppercased()
-        headlineLabel.text = article.headline
+    func configureCellWith(_ article: Article) {
+        categoryLabel.text = article.description ?? "no description"
+        headlineLabel.text = article.title
     }
     
     required init?(coder: NSCoder) {
