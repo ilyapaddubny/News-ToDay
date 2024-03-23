@@ -7,23 +7,32 @@
 
 import UIKit
 
-class TermsConditionsController: UIView {
+class TermsConditionsController: UIViewController {
     let logoLabel = UILabel()
     let termsLabel = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-    let backButton = UIButton()
     
-    init() {
-        super.init(frame: CGRect())
-        setUI()
+    lazy var backButton: UIButton = {
+        let button = UIButton(primaryAction: back())
+        button.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
+        button.tintColor = .textSecondaryColor
+        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         
+        return button
+    }()
+   
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        setUI()
+        view.backgroundColor = .white
     }
-    
-    
+        
     func setUI() {
-        backButton.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
-        backButton.tintColor = .textSecondaryColor
-        backButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        
         
         
         logoLabel.text = ("Terms & Conditions")
@@ -35,50 +44,57 @@ class TermsConditionsController: UIView {
         termsLabel.font = UIFont(name: "Inter-Regular" , size: 15)
         termsLabel.textColor = .textSecondaryColor
         
-        backButton.translatesAutoresizingMaskIntoConstraints = false
+       
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         termsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(logoLabel)
-        addSubview(termsLabel)
-        addSubview(backButton)
+        view.addSubview(logoLabel)
+        view.addSubview(termsLabel)
+        view.addSubview(backButton)
         
         NSLayoutConstraint.activate([
             
-            backButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 18),
-            backButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
-            logoLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            logoLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            logoLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             
             
             termsLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 10),
-            termsLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            termsLabel.trailingAnchor.constraint(equalTo:safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            termsLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            termsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            termsLabel.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            termsLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         
         ])
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-
-import SwiftUI
-
-struct viewProvider: PreviewProvider {
-    static var previews: some View {
-        ContainerView().ignoresSafeArea()
-    }
-    struct ContainerView: UIViewRepresentable {
-        let view = TermsConditionsController()
-        
-        func makeUIView(context: Context) -> some UIView {
-            return view
+    func back() -> UIAction {
+        let act = UIAction { _ in
+            print(4)
+            self.navigationController?.popViewController(animated: true)
+//            let vc = ProfileViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
         }
-        func updateUIView(_ uiView: UIViewType, context: Context) { }
+        return act
     }
+    
 }
+
+
+//import SwiftUI
+//
+//struct viewProvider: PreviewProvider {
+//    static var previews: some View {
+//        ContainerView().ignoresSafeArea()
+//    }
+//    struct ContainerView: UIViewRepresentable {
+//        let view = TermsConditionsController()
+//        
+//        func makeUIView(context: Context) -> some UIView {
+//            return view
+//        }
+//        func updateUIView(_ uiView: UIViewType, context: Context) { }
+//    }
+//}
