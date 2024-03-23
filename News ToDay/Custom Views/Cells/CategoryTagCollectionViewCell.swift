@@ -64,7 +64,7 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     
     
     func configureCellWith(_ category: Category) {
-        label.text = category.toString()
+        label.text = category.getButtonName()
 //        label.sizeToFit()
     }
     

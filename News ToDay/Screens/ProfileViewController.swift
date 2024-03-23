@@ -37,7 +37,8 @@ class ProfileViewController: BaseController {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.heightAnchor.constraint(equalToConstant: view.frame.height/10).isActive = true
         image.widthAnchor.constraint(equalToConstant: view.frame.height/10).isActive = true
-        image.layer.borderWidth = 1
+        image.layer.borderWidth = 0.5
+        image.layer.borderColor = UIColor.textSecondary.cgColor
         image.layer.masksToBounds = false
         image.layer.cornerRadius = view.frame.height/20
         image.clipsToBounds = true
@@ -86,9 +87,9 @@ class ProfileViewController: BaseController {
         
         self.view.addSubview(btnStack)
         
-        let langLabel = createLabel(size: 20, font: "Inter-SemiBold", text: "Language", color: .textOnDisabledButtonColor)
-        let termsLabel = createLabel(size: 20, font: "Inter-SemiBold", text: "Terms & Conditions", color: .textOnDisabledButtonColor)
-        let signOutLabel = createLabel(size: 20, font: "Inter-SemiBold", text: "Sign Out", color: .textOnDisabledButtonColor)
+        let langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Language", color: .textOnDisabledButtonColor)
+        let termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Terms & Conditions", color: .textOnDisabledButtonColor)
+        let signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Sign Out", color: .textOnDisabledButtonColor)
         
 //        langBtn.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
 //        langBtn.configuration?.imagePlacement = .trailing

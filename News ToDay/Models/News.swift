@@ -33,14 +33,14 @@ struct Article: Codable, Hashable {
     ]
     
     static var recommendedNews: [Article] = [
-        Article(source: nil, author: "Michael Green", title: "New Study Reveals Surprising Benefits of Chocolate", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Sophia White", title: "Space Exploration: Latest Developments and Future Prospects", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Ryan Johnson", title: "Artificial Intelligence: Transforming Industries Across the Globe", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Olivia Davis", title: "The Future of Transportation: Electric Vehicles and Beyond", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Daniel Adams", title: "Advancements in Virtual Reality Technology", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Sophia Smith", title: "Exploring the Mysteries of Deep Sea Ecosystems", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Ethan Brown", title: "Revolutionizing Education: Impact of Online Learning Platforms", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
-        Article(source: nil, author: "Isabella White", title: "The Rise of Sustainable Fashion: Ethical Practices in the Industry", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil)
+//        Article(source: nil, author: "Michael Green", title: "New Study Reveals Surprising Benefits of Chocolate", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Sophia White", title: "Space Exploration: Latest Developments and Future Prospects", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Ryan Johnson", title: "Artificial Intelligence: Transforming Industries Across the Globe", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Olivia Davis", title: "The Future of Transportation: Electric Vehicles and Beyond", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Daniel Adams", title: "Advancements in Virtual Reality Technology", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Sophia Smith", title: "Exploring the Mysteries of Deep Sea Ecosystems", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Ethan Brown", title: "Revolutionizing Education: Impact of Online Learning Platforms", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
+//        Article(source: nil, author: "Isabella White", title: "The Rise of Sustainable Fashion: Ethical Practices in the Industry", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil)
     ]
 }
 

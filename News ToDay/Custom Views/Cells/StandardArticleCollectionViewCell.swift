@@ -24,6 +24,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12.0
+        imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalToConstant: 96).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 96).isActive = true
         imageView.backgroundColor = UIColor.random
@@ -34,7 +35,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let headlineLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-SemiBold", size: 17)
-        label.textColor = .textPrimary
+        label.textColor = .textPrimaryColor
         label.numberOfLines = 2
         
         return label
@@ -43,7 +44,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-Regular", size: 15)
-        label.textColor = .textSecondary
+        label.textColor = .textSecondaryColor
         label.numberOfLines = 1
         
         return label
@@ -89,6 +90,14 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     func configureCellWith(_ article: Article) {
         headlineLabel.text = article.title
         categoryLabel.text = article.description ?? "no description"
+        
+        guard let imageUrl = article.urlToImage else {return}
+        Task {
+            imageView.image = await NetworkManager.shared.downloadImage(from: imageUrl)
+            imageView.contentMode = .scaleAspectFill
+            imageView.layer.cornerRadius = 12.0
+        }
+       
     }
     
 }
