@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class StandardArticleCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "StandardArticleCollectionViewCell"
+    private var cancellable: AnyCancellable?
+    private var animator: UIViewPropertyAnimator?
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -24,6 +27,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12.0
+        imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalToConstant: 96).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 96).isActive = true
         imageView.backgroundColor = UIColor.random
@@ -34,7 +38,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let headlineLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-SemiBold", size: 17)
-        label.textColor = .textPrimary
+        label.textColor = .textPrimaryColor
         label.numberOfLines = 2
         
         return label
@@ -43,7 +47,7 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-Regular", size: 15)
-        label.textColor = .textSecondary
+        label.textColor = .textSecondaryColor
         label.numberOfLines = 1
         
         return label
@@ -86,9 +90,43 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCellWith(_ article: NewsArticle) {
-        headlineLabel.text = article.headline
-        categoryLabel.text = article.category?.toString()
+    func configureCellWith(_ article: Article) {
+        headlineLabel.text = article.title
+        categoryLabel.text = article.description ?? "no description"
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 12.0
+        cancellable = loadImage(for: article).sink(receiveValue: { [unowned self] image in
+            showImage(image: image)
+        })
+        
     }
     
+    
+    private func showImage(image: UIImage?) {
+        imageView.alpha = 0.0
+        animator?.stopAnimation(false)
+        imageView.image = image
+        animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+            self.imageView.alpha = 1.0
+        })
+    }
+    
+    private func loadImage(for article: Article) -> AnyPublisher<UIImage?, Never> {
+        return Just(article.urlToImage)
+            .flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+                let url = URL(string: article.urlToImage ?? "") ?? URL(fileURLWithPath: "")
+                return ImageLoader.shared.loadImage(from: url)
+            })
+            .eraseToAnyPublisher()
+        }
+    
+    
+    override public func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        imageView.alpha = 0.0
+        animator?.stopAnimation(true)
+        cancellable?.cancel()
+    }
 }

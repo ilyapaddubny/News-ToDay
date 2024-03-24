@@ -6,15 +6,20 @@
 //
 
 import UIKit
+import Combine
 
 class PromotedArticleCollectionViewCell: UICollectionViewCell {
     
-    static let reuseIdentifier = "PromotedArticleCollectionViewCell"
+    static let reuseIdentifier  = "PromotedArticleCollectionViewCell"
+    private var cancellable: AnyCancellable?
+    private var animator: UIViewPropertyAnimator?
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 12.0
         imageView.backgroundColor = UIColor.random
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -41,7 +46,7 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     let headlineLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-SemiBold", size: 17)
-        label.textColor = .textOnImageSecondary
+        label.textColor = .textOnImageSecondaryColor
         label.numberOfLines = 2
         
         return label
@@ -50,7 +55,7 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-Regular", size: 13)
-        label.textColor = .textOnImageSecondary
+        label.textColor = .textOnImageSecondaryColor
         label.numberOfLines = 1
         
         return label
@@ -122,12 +127,43 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func configureCellWith(_ article: NewsArticle) {
-        categoryLabel.text = article.category?.toString().uppercased()
-        headlineLabel.text = article.headline
+    func configureCellWith(_ article: Article) {
+        categoryLabel.text = article.description ?? "no description"
+        headlineLabel.text = article.title
+        cancellable = loadImage(for: article).sink(receiveValue: { [unowned self] image in
+            showImage(image: image)
+        })
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    private func showImage(image: UIImage?) {
+        imageView.alpha = 0.0
+        animator?.stopAnimation(false)
+        imageView.image = image
+        animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+            self.imageView.alpha = 1.0
+        })
+    }
+    
+    private func loadImage(for article: Article) -> AnyPublisher<UIImage?, Never> {
+        return Just(article.urlToImage)
+            .flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+                let url = URL(string: article.urlToImage ?? "") ?? URL(fileURLWithPath: "")
+                return ImageLoader.shared.loadImage(from: url)
+            })
+            .eraseToAnyPublisher()
+        }
+    
+    
+    override public func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        imageView.alpha = 0.0
+        animator?.stopAnimation(true)
+        cancellable?.cancel()
     }
 }

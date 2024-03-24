@@ -19,6 +19,12 @@ class HomeViewController: BaseController {
         static let header = "header"
     }
     
+    var recommendedArticles: [Item] = Item.recommendedNews
+    var promotedArticles: [Item] = Item.promotedNews
+    
+    private let searchBar       = UISearchBar()
+    private let scrollView      = UIScrollView()
+    private let mainStackView   = UIStackView()
     var collectionView: UICollectionView!
     
     var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
@@ -27,9 +33,37 @@ class HomeViewController: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setSubtitleText(text: Subtitle.browse)
+        configureSearchBar()
+        configureCollectionView()
+        getNews()
+        configureDataSource()
+    }
+    
+    
+    private func configureSearchBar() {
+        searchBar.delegate = self
+        searchBar.placeholder = Placeholder.search
+        searchBar.setLeftImage(Image.searchIcon!, with: 16, tintColor: .systemGray)
+        searchBar.clearBackgroundColor()
+        searchBar.textField?.backgroundColor = .systemGray6
+        searchBar.updateHeight(height: 56)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(searchBar)
         
-        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
-        
+        let margins = view.safeAreaLayoutGuide
+        let offset: CGFloat = 10
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: margins.topAnchor, constant: 32),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: offset),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -offset),
+            searchBar.heightAnchor.constraint(equalToConstant: 76)
+        ])
+    }
+    
+    
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(CollectionHeaderReusableView.self,
                                 forSupplementaryViewOfKind: SupplemenntaryViewKind.header,
                                 withReuseIdentifier: CollectionHeaderReusableView.reuseIdentifire)
@@ -40,19 +74,18 @@ class HomeViewController: BaseController {
                                 forCellWithReuseIdentifier: PromotedArticleCollectionViewCell.reuseIdentifier)
         collectionView.register(StandardArticleCollectionViewCell.self,
                                 forCellWithReuseIdentifier: StandardArticleCollectionViewCell.reuseIdentifier)
-        
-        configureDataSource()
-        
-//        testAPI()
-        
         self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ])
+        collectionView.delegate = self
     }
     
-//    override func configureViews() {
-//        super.configureViews()
-//        descriptionLabel.text = "Discover things of this world"
-//        view.backgroundColor = .systemBackground
-//    }
     
     func createLayout() -> UICollectionViewLayout  {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
@@ -76,8 +109,9 @@ class HomeViewController: BaseController {
             
             switch section {
             case .categories:
+                let estimatedItemWidth = self.calculateMaxCategoryWidth() // Calculate width
                 let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(90),
+                    widthDimension: .estimated(estimatedItemWidth), // Use calculated width
                     heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
@@ -85,16 +119,18 @@ class HomeViewController: BaseController {
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1),
                     heightDimension: .absolute(52.0))
+                
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.contentInsets = .init(top: 12,
                                             leading: 0,
                                             bottom: 0,
                                             trailing: 0)
-                group.interItemSpacing = .fixed(12)
+                group.interItemSpacing = .fixed(20.0)
+                
                 
                 let section = NSCollectionLayoutSection(group: group)
-                section.orthogonalScrollingBehavior = .continuous // horizontal scroolling
-                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 30, trailing: 0)
+                section.orthogonalScrollingBehavior = .continuous // horizontal scrolling
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 30, trailing: -20)
                 return section
                 
                 
@@ -106,12 +142,12 @@ class HomeViewController: BaseController {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 16)
                 
-               
+                
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(0.75),
                     heightDimension: .estimated(256))
                 let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-               
+                
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .groupPaging // horizontal scroolling
@@ -125,14 +161,14 @@ class HomeViewController: BaseController {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 2)
                 
-
+                
                 let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(0.9),
                                                         heightDimension: .estimated(336))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 3)
                 group.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                             leading: 1,
-                                                             bottom: 0,
-                                                             trailing: 1)
+                                                              leading: 1,
+                                                              bottom: 0,
+                                                              trailing: 1)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .groupPagingCentered
@@ -143,6 +179,7 @@ class HomeViewController: BaseController {
         }
         return layout
     }
+    
     
     func configureDataSource() {
         dataSource = .init(collectionView: collectionView, cellProvider: {
@@ -176,12 +213,12 @@ class HomeViewController: BaseController {
                                                                                  for: indexPath) as! CollectionHeaderReusableView
                 let section = self.sections[indexPath.section]
                 let sectionName: String
-                    switch section {
-                    case .recommended:
-                        sectionName = "Recommended for you"
-                    default:
-                        return nil
-                    }
+                switch section {
+                case .recommended:
+                    sectionName = "Recommended for you"
+                default:
+                    return nil
+                }
                 
                 
                 headerView.setTitle(sectionName)
@@ -200,49 +237,144 @@ class HomeViewController: BaseController {
         snapshot.appendItems(Item.promotedNews, toSection: .promoted)
         
         snapshot.appendSections([.recommended])
-        snapshot.appendItems(Item.reccomendedNews, toSection: .recommended)
+        snapshot.appendItems(recommendedArticles, toSection: .recommended)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
     }
-
-    func testAPI() {
-        
-        let healthCategory = Category.health.rawValue
-        let business = Category.business.rawValue
-        let uSA = Country.USA
-        let gB = Country.GreatBritain
-        
-        guard let url = Endpoint.searchTopHeadlines(categories: [healthCategory, business], countries: [uSA, gB]).url else { return
-        }
     
+    // MARK: - Retriving data
+    
+    func getNews() {
+        getPromotedSectionArticles()
+        getRecommendedSectionArticles()
+    }
+    
+    func getPromotedSectionArticles() {
+        let category = Category.business.rawValue
+        let country = Country.USA
+        
+        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
+        }
+        
         Task {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
-            news.articles.forEach {
-                print($0.title ?? "")
+            //TODO: reload data
+            let items = news.articles.map { Item.news($0, UUID()) }
+            
+            print(items.isEmpty ? "⚠️ No promoted articles from API" : "\(items.count) promoted articles retrived from API")
+            promotedArticles = items
+            DispatchQueue.main.async {
+                // Update existing data source snapshot with new promoted articles
+                var snapshot = self.dataSource.snapshot()
+                snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .promoted))
+                snapshot.appendItems(self.promotedArticles, toSection: .promoted)
+                self.dataSource.apply(snapshot, animatingDifferences: true)
             }
         }
+    }
+    
+    func getRecommendedSectionArticles() {
+        let category = Category.entertainment.rawValue
+        let country = Country.USA
+        
+        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
+        }
+        
+        Task {
+            let news = try? await NetworkManager.shared.retrieveNews(from: url)
+            guard let news = news else { return }
+            //TODO: reload data
+            let items = news.articles.map { Item.news($0, UUID()) }
+            
+            print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
+            recommendedArticles = items
+            DispatchQueue.main.async {
+                    // Update existing data source snapshot with new recommended articles
+                    var snapshot = self.dataSource.snapshot()
+                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .recommended))
+                    snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
+                    self.dataSource.apply(snapshot, animatingDifferences: true)
+                
+                // Or, if you want to reload specific sections:
+                //                 collectionView.reloadSections(IndexSet(integer: sectionIndex))
+            }
+        }
+    }
+    
+    func configureSearchIcon() -> UIView {
+        let imageView = UIImageView(image: Icons.search)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.widthAnchor.constraint(equalToConstant: 18).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let paddingView = UIView()
+        paddingView.translatesAutoresizingMaskIntoConstraints = false
+        paddingView.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        paddingView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        let paddingView1 = UIView()
+        paddingView1.translatesAutoresizingMaskIntoConstraints = false
+        paddingView1.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        paddingView1.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        stackView.addArrangedSubview(paddingView)
+        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(paddingView1)
+        return stackView
+        
+    }
+    
+}
+
+// MARK: - Searh delegate
+
+extension HomeViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchString = searchController.searchBar.text,
+           searchString.isEmpty == false {
+            print("User input: \(searchString)") // TODO: Implement the search logic
+            
+        }
+    }
+    
+    func calculateMaxCategoryWidth() -> CGFloat {
+        let categories = Item.categories.map { $0.category! } // Get the category strings
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Inter-SemiBold", size: 17)! // Use the font of your cell
+        ]
+        
+        let maxWidth = categories.map {
+            $0.getButtonName().size(withAttributes: textAttributes).width
+        }.max() ?? 0
+        
+        return maxWidth - 15
     }
     
 }
 
 
-// MARK: - Mock models
+// MARK: - Model
 
 enum Item: Hashable {
-    case news(NewsArticle)
-    case category(NewsCategory)
+    case news(Article, UUID)
+    case category(Category)
     
-    var news: NewsArticle? {
-        if case .news(let news) = self {
-            return news
+    var news: Article? {
+        if case .news(let article, _) = self {
+            return article
         } else {
             return nil
         }
     }
     
-    var category: NewsCategory? {
+    var category: Category? {
         if case .category(let category) = self {
             return category
         } else {
@@ -250,59 +382,40 @@ enum Item: Hashable {
         }
     }
     
-    
-    static let promotedNews: [Item] = [
-        .news(NewsArticle(headline: "New Study Finds Exercise Increases Productivity", author: "John Doe", category: .health)),
-        .news(NewsArticle(headline: "Apple Unveils Latest iPhone Model", author: "Jane Smith", category: .technology)),
-        .news(NewsArticle(headline: "Government Passes New Tax Reform Bill", author: "Alex Johnson", category: .politics)),
-        .news(NewsArticle(headline: "Football Team Wins Championship", author: "David Brown", category: .sports)),
-        .news(NewsArticle(headline: "Netflix Releases Highly Anticipated Series", author: "Emily White", category: .entertainment)),
-    ]
-    
-    static let reccomendedNews: [Item] = [
-        .news(NewsArticle(headline: "New Study Finds Exercise Increases Productivity", author: "John Doe", category: .sports)),
-        .news(NewsArticle(headline: "Apple Unveils Latest iPhone Model", author: "Jane Smith", category: .technology)),
-        .news(NewsArticle(headline: "Government Passes New Tax Reform Bill", author: "Alex Johnson", category: .politics)),
-        .news(NewsArticle(headline: "Football Team Wins Championship", author: "David Brown", category: .sports)),
-        .news(NewsArticle(headline: "Netflix Releases Highly Anticipated Series", author: "Emily White", category: .entertainment)),
-        .news(NewsArticle(headline: "Breakthrough in Renewable Energy Research", author: "Michael Green", category: .technology)),
-        .news(NewsArticle(headline: "Stock Market Reaches All-Time High", author: "Sarah Johnson", category: .business)),
-        .news(NewsArticle(headline: "Hollywood Actress Wins Oscar Award", author: "Christopher Black", category: .entertainment)),
-        .news(NewsArticle(headline: "Global Leaders Meet to Discuss Climate Change", author: "Emma Taylor", category: .politics)),
-        .news(NewsArticle(headline: "World Cup Finals Scheduled for Next Year", author: "Daniel Adams", category: .sports)),
-    ]
-    
-    static let categories: [Item] = [
-        .category(.business),
-        .category(.health),
-        .category(.technology),
-        .category(.politics),
-        .category(.entertainment),
-    ]
+    static let categories: [Item] = Category.categories.map { Item.category($0) }
+    static var promotedNews: [Item] = Article.promotedNews.map { Item.news($0, UUID()) }
+    static var recommendedNews: [Item] = Article.recommendedNews.map { Item.news($0, UUID()) }
     
 }
 
 
-struct NewsArticle: Hashable {
-    let headline: String?
-    let author: String?
-    let category: NewsCategory?
-    
-    let color = UIColor.random
-}
-
-enum NewsCategory: String, Hashable {
-    case sports = "Sport"
-    case health = "Health"
-    case technology = "Technology"
-    case politics = "Politics"
-    case entertainment = "Entertainment"
-    case business = "Business"
-    
-    // Method to get a string representation of the enum case
-    func toString() -> String {
-        return self.rawValue
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        guard let item = dataSource?.itemIdentifier(for: indexPath) else {
+            return
+        }
+        guard let article = item.news else { return }
+        let newsViewController = NewsViewController(category: "entertainment", article: article)
+        navigationController?.pushViewController(newsViewController, animated: true)
     }
 }
 
 
+//MARK: - SearchBarDelegate
+
+extension HomeViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print(searchBar.text)
+        searchBar.text = ""
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+}

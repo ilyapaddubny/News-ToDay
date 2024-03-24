@@ -22,7 +22,7 @@ class CollectionHeaderReusableView: UICollectionReusableView {
     let label: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-SemiBold", size: 20)
-        label.textColor = .textPrimary
+        label.textColor = .textPrimaryColor
         
         return label
     }()
@@ -30,7 +30,7 @@ class CollectionHeaderReusableView: UICollectionReusableView {
     let seeAllButton: UIButton = {
         let button = UIButton()
         button.setTitle("See All", for: .normal)
-        button.setTitleColor(.textSecondary, for: .normal)
+        button.setTitleColor(.textSecondaryColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "Inter-Regular", size: 14)
         button.setContentHuggingPriority(.required, for: .horizontal)
         

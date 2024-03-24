@@ -5,7 +5,7 @@
 //  Created by Mikhail Ustyantsev on 13.03.2024.
 //
 
-import Foundation
+import UIKit
 
 final class NetworkManager {
     
@@ -22,6 +22,4 @@ final class NetworkManager {
         let decoder = JSONDecoder()
         return try decoder.decode(News.self, from: data)
     }
-    
-
 }

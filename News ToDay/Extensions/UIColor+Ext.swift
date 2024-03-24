@@ -49,4 +49,22 @@ extension UIColor {
     static var textSecondaryColor: UIColor {
         return UIColor(named: "TextSecondaryColor") ?? .clear
     }
+    
+    static var textGreyLightColor: UIColor {
+        return UIColor(named: "TextGreyLight") ?? .clear
+    }
+}
+
+
+extension UILabel {
+    func getTextSize() -> CGSize {
+        guard let text else { return CGSize() }
+        let fontName = font.fontName
+        let fontSize = font.pointSize
+        let font = UIFont(name: fontName, size: fontSize)
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = text.size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
+        return CGSize(width: size.width.rounded(),
+                      height: size.height.rounded())
+    }
 }
