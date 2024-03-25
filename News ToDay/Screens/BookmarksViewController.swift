@@ -9,9 +9,12 @@ import UIKit
 
 class BookmarksViewController: BaseController {
     
+    var favorites: [Article]   = []
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
+        getFavorites()
         configureDataSource()
     }
     
@@ -27,15 +30,26 @@ class BookmarksViewController: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setSubtitleText(text: Subtitle.bookmarks)
+        configureCollectionView()
+        updateUI(with: self.favorites)
+        configureDataSource()
+    }
+    
+    private func configureCollectionView() {
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
         
         collectionView.register(StandardArticleCollectionViewCell.self,
                                 forCellWithReuseIdentifier: StandardArticleCollectionViewCell.reuseIdentifier)
-        
-        configureDataSource()
-        
-        self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(collectionView)
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 30),
+            collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ])
     }
     
     func createLayout() -> UICollectionViewLayout  {
@@ -92,4 +106,36 @@ class BookmarksViewController: BaseController {
         dataSource.apply(snapshot)
     }
     
+}
+
+
+extension BookmarksViewController {
+    
+    
+    private func getFavorites() {
+            //TODO: -  получаем данные из локального хранилища
+    }
+    
+    
+    func updateUI(with favorites: [Article]) {
+        if favorites.isEmpty {
+            self.showEmptyStateView(with: Message.emptyState, in: self.view)
+        } else {
+            self.favorites = favorites
+
+        }
+    }
+    
+    
+    func showEmptyStateView(with message: String, in view: UIView) {
+        let emptyStateView = NTDEmptyStateView(message: message)
+        view.addSubview(emptyStateView)
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            emptyStateView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            emptyStateView.heightAnchor.constraint(equalToConstant: 150),
+            emptyStateView.centerYAnchor.constraint(equalTo: margins.centerYAnchor)
+        ])
+    }
 }
