@@ -11,14 +11,13 @@ class NTDEmptyStateView: UIView {
 
     let logoImageView           = UIImageView(image: Image.emptyBookmarksIcon)
     let logoImageViewContainer  = UIView()
-    let messageLabel            = NTDLabel(font: Font.interRegular(with: 16), textColor: .textPrimaryColor)
+    let messageLabel            = NTDLabel(font: Font.interSemiBold(with: 17), textColor: .textPrimaryColor)
     let stackView               = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
-    
     
     convenience init(message: String) {
         self.init(frame: .zero)
@@ -32,6 +31,13 @@ class NTDEmptyStateView: UIView {
     
     
     private func configure() {
+        // Increase line spacing
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        let attributedText = NSAttributedString(string: EmptyListHelper.noBookmarks, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        messageLabel.attributedText = attributedText
+        
+        
         addSubviews(messageLabel, logoImageView)
         translatesAutoresizingMaskIntoConstraints = false
         configureMessageLabel()
@@ -41,7 +47,7 @@ class NTDEmptyStateView: UIView {
     
     
     private func configureMessageLabel() {
-        messageLabel.numberOfLines  = 3
+        messageLabel.numberOfLines  = 0
         messageLabel.textAlignment  = .center
     }
     
@@ -90,7 +96,7 @@ class NTDEmptyStateView: UIView {
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
-            stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5)
+            stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7)
         ])
     }
 }

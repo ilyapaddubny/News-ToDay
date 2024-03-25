@@ -64,7 +64,7 @@ enum Placeholder {
 }
 
 enum EmptyListHelper {
-    static let noBookmarks = "You haven't saved any articles yet. Start reading and bookmarking them now."
+    static let noBookmarks = "You haven't saved any articles yet. Start reading and bookmarking them now"
 }
 
 
