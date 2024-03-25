@@ -86,7 +86,7 @@ class HomeViewController: BaseController {
         collectionView.delegate = self
     }
     
-    
+    // MARK: - Layout creation
     func createLayout() -> UICollectionViewLayout  {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             
@@ -180,7 +180,7 @@ class HomeViewController: BaseController {
         return layout
     }
     
-    
+    // MARK: - configureDataSource
     func configureDataSource() {
         dataSource = .init(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -383,6 +383,7 @@ enum Item: Hashable {
     }
     
     static let categories: [Item] = Category.categories.map { Item.category($0) }
+    static let categoriesSortedABC: [Item] = Category.categoriesSortedABC.map { Item.category($0) }
     static var promotedNews: [Item] = Article.promotedNews.map { Item.news($0, UUID()) }
     static var recommendedNews: [Item] = Article.recommendedNews.map { Item.news($0, UUID()) }
     
