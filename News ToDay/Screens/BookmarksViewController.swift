@@ -9,14 +9,7 @@ import UIKit
 
 class BookmarksViewController: BaseController {
     
-    var favorites: [Article]   = []
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView.reloadData()
-        getFavorites()
-        configureDataSource()
-    }
+    let emptyStateView = NTDEmptyStateView(message: EmptyListHelper.noBookmarks)
     
     enum Section: Hashable {
         case recommended
@@ -28,12 +21,30 @@ class BookmarksViewController: BaseController {
     
     var sections = [Section]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+        configureDataSource()
+        configureEmptyState()
+        updateUI()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setSubtitleText(text: Subtitle.bookmarks)
         configureCollectionView()
-        updateUI(with: self.favorites)
         configureDataSource()
+    }
+    
+    private func configureEmptyState() {
+        view.addSubview(emptyStateView)
+        
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            emptyStateView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            emptyStateView.centerYAnchor.constraint(equalTo: margins.centerYAnchor)
+        ])
     }
     
     private func configureCollectionView() {
@@ -41,15 +52,21 @@ class BookmarksViewController: BaseController {
         
         collectionView.register(StandardArticleCollectionViewCell.self,
                                 forCellWithReuseIdentifier: StandardArticleCollectionViewCell.reuseIdentifier)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collectionView)
-        let margins = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 30),
-            collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
-        ])
+        configureDataSource()
+        self.view.addSubview(collectionView)
+        updateUI()
+    }
+    
+    func updateUI() {
+        if CollectionItem.bookmarkedArticles.isEmpty {
+            // Collection is empty, show empty state
+            emptyStateView.isHidden = false
+            collectionView.isHidden = true
+        } else {
+            // Collection has items, hide empty state
+            emptyStateView.isHidden = true
+            collectionView.isHidden = false
+        }
     }
     
     func createLayout() -> UICollectionViewLayout  {
@@ -75,7 +92,6 @@ class BookmarksViewController: BaseController {
                                                               trailing: 20)
                 
                 let section = NSCollectionLayoutSection(group: group)
-                
                 return section
             }
         }
@@ -96,7 +112,6 @@ class BookmarksViewController: BaseController {
             }
         });
         
-        
         // MARK: Snapshot Definition
         var snapshot = NSDiffableDataSourceSnapshot<Section, CollectionItem>()
         snapshot.appendSections([.recommended])
@@ -104,38 +119,5 @@ class BookmarksViewController: BaseController {
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
-    }
-    
-}
-
-
-extension BookmarksViewController {
-    
-    
-    private func getFavorites() {
-            //TODO: -  получаем данные из локального хранилища
-    }
-    
-    
-    func updateUI(with favorites: [Article]) {
-        if favorites.isEmpty {
-            self.showEmptyStateView(with: Message.emptyState, in: self.view)
-        } else {
-            self.favorites = favorites
-
-        }
-    }
-    
-    
-    func showEmptyStateView(with message: String, in view: UIView) {
-        let emptyStateView = NTDEmptyStateView(message: message)
-        view.addSubview(emptyStateView)
-        let margins = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            emptyStateView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            emptyStateView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            emptyStateView.heightAnchor.constraint(equalToConstant: 150),
-            emptyStateView.centerYAnchor.constraint(equalTo: margins.centerYAnchor)
-        ])
     }
 }

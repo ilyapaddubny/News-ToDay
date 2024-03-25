@@ -10,6 +10,8 @@ import UIKit
 class LanduageViewController: UIViewController {
     let logoLabel = UILabel()
     
+    let selectedLanguage = "Russian"
+    
     lazy var backButton: UIButton = {
         let button = UIButton(primaryAction: back())
         button.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
@@ -125,7 +127,6 @@ class LanduageViewController: UIViewController {
 //        button.setTitleColor(.textOnDisabledButtonColor, for: .normal)
 //        button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
-        button.backgroundColor = .buttonDisabledColor
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
@@ -136,6 +137,7 @@ class LanduageViewController: UIViewController {
     private func createLabel(size: CGFloat, font: String, text: String, color: UIColor) -> UILabel {
         
         let label = UILabel()
+        
         label.translatesAutoresizingMaskIntoConstraints  = false
         label.text = text
         label.font = UIFont(name: font, size: size)

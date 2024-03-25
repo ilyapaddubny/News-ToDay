@@ -63,6 +63,10 @@ enum Placeholder {
     static let search = "Search"
 }
 
+enum EmptyListHelper {
+    static let noBookmarks = "You haven't saved any articles yet. Start reading and bookmarking them now"
+}
+
 
 enum Key {
     static let apiKey = "ddbae45c2e33483d9cec5e18eaa5a82c"
