@@ -38,7 +38,7 @@ final class BlueButton: UIButton {
 private extension BlueButton {
     
     func configure() {
-        backgroundColor = .buttonActive
+        backgroundColor = .buttonActiveColor
         titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 16)
         tintColor = .white
         layer.cornerRadius = 12

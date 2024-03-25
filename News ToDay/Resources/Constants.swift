@@ -35,6 +35,7 @@ enum Image {
     static let bookmarkWhite = UIImage(named: "BookmarkWhiteIcon")
     static let shareArrow = UIImage(named: "ForwardWhiteIcon")
     static let searchIcon = UIImage(named: "searchIcon")
+    static let emptyBookmarksIcon = UIImage(named: "EmptyBookmarksIcon")
 }
 
 
@@ -49,6 +50,12 @@ enum ScreenTitle {
 enum Subtitle {
     static let categories = "Thousands of articles in each category"
     static let browse = "Discover things of the world"
+    static let bookmarks  = "Saved articles to the library"
+}
+
+
+enum Message {
+    static let emptyState = "You haven't saved any articles yet. Start reading and bookmarking them now"
 }
 
 
