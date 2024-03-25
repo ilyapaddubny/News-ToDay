@@ -9,6 +9,12 @@ import UIKit
 
 class BookmarksViewController: BaseController {
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("collectionView.reloadData() --- \(Item.bookmarkedArticles.count)")
+        collectionView.reloadData()
+    }
+    
     enum Section: Hashable {
         case recommended
     }
@@ -80,7 +86,7 @@ class BookmarksViewController: BaseController {
         // MARK: Snapshot Definition
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.recommended])
-        snapshot.appendItems(Item.recommendedNews, toSection: .recommended)
+        snapshot.appendItems(Item.bookmarkedArticles, toSection: .recommended)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)

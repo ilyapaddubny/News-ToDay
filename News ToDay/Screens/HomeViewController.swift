@@ -386,6 +386,7 @@ enum Item: Hashable {
     static let categoriesSortedABC: [Item] = Category.categoriesSortedABC.map { Item.category($0) }
     static var promotedNews: [Item] = Article.promotedNews.map { Item.news($0, UUID()) }
     static var recommendedNews: [Item] = Article.recommendedNews.map { Item.news($0, UUID()) }
+    static var bookmarkedArticles: [Item] = Article.bookmarkedArticles.map { Item.news($0, UUID()) }
     
 }
 

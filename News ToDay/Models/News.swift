@@ -25,7 +25,24 @@ struct Article: Codable, Hashable {
     let content: String?
     
     var isBookmarked: Bool {
-        return true
+        // надо получать из кор-даты массив типа [Category] и возвращать значение [Category].contains(self)
+        get {
+            //TODO: (Для Миши) Category.bookmarked получать из core-data
+            return Article.bookmarkedArticles.contains(self)
+        }
+        
+        //TODO: (Для Миши) Category.bookmarked получать и записывать в core-data
+        set {
+            print("Новое значение - \(newValue)")
+            // если мы убираем кейс из избранного, нужно удалить его из массива
+            if Article.bookmarkedArticles.first(where: {$0.url == self.url}) != nil, !newValue {
+                Article.bookmarkedArticles.removeAll(where: {$0 == self})
+            }
+            // если мы добавляем кейс в избранное, нужно его добавить в массив
+            if newValue {
+                Article.bookmarkedArticles.append(self)
+            }
+        }
     }
     
     static let promotedNews: [Article] = [
