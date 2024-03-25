@@ -15,7 +15,7 @@ class CategoriesViewController: BaseController {
     
     var collectionView: UICollectionView!
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, CollectionItem>!
     
     var sections = [Section]()
     
@@ -87,9 +87,9 @@ class CategoriesViewController: BaseController {
         
         
         // MARK: Snapshot Definition
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CollectionItem>()
         snapshot.appendSections([.categories])
-        snapshot.appendItems(Item.categoriesSortedABC, toSection: .categories)
+        snapshot.appendItems(CollectionItem.categoriesSortedABC, toSection: .categories)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)

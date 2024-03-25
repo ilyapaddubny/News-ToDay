@@ -19,15 +19,15 @@ class HomeViewController: BaseController {
         static let header = "header"
     }
     
-    var recommendedArticles: [Item] = Item.recommendedNews
-    var promotedArticles: [Item] = Item.promotedNews
+    var recommendedArticles: [CollectionItem] = CollectionItem.recommendedNews
+    var promotedArticles: [CollectionItem] = CollectionItem.promotedNews
     
     private let searchBar       = UISearchBar()
     private let scrollView      = UIScrollView()
     private let mainStackView   = UIStackView()
     var collectionView: UICollectionView!
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, CollectionItem>!
     
     var sections = [Section]()
     
@@ -229,12 +229,12 @@ class HomeViewController: BaseController {
         }
         
         // MARK: Snapshot Definition
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CollectionItem>()
         snapshot.appendSections([.categories])
-        snapshot.appendItems(Item.categories, toSection: .categories)
+        snapshot.appendItems(CollectionItem.categories, toSection: .categories)
         
         snapshot.appendSections([.promoted])
-        snapshot.appendItems(Item.promotedNews, toSection: .promoted)
+        snapshot.appendItems(CollectionItem.promotedNews, toSection: .promoted)
         
         snapshot.appendSections([.recommended])
         snapshot.appendItems(recommendedArticles, toSection: .recommended)
@@ -261,7 +261,7 @@ class HomeViewController: BaseController {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
             //TODO: reload data
-            let items = news.articles.map { Item.news($0, UUID()) }
+            let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
             print(items.isEmpty ? "⚠️ No promoted articles from API" : "\(items.count) promoted articles retrived from API")
             promotedArticles = items
@@ -286,7 +286,7 @@ class HomeViewController: BaseController {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
             //TODO: reload data
-            let items = news.articles.map { Item.news($0, UUID()) }
+            let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
             print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
             recommendedArticles = items
@@ -345,7 +345,7 @@ extension HomeViewController: UISearchResultsUpdating {
     }
     
     func calculateMaxCategoryWidth() -> CGFloat {
-        let categories = Item.categories.map { $0.category! } // Get the category strings
+        let categories = CollectionItem.categories.map { $0.category! } // Get the category strings
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Inter-SemiBold", size: 17)! // Use the font of your cell
         ]
@@ -356,37 +356,6 @@ extension HomeViewController: UISearchResultsUpdating {
         
         return maxWidth - 15
     }
-    
-}
-
-
-// MARK: - Model
-
-enum Item: Hashable {
-    case news(Article, UUID)
-    case category(Category)
-    
-    var news: Article? {
-        if case .news(let article, _) = self {
-            return article
-        } else {
-            return nil
-        }
-    }
-    
-    var category: Category? {
-        if case .category(let category) = self {
-            return category
-        } else {
-            return nil
-        }
-    }
-    
-    static let categories: [Item] = Category.categories.map { Item.category($0) }
-    static let categoriesSortedABC: [Item] = Category.categoriesSortedABC.map { Item.category($0) }
-    static var promotedNews: [Item] = Article.promotedNews.map { Item.news($0, UUID()) }
-    static var recommendedNews: [Item] = Article.recommendedNews.map { Item.news($0, UUID()) }
-    static var bookmarkedArticles: [Item] = Article.bookmarkedArticles.map { Item.news($0, UUID()) }
     
 }
 

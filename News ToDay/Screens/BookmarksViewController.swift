@@ -11,8 +11,8 @@ class BookmarksViewController: BaseController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("collectionView.reloadData() --- \(Item.bookmarkedArticles.count)")
         collectionView.reloadData()
+        configureDataSource()
     }
     
     enum Section: Hashable {
@@ -21,7 +21,7 @@ class BookmarksViewController: BaseController {
     
     var collectionView: UICollectionView!
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, CollectionItem>!
     
     var sections = [Section]()
     
@@ -52,7 +52,7 @@ class BookmarksViewController: BaseController {
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 2)
                 
                 
-                let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(0.9),
+                let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(1),
                                                         heightDimension: .estimated(336))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 group.contentInsets = NSDirectionalEdgeInsets(top: 0,
@@ -84,9 +84,9 @@ class BookmarksViewController: BaseController {
         
         
         // MARK: Snapshot Definition
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CollectionItem>()
         snapshot.appendSections([.recommended])
-        snapshot.appendItems(Item.bookmarkedArticles, toSection: .recommended)
+        snapshot.appendItems(CollectionItem.bookmarkedArticles, toSection: .recommended)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
