@@ -13,7 +13,9 @@ class NTDTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewControllers = [createHomeNC(), createCategoriesNC(), createBookmarksNC(), createProfileNC()]
-        tabBar.backgroundColor = .systemGray6
+        tabBar.barTintColor = .white
+        tabBar.layer.borderWidth = 0.3
+        tabBar.layer.borderColor = UIColor.textSecondaryColor.cgColor
     }
     
     
