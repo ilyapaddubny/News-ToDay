@@ -98,12 +98,7 @@ class CategoriesViewController: BaseController {
 }
 
 extension CategoriesViewController: UICollectionViewDelegate {
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Handle item selection here
-        var selectedItem = dataSource.itemIdentifier(for: indexPath)?.category
 
         if var selectedItem = dataSource.itemIdentifier(for: indexPath)?.category {
             selectedItem.isBookmarked.toggle()

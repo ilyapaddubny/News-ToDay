@@ -24,6 +24,10 @@ struct Article: Codable, Hashable {
     let publishedAt: String?
     let content: String?
     
+    var isBookmarked: Bool {
+        return true
+    }
+    
     static let promotedNews: [Article] = [
 //        Article(source: nil, author: "John Doe", title: "Study Shows Benefits of Meditation", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
 //        Article(source: nil, author: "Alice Johnson", title: "New Technology Aids in Environmental Conservation", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
@@ -41,6 +45,9 @@ struct Article: Codable, Hashable {
 //        Article(source: nil, author: "Sophia Smith", title: "Exploring the Mysteries of Deep Sea Ecosystems", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
 //        Article(source: nil, author: "Ethan Brown", title: "Revolutionizing Education: Impact of Online Learning Platforms", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil),
 //        Article(source: nil, author: "Isabella White", title: "The Rise of Sustainable Fashion: Ethical Practices in the Industry", description: nil, url: nil, urlToImage: nil, publishedAt: nil, content: nil)
+    ]
+    
+    static var bookmarkedArticles: [Article] = [
     ]
 }
 
