@@ -23,22 +23,9 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        
-        self.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(categoryTagTapped))
-        self.addGestureRecognizer(tapGesture)
     }
     
-    var isChosen: Bool = false {
-        didSet {
-            let backgroundColor = isChosen ? UIColor.buttonActiveColor : UIColor.buttonDisabledColor
-            self.backgroundColor = backgroundColor
-            
-            let labelColor = isChosen ? UIColor.textOnActiveButtonColor : UIColor.textOnDisabledButtonColor
-            label.textColor = labelColor
-            
-        }
-    }
+    var isChosen = false
     
     private func setup() {
         backgroundColor = .buttonDisabledColor
@@ -56,18 +43,22 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    @objc func categoryTagTapped() {
-        //TODO: implement category selected here
-        
-        isChosen.toggle() 
-    }
-    
-    
     func configureCellWith(_ category: Category) {
         label.text = category.getButtonName()
-//        label.sizeToFit()
+        isChosen = category.isSelectedOnTheMainScreen
+        configureCellSelection()
     }
     
+    private func configureCellSelection() {
+        if isChosen {
+            self.backgroundColor = UIColor.buttonActiveColor
+            self.label.textColor = UIColor.textOnActiveButtonColor
+        } else {
+            self.backgroundColor = UIColor.buttonDisabledColor
+            self.label.textColor = UIColor.textOnDisabledButtonColor
+        }
+        isChosen.toggle()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError()

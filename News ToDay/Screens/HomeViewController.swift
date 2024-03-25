@@ -396,9 +396,18 @@ extension HomeViewController: UICollectionViewDelegate {
         guard let item = dataSource?.itemIdentifier(for: indexPath) else {
             return
         }
-        guard let article = item.news else { return }
-        let newsViewController = NewsViewController(category: "entertainment", article: article)
-        navigationController?.pushViewController(newsViewController, animated: true)
+        
+        switch item {
+        case .news(let article, _):
+            let newsViewController = NewsViewController(category: "entertainment", article: article)
+            navigationController?.pushViewController(newsViewController, animated: true)
+        case .category(var category):
+            category.isSelectedOnTheMainScreen.toggle()
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? CategoryTagCollectionViewCell {
+                cell.configureCellWith(category)
+            }
+        }
     }
 }
 
@@ -420,3 +429,5 @@ extension HomeViewController: UISearchBarDelegate {
         
     }
 }
+
+
