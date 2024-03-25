@@ -9,10 +9,11 @@ import Foundation
 
 
 enum Country {
-    static let Russia       = "ru"
-    static let Argentina    = "ar"
-    static let Austria      = "at"
-    static let Brazil       = "br"
-    static let GreatBritain = "gb"
-    static let USA          = "us"
+    static let russia       = "ru"
+    static let argentina    = "ar"
+    static let austria      = "at"
+    static let brazil       = "br"
+    static let greatBritain = "gb"
+    static let usa          = "us"
+    
 }

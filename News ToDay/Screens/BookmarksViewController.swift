@@ -9,10 +9,24 @@ import UIKit
 
 class BookmarksViewController: BaseController {
     
+    var emptyStateView: UIStackView!
+    var emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Inter-SemiBold", size: 17)
+        label.numberOfLines = 0
+        label.textColor = .textPrimaryColor
+        label.text = EmptyListHelper.noBookmarks
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        return label
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
         configureDataSource()
+        
+        updateUI()
     }
     
     enum Section: Hashable {
@@ -36,7 +50,58 @@ class BookmarksViewController: BaseController {
         configureDataSource()
         
         self.view.addSubview(collectionView)
+        
+        // Add message label
+        emptyStateLabel = UILabel(frame: CGRect(x: 20, y: 100, width: collectionView.bounds.width - 40, height: 100))
+        emptyStateLabel.numberOfLines = 0
+        emptyStateLabel.textAlignment = .center
+        emptyStateLabel.textColor = .gray
+        view.addSubview(emptyStateLabel)
+        
+        self.view.addSubview(collectionView)
+                
+                // Create and configure empty state view
+                emptyStateLabel = UILabel()
+                emptyStateLabel.font = UIFont(name: "Inter-SemiBold", size: 17)
+                emptyStateLabel.numberOfLines = 0
+                emptyStateLabel.textColor = .textPrimaryColor
+                emptyStateLabel.text = EmptyListHelper.noBookmarks
+                emptyStateLabel.translatesAutoresizingMaskIntoConstraints = false
+                
+                let imageView = UIImageView(image: UIImage(named: "EmptyBookmarksIcon")) 
+                imageView.contentMode = .scaleAspectFit
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                
+                emptyStateView = UIStackView(arrangedSubviews: [imageView, emptyStateLabel])
+                emptyStateView.axis = .vertical
+                emptyStateView.alignment = .center
+                emptyStateView.spacing = 8
+                emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(emptyStateView)
+                
+                NSLayoutConstraint.activate([
+                    emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                    emptyStateView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                    emptyStateLabel.widthAnchor.constraint(equalToConstant: collectionView.bounds.width - 40),
+                    // Add constraints for imageView if needed
+                ])
+                
+                updateUI()
+        
     }
+    
+    
+    func updateUI() {
+            if CollectionItem.bookmarkedArticles.isEmpty {
+                // Collection is empty, show empty state
+                emptyStateView.isHidden = false
+                collectionView.isHidden = true
+            } else {
+                // Collection has items, hide empty state
+                emptyStateView.isHidden = true
+                collectionView.isHidden = false
+            }
+        }
     
     func createLayout() -> UICollectionViewLayout  {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in

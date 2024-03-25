@@ -252,7 +252,7 @@ class HomeViewController: BaseController {
     
     func getPromotedSectionArticles() {
         let category = Category.business.rawValue
-        let country = Country.USA
+        let country = Country.usa
         
         guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
         }
@@ -277,7 +277,7 @@ class HomeViewController: BaseController {
     
     func getRecommendedSectionArticles() {
         let category = Category.entertainment.rawValue
-        let country = Country.USA
+        let country = Country.usa
         
         guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
         }
