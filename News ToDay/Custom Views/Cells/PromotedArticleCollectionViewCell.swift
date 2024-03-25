@@ -13,6 +13,7 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier  = "PromotedArticleCollectionViewCell"
     private var cancellable: AnyCancellable?
     private var animator: UIViewPropertyAnimator?
+    private var article: Article? = nil
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -28,12 +29,13 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    var isBookmarked: Bool = false {
-        didSet {
-            let bookmarkImage = isBookmarked ? Icons.bookmarkFilled : Icons.bookmarkStroke
-            bookmarkView.image = bookmarkImage
-        }
-    }
+//    var isBookmarked: Bool = false {
+//        didSet {
+//            let bookmarkImage = isBookmarked ? Icons.bookmarkFilled : Icons.bookmarkStroke
+//            bookmarkView.image = bookmarkImage
+//            
+//        }
+//    }
     
     let dimmerView: UIImageView = {
         let imageView = UIImageView()
@@ -77,7 +79,7 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
         
         labelStackView.addArrangedSubview(categoryLabel)
         labelStackView.addArrangedSubview(headlineLabel)
-        
+        bookmarkView.image = (article?.isBookmarked ?? false) ? Icons.bookmarkFilled : Icons.bookmarkStroke
         configureLayout()
         
         bookmarkView.isUserInteractionEnabled = true
@@ -122,12 +124,16 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     
     @objc func bookmarkTapped() {
         //TODO: implement bookmark logic here
+        article?.isBookmarked.toggle()
+//        isBookmarked.toggle()
         
-        isBookmarked.toggle()
+        bookmarkView.image = (article?.isBookmarked ?? false) ? Icons.bookmarkFilled : Icons.bookmarkStroke
     }
     
     
     func configureCellWith(_ article: Article) {
+        self.article = article
+        bookmarkView.image = article.isBookmarked ? Icons.bookmarkFilled : Icons.bookmarkStroke
         categoryLabel.text = article.description ?? "no description"
         headlineLabel.text = article.title
         cancellable = loadImage(for: article).sink(receiveValue: { [unowned self] image in
