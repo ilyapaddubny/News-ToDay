@@ -45,20 +45,16 @@ class CategoryTagCollectionViewCell: UICollectionViewCell {
     
     func configureCellWith(_ category: Category) {
         label.text = category.getButtonName()
-        isChosen = category.isSelectedOnTheMainScreen
-        configureCellSelection()
-    }
-    
-    private func configureCellSelection() {
-        if isChosen {
+
+        if category.isSelectedOnTheMainScreen {
             self.backgroundColor = UIColor.buttonActiveColor
             self.label.textColor = UIColor.textOnActiveButtonColor
         } else {
             self.backgroundColor = UIColor.buttonDisabledColor
             self.label.textColor = UIColor.textOnDisabledButtonColor
         }
-        isChosen.toggle()
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError()
