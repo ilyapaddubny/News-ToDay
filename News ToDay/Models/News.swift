@@ -7,6 +7,18 @@
 
 import Foundation
 
+fileprivate func transformToArticleObject(favorite: Favorite) -> Article {
+    return Article(
+        source: nil,
+        author: nil,
+        title: favorite.title,
+        description: favorite.newsDescription,
+        url: nil,
+        urlToImage: favorite.urlToImage,
+        publishedAt: nil,
+        content: favorite.content)
+}
+
 struct News: Codable {
     let status: String
     let totalResults: Int
@@ -25,8 +37,12 @@ struct Article: Codable, Hashable, Equatable {
     let content: String?
     
     
-    static var bookmarkedArticles: [Article] = []
-    
+    static var bookmarkedArticles: [Article] {
+        let favorites = StorageManager.shared.fetchFavorites()
+        let articles = favorites.map { transformToArticleObject(favorite: $0) }
+        return articles
+    }
+        
     var isBookmarked: Bool {
         // надо получать из кор-даты массив типа [Article] и возвращать значение [Article].contains(self)
         get {
@@ -37,12 +53,14 @@ struct Article: Codable, Hashable, Equatable {
         //TODO: (Для Миши) Article.isBookmarked получать и записывать в core-data
         set {
             // если мы убираем кейс из избранного, нужно удалить его из массива
-            if Article.bookmarkedArticles.first(where: {$0.url == self.url}) != nil, !newValue {
-                Article.bookmarkedArticles.removeAll(where: {$0.url == self.url})
+            if Article.bookmarkedArticles.first(where: {$0.title == self.title}) != nil, !newValue {
+//                Article.bookmarkedArticles.removeAll(where: {$0.title == self.title})
+                StorageManager.shared.deleteFavorite(self)
             }
             // если мы добавляем кейс в избранное, нужно его добавить в массив
             if newValue {
-                Article.bookmarkedArticles.append(self)
+//                Article.bookmarkedArticles.append(self)
+                StorageManager.shared.saveToFavorites(self)
             }
         }
     }
