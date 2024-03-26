@@ -24,6 +24,8 @@ class BookmarksViewController: BaseController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
+        collectionView.delegate = self
+
         configureDataSource()
         configureEmptyState()
         updateUI()
@@ -120,4 +122,23 @@ class BookmarksViewController: BaseController {
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
     }
+}
+
+
+extension BookmarksViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        guard let item = dataSource?.itemIdentifier(for: indexPath) else {
+            return
+        }
+        
+        switch item {
+        case .news(let article, _):
+            let newsViewController = NewsViewController(category: "entertainment", article: article)
+            navigationController?.pushViewController(newsViewController, animated: true)
+        case .category(_):
+            return
+        }
+    }
+    
 }
