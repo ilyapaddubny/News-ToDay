@@ -31,6 +31,11 @@ class HomeViewController: BaseController {
     
     var sections = [Section]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setSubtitleText(text: Subtitle.browse)
