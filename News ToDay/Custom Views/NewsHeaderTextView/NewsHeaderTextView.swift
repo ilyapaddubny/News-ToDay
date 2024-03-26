@@ -12,10 +12,10 @@ class NewsHeaderTextView: BaseView {
     let categoryLabel   = PaddingLabel()
     let titleLabel      = NTDLabel(font: Font.interBold(with: 20), textColor: .white)
     let authorNameLabel = NTDLabel(font: Font.interSemiBold(with: 16), textColor: .white)
-    let authorLabel     = NTDLabel(font: Font.interRegular(with: 14), textColor: .textGreyLight)
+    let authorLabel     = NTDLabel(font: Font.interRegular(with: 14), textColor: .textGreyLightColor)
     
     func configure(category: String, article: Article) {
-        categoryLabel.text        = category
+        categoryLabel.text        = category.capitalized
         categoryLabel.sizeToFit()
         titleLabel.text           = article.title
         authorNameLabel.text      = article.author

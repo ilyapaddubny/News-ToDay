@@ -1,13 +1,16 @@
 //
-//  NewsViewController.swift
+//  NewsVC.swift
 //  News ToDay
 //
-//  Created by Михаил on 20.03.2024.
+//  Created by Mikhail Ustyantsev on 23.03.2024.
 //
 
 import UIKit
+import Combine
 
 class NewsViewController: BaseController {
+    
+    private var cancellable: AnyCancellable?
     
     let headerImageView = NewsHeaderImageView(frame: .zero)
     let dimmedView      = UIView()
@@ -19,8 +22,7 @@ class NewsViewController: BaseController {
     let headerTextView  = NewsHeaderTextView()
     
     let category: String
-    let article: Article
-    
+    var article: Article
     
     init(category: String, article: Article) {
         self.category = category
@@ -42,20 +44,36 @@ class NewsViewController: BaseController {
     
     
     func configureItems(article: Article, category: String) {
-        headerImageView.downloadImage(fromURL: article.urlToImage ?? "")
+        cancellable = loadImage(for: article).sink(receiveValue: { [unowned self] image in
+            headerImageView.image = image
+        })
+        
+        
         subtitleLabel.text  = article.description
         newsTextView.text   = article.content
         headerTextView.configure(category: category, article: article)
+        setBookmarkImage()
     }
     
     
     private func addTarget() {
+        bookmarkButton.addTarget(self, action: #selector(bookmarkTapped), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
+    }
+    
+    @objc func bookmarkTapped() {
+        article.isBookmarked.toggle()
+        setBookmarkImage()
+    }
+    
+    func setBookmarkImage() {
+        let bookmarkImage = article.isBookmarked ? Icons.bookmarkFilled : Icons.bookmarkStroke
+        bookmarkButton.setImage(bookmarkImage, for: .normal)
     }
     
     
     @objc private func dismissViewController() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -157,5 +175,13 @@ extension NewsViewController {
         newsTextView.isEditable = false
         newsTextView.textContainer.lineFragmentPadding = 0
     }
+    
+    private func loadImage(for article: Article) -> AnyPublisher<UIImage?, Never> {
+        return Just(article.urlToImage)
+            .flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+                let url = URL(string: article.urlToImage ?? "") ?? URL(fileURLWithPath: "")
+                return ImageLoader.shared.loadImage(from: url)
+            })
+            .eraseToAnyPublisher()
+        }
 }
-

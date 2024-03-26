@@ -34,6 +34,8 @@ enum Image {
     static let arrowBackWhite = UIImage(named: "BackWhiteIcon")
     static let bookmarkWhite = UIImage(named: "BookmarkWhiteIcon")
     static let shareArrow = UIImage(named: "ForwardWhiteIcon")
+    static let searchIcon = UIImage(named: "searchIcon")
+    static let emptyBookmarksIcon = UIImage(named: "EmptyBookmarksIcon")
 }
 
 
@@ -47,6 +49,17 @@ enum ScreenTitle {
 
 enum Subtitle {
     static let categories = "Thousands of articles in each category"
+    static let browse = "Discover things of the world"
+    static let bookmarks  = "Saved articles to the library"
+}
+
+
+enum Placeholder {
+    static let search = "Search"
+}
+
+enum EmptyListHelper {
+    static let noBookmarks = "You haven't saved any articles yet. Start reading and bookmarking them now"
 }
 
 
@@ -72,4 +85,13 @@ enum Font {
     static func interBold(with size: CGFloat) -> UIFont {
         UIFont(name: "Inter-Bold", size: size) ?? UIFont()
     }
+}
+
+
+enum UserDefaultsConstants {
+    static let bookmarkedCategoriesKey = "categories_bookmarked"
+    static let mainScreenCategoriesSelectedKey = "categories_tags"
+    static let selectedLanguageKey = "selected_language"
+    
+//    static let appGroup = "ddbae45c2e33483d9cec5e18eaa5a82c"
 }
