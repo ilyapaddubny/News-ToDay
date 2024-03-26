@@ -133,7 +133,7 @@ class RecommendedArticlesViewController: BaseController {
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
             print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
-            recommendedArticles = items
+            recommendedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
                 // Update existing data source snapshot with new recommended articles
                 var snapshot = self.dataSource.snapshot()

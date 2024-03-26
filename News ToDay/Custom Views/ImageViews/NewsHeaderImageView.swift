@@ -23,9 +23,10 @@ class NewsHeaderImageView: UIImageView {
     
     
     private func configure() {
-        image              = placeholderImage
-        contentMode        = .scaleAspectFill
-        clipsToBounds      = true
+        layer.backgroundColor   = UIColor.random.cgColor
+        image                   = placeholderImage
+        contentMode             = .scaleAspectFill
+        clipsToBounds           = true
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

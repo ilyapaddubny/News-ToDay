@@ -270,7 +270,7 @@ class HomeViewController: BaseController {
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
             print(items.isEmpty ? "⚠️ No promoted articles from API" : "\(items.count) promoted articles retrived from API")
-            promotedArticles = items
+            promotedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
                 // Update existing data source snapshot with new promoted articles
                 var snapshot = self.dataSource.snapshot()
@@ -295,7 +295,7 @@ class HomeViewController: BaseController {
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
             print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
-            recommendedArticles = items
+            recommendedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
                     // Update existing data source snapshot with new recommended articles
                     var snapshot = self.dataSource.snapshot()
