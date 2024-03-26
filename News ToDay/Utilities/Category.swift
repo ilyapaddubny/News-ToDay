@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category: String, Hashable, CaseIterable {
+enum Category: String, Hashable, CaseIterable, Codable {
     case general = "general"
     case business = "business"
     case sports = "sports"
@@ -16,51 +16,47 @@ enum Category: String, Hashable, CaseIterable {
     case health = "health"
     case technology = "technology"
     
-    // MARK: - Categories bookmark logic
-    static var bookmarked = [Category.business, Category.sports] //условно находится в памяти девайса
     
+    // MARK: - Bookmark categories logic
     var isBookmarked: Bool {
-        
-        // надо получать из кор-даты массив типа [Category] и возвращать значение [Category].contains(self)
         get {
-            //TODO: (Для Миши) Category.bookmarked получать из core-data
-            return Category.bookmarked.contains(self)
+            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+            return categories.contains(self)
         }
         
-        //TODO: (Для Миши) Category.bookmarked получать и записывать в core-data
         set {
+            var categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
             // если мы убираем кейс из избранного, нужно удалить его из массива
-            if Category.bookmarked.contains(self), !newValue {
-                Category.bookmarked.removeAll(where: {$0 == self})
+            if categories.contains(self), !newValue {
+                categories.removeAll(where: {$0 == self})
             }
             // если мы добавляем кейс в избранное, нужно его добавить в массив
             if newValue {
-                Category.bookmarked.append(self)
+                categories.append(self)
             }
+            UserDefaults.standard.setValue(categories, forKey:  UserDefaultsConstants.bookmarkedCategoriesKey)
         }
     }
     
     // MARK: - Tag Section Logic
-    static var selectedOnTheMainScreen = [Category.general, Category.sports] //условно находится в памяти девайса
-    
     var isSelectedOnTheMainScreen: Bool {
-        
-        // надо получать из кор-даты массив типа [Category] и возвращать значение [Category].contains(self)
         get {
-            //TODO: (Для Миши) Category.bookmarked получать из core-data
-            return Category.selectedOnTheMainScreen.contains(self)
+            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            return categories.contains(self)
         }
-        
-        //TODO: (Для Миши) Category.bookmarked получать и записывать в core-data
+
         set {
+            var categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
             // если мы убираем кейс из избранного, нужно удалить его из массива
-            if Category.selectedOnTheMainScreen.contains(self), !newValue {
-                Category.selectedOnTheMainScreen.removeAll(where: {$0 == self})
+            if categories.contains(self), !newValue {
+                categories.removeAll(where: {$0 == self})
             }
             // если мы добавляем кейс в избранное, нужно его добавить в массив
             if newValue {
-                Category.selectedOnTheMainScreen.append(self)
+                categories.append(self)
             }
+            
+            UserDefaults.standard.setValue(categories, forKey:  UserDefaultsConstants.mainScreenCategoriesSelectedKey)
         }
     }
     

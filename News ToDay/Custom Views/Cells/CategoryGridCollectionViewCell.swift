@@ -51,19 +51,13 @@ class CategoryGridCollectionViewCell: UICollectionViewCell {
     
     func configureCellWith(_ category: Category) {
         label.text = category.getNamePlusIconString()
-        borderColorFlag = category.isBookmarked
-        configureCellSelection()
-    }
-    
-    
-    private func configureCellSelection() {
-        if borderColorFlag {
+        if category.isBookmarked {
             layer.borderColor = UIColor.buttonActiveColor.cgColor
             layer.borderWidth  = 2
         } else {
             layer.borderColor = UIColor.buttonDisabledColor.cgColor
             layer.borderWidth  = 1.5
         }
-        borderColorFlag.toggle()
+        
     }
 }
