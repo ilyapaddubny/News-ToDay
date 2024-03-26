@@ -8,9 +8,11 @@
 import UIKit
 
 class LanduageViewController: UIViewController {
+    
     let logoLabel = UILabel()
     
-    let selectedLanguage = "Russian"
+    var selectedLanguage = UserDefaults.standard.string(forKey: "language")
+    var selectedCountry = UserDefaults.standard.data(forKey: "country")
     
     lazy var backButton: UIButton = {
         let button = UIButton(primaryAction: back())
@@ -29,16 +31,13 @@ class LanduageViewController: UIViewController {
         setBtn()
         view.backgroundColor = .white
     }
-    
-    
+
     func setUI() {
         
         logoLabel.text = ("Language")
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .center
-        
-        
         
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         backButton.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +73,13 @@ class LanduageViewController: UIViewController {
     lazy var englishLabel: UILabel = {
         let label = createLabel(size: 20, font: "Inter-SemiBold", text: "English", color: .textOnDisabledButtonColor)
         label.translatesAutoresizingMaskIntoConstraints = false
+        if selectedLanguage == nil {
+            englishBtn.backgroundColor = .buttonActiveColor
+            label.textColor = .textOnActiveButtonColor
+        } else {
+            englishBtn.backgroundColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .buttonActiveColor : .buttonDisabledColor
+            label.textColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .textOnActiveButtonColor : .textOnDisabledButtonColor
+        }
         
         return label
     }()
@@ -81,16 +87,14 @@ class LanduageViewController: UIViewController {
     lazy var russianLabel: UILabel = {
         let label = createLabel(size: 20, font: "Inter-SemiBold", text: "Russian", color: .textOnDisabledButtonColor)
         label.translatesAutoresizingMaskIntoConstraints = false
+        russianBtn.backgroundColor = label.text == UserDefaults.standard.object(forKey: "language") as? String  ? .buttonActiveColor : .buttonDisabledColor
+        label.textColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .textOnActiveButtonColor : .textOnDisabledButtonColor
         
         return label
     }()
     
-    
     func setBtn() {
-        
-        englishBtn.backgroundColor = .buttonActiveColor
-        englishLabel.textColor = .textOnActiveButtonColor
-        
+
         view.addSubview(englishBtn)
         view.addSubview(russianBtn)
         view.addSubview(englishLabel)
@@ -156,6 +160,8 @@ class LanduageViewController: UIViewController {
         return act
     }
     
+   
+    
     func engLang() -> UIAction {
         let act = UIAction { _ in
             print(5)
@@ -163,6 +169,9 @@ class LanduageViewController: UIViewController {
             self.englishLabel.textColor = .textOnActiveButtonColor
             self.russianBtn.backgroundColor = .buttonDisabledColor
             self.russianLabel.textColor = .textOnDisabledButtonColor
+            UserDefaults.standard.set("English", forKey: "language")
+            UserDefaults.standard.set(Country.usa, forKey: "country")
+            
         }
         return act
     }
@@ -174,11 +183,16 @@ class LanduageViewController: UIViewController {
             self.russianLabel.textColor = .textOnActiveButtonColor
             self.englishBtn.backgroundColor = .buttonDisabledColor
             self.englishLabel.textColor = .textOnDisabledButtonColor
+            UserDefaults.standard.set("Russian", forKey: "language")
+            UserDefaults.standard.set(Country.russia, forKey: "country")
+            
         }
         return act
     }
-    
+  
 }
+
+
 //
 ////import SwiftUI
 ////
