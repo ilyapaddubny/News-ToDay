@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol CollectionHeaderDelegate: AnyObject {
+    func seeAllButtonTapped(_ header: UICollectionReusableView)
+}
+
 class CollectionHeaderReusableView: UICollectionReusableView {
-        static let reuseIdentifire = "CollectionHeaderReusableView"
+    static let reuseIdentifire = "CollectionHeaderReusableView"
+    weak var delegate: CollectionHeaderDelegate?
     
     let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -49,8 +54,18 @@ class CollectionHeaderReusableView: UICollectionReusableView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
         ])
         
+        addTarget()
+        
         stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(seeAllButton)
+    }
+    
+    private func addTarget() {
+        seeAllButton.addTarget(self, action: #selector(seeAllButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func seeAllButtonTapped() {
+        delegate?.seeAllButtonTapped(self)
     }
     
     required init?(coder: NSCoder) {

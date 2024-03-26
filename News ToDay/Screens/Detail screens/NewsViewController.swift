@@ -71,7 +71,7 @@ class NewsViewController: BaseController {
     
     
     @objc private func dismissViewController() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
 

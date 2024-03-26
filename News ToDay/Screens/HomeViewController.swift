@@ -216,6 +216,7 @@ class HomeViewController: BaseController {
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: SupplemenntaryViewKind.header,
                                                                                  withReuseIdentifier: CollectionHeaderReusableView.reuseIdentifire,
                                                                                  for: indexPath) as! CollectionHeaderReusableView
+                headerView.delegate = self
                 let section = self.sections[indexPath.section]
                 let sectionName: String
                 switch section {
@@ -385,6 +386,17 @@ extension HomeViewController: UICollectionViewDelegate {
         }
     }
 }
+
+// MARK: - SeeAll header delegate
+extension HomeViewController: CollectionHeaderDelegate {
+    func seeAllButtonTapped(_ header: UICollectionReusableView) {
+        let recommendedArticlesVC = RecommendedArticlesViewController()
+        recommendedArticlesVC.title = "For you"
+        navigationController?.pushViewController(recommendedArticlesVC, animated: true)
+
+    }
+}
+
 
 
 //MARK: - SearchBarDelegate
