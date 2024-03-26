@@ -57,7 +57,10 @@ private extension OnboardingViewController {
 extension OnboardingViewController: OnboardingViewProtocol {
     func actionButtonPressed() {
             let rootVC = NTDTabBarController()
+        
             rootVC.modalPresentationStyle = .fullScreen
-            present(rootVC, animated: true)
+        present(rootVC, animated: true) {
+            FirstLaunchStorage.setFirstLaunchComplete()
+        }
     }
 }
