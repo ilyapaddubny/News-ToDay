@@ -60,6 +60,7 @@
 		83E5FAC12BAA0FA0003D99ED /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAC02BAA0FA0003D99ED /* Category.swift */; };
 		83E5FAC32BAA0FA7003D99ED /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAC22BAA0FA7003D99ED /* Country.swift */; };
 		83E5FAC82BAA10DD003D99ED /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAC72BAA10DD003D99ED /* Endpoint.swift */; };
+		A05DB9792BB30DEA00C98209 /* FirstLaunghStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05DB9782BB30DEA00C98209 /* FirstLaunghStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		83E5FAC02BAA0FA0003D99ED /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		83E5FAC22BAA0FA7003D99ED /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		83E5FAC72BAA10DD003D99ED /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		A05DB9782BB30DEA00C98209 /* FirstLaunghStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunghStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 		83E5FAB92BAA0ED9003D99ED /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				A05DB9782BB30DEA00C98209 /* FirstLaunghStorage.swift */,
 				838EC8372BAC703E004EBC4C /* NetworkManager.swift */,
 				83253AEF2BB1F9E000B43DC0 /* CoreDataManager.swift */,
 			);
@@ -433,6 +436,7 @@
 				2D6DD5AD2BB179B200F2E33B /* UIFond+Extensions.swift in Sources */,
 				83E5FAB22BA8BD25003D99ED /* BaseController.swift in Sources */,
 				838EC8382BAC703E004EBC4C /* NetworkManager.swift in Sources */,
+				A05DB9792BB30DEA00C98209 /* FirstLaunghStorage.swift in Sources */,
 				83E5FAA92BA8BBBE003D99ED /* HomeViewController.swift in Sources */,
 				838EC84C2BAED535004EBC4C /* UISearchBar + ext.swift in Sources */,
 				838EC8482BAEC1E4004EBC4C /* ImageCache.swift in Sources */,
