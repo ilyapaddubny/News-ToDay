@@ -22,8 +22,7 @@ class NewsViewController: BaseController {
     let headerTextView  = NewsHeaderTextView()
     
     let category: String
-    let article: Article
-    
+    var article: Article
     
     init(category: String, article: Article) {
         self.category = category
@@ -51,11 +50,23 @@ class NewsViewController: BaseController {
         subtitleLabel.text  = article.description
         newsTextView.text   = article.content
         headerTextView.configure(category: category, article: article)
+        setBookmarkImage()
     }
     
     
     private func addTarget() {
+        bookmarkButton.addTarget(self, action: #selector(bookmarkTapped), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
+    }
+    
+    @objc func bookmarkTapped() {
+        article.isBookmarked.toggle()
+        setBookmarkImage()
+    }
+    
+    func setBookmarkImage() {
+        let bookmarkImage = article.isBookmarked ? Icons.bookmarkFilled : Icons.bookmarkStroke
+        bookmarkButton.setImage(bookmarkImage, for: .normal)
     }
     
     
