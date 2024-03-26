@@ -404,7 +404,7 @@ extension HomeViewController: CollectionHeaderDelegate {
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text)
+        print(searchBar.text ?? "")
         searchBar.text = ""
     }
     

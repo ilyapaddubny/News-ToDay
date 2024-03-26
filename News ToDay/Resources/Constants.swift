@@ -40,31 +40,31 @@ enum Image {
 
 
 enum ScreenTitle {
-    static let home = "Browse"
-    static let categories = "Categories"
-    static let bookmarks = "Bookmarks"
-    static let user = "Profile"
+    static let home = NSLocalizedString("Browse", value: "Browse", comment: "Screen title: Browse").localized
+    static let categories = NSLocalizedString("Categories", value: "Categories", comment: "Screen title: Categories").localized
+    static let bookmarks = NSLocalizedString("Bookmarks", value: "Bookmarks", comment: "Screen title: Bookmarks").localized
+    static let user = NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized
 }
 
 
 enum Subtitle {
-    static let categories = "Thousands of articles in each category"
-    static let browse = "Discover things of the world"
-    static let bookmarks  = "Saved articles to the library"
+    static let categories = NSLocalizedString("Thousands of articles in each category", value: "Thousands of articles in each category", comment: "Subtitle: Categories")
+    static let browse = NSLocalizedString("Discover things of the world", value: "Discover things of the world", comment: "Subtitle: Browse")
+    static let bookmarks  = NSLocalizedString("Saved articles to the library", value: "Saved articles to the library", comment: "Subtitle: Bookmarks")
 }
 
 
 enum Placeholder {
-    static let search = "Search"
+    static let search = NSLocalizedString("Search", value: "Search", comment: "Placeholder text for search")
 }
 
 enum EmptyListHelper {
-    static let noBookmarks = "You haven't saved any articles yet. Start reading and bookmarking them now"
+    static let noBookmarks = NSLocalizedString("You haven't saved any articles yet. Start reading and bookmarking them now", value: "You haven't saved any articles yet. Start reading and bookmarking them now", comment: "Empty bookmarks list message")
 }
 
 
 enum Key {
-    static let apiKey = "ddbae45c2e33483d9cec5e18eaa5a82c"
+    static let apiKey = "3e1f1bb553a84f6586354aa67b06b19f"
 }
 
 
