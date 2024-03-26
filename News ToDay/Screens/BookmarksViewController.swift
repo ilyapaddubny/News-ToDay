@@ -9,27 +9,64 @@ import UIKit
 
 class BookmarksViewController: BaseController {
     
+    let emptyStateView = NTDEmptyStateView(message: EmptyListHelper.noBookmarks)
+    
     enum Section: Hashable {
         case recommended
     }
     
     var collectionView: UICollectionView!
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, CollectionItem>!
     
     var sections = [Section]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+        configureDataSource()
+        configureEmptyState()
+        updateUI()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setSubtitleText(text: Subtitle.bookmarks)
+        configureCollectionView()
+        configureDataSource()
+    }
+    
+    private func configureEmptyState() {
+        view.addSubview(emptyStateView)
         
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            emptyStateView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            emptyStateView.centerYAnchor.constraint(equalTo: margins.centerYAnchor)
+        ])
+    }
+    
+    private func configureCollectionView() {
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
         
         collectionView.register(StandardArticleCollectionViewCell.self,
                                 forCellWithReuseIdentifier: StandardArticleCollectionViewCell.reuseIdentifier)
-        
         configureDataSource()
-        
         self.view.addSubview(collectionView)
+        updateUI()
+    }
+    
+    func updateUI() {
+        if CollectionItem.bookmarkedArticles.isEmpty {
+            // Collection is empty, show empty state
+            emptyStateView.isHidden = false
+            collectionView.isHidden = true
+        } else {
+            // Collection has items, hide empty state
+            emptyStateView.isHidden = true
+            collectionView.isHidden = false
+        }
     }
     
     func createLayout() -> UICollectionViewLayout  {
@@ -46,7 +83,7 @@ class BookmarksViewController: BaseController {
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 2)
                 
                 
-                let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(0.9),
+                let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(1),
                                                         heightDimension: .estimated(336))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 group.contentInsets = NSDirectionalEdgeInsets(top: 0,
@@ -55,7 +92,6 @@ class BookmarksViewController: BaseController {
                                                               trailing: 20)
                 
                 let section = NSCollectionLayoutSection(group: group)
-                
                 return section
             }
         }
@@ -76,14 +112,12 @@ class BookmarksViewController: BaseController {
             }
         });
         
-        
         // MARK: Snapshot Definition
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CollectionItem>()
         snapshot.appendSections([.recommended])
-        snapshot.appendItems(Item.recommendedNews, toSection: .recommended)
+        snapshot.appendItems(CollectionItem.bookmarkedArticles, toSection: .recommended)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
     }
-    
 }

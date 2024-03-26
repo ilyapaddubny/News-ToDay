@@ -150,11 +150,11 @@ private extension OnboardingView {
     
     func configureCollectionView() {
         
-        let firstScreen = OnboardingModel(mainImage: .firstScreen)
-        let secondScreen = OnboardingModel(mainImage: .secondScreen)
-        let thirdScreen = OnboardingModel(mainImage: .firstScreen)
-        
-        onboardingArray = [firstScreen, secondScreen, thirdScreen]
+//        let firstScreen = OnboardingModel(mainImage: .firstScreen)
+//        let secondScreen = OnboardingModel(mainImage: .secondScreen)
+//        let thirdScreen = OnboardingModel(mainImage: .firstScreen)
+//
+//        onboardingArray = [firstScreen, secondScreen, thirdScreen]
     }
     
     
@@ -186,9 +186,9 @@ private extension OnboardingView {
         pageControl.pageIndicatorTintColor = .textSecondaryColor
         pageControl.currentPageIndicatorTintColor = .buttonActiveColor
         
-        if #available(iOS 14.0, *) {
-            pageControl.preferredIndicatorImage = .largeIndicator
-        }
+//        if #available(iOS 14.0, *) {
+//            pageControl.preferredIndicatorImage = .largeIndicator
+//        }
     }
     
     
