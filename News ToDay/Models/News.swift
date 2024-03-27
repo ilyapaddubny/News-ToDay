@@ -7,6 +7,20 @@
 
 import Foundation
 
+fileprivate func transformToArticleObject(favorite: Favorite) -> Article {
+    let source = Source(name: favorite.source?.name ?? "unknown")
+    return Article(
+        source: source,
+        author: favorite.author,
+        title: favorite.title,
+        description: favorite.newsDescription,
+        url: nil,
+        urlToImage: favorite.urlToImage,
+        publishedAt: nil,
+        content: favorite.content)
+    
+}
+
 struct News: Codable {
     let status: String
     let totalResults: Int
@@ -25,30 +39,32 @@ struct Article: Codable, Hashable, Equatable {
     let content: String?
     
     
-    static var bookmarkedArticles: [Article] = []
-    
+    static var bookmarkedArticles: [Article] {
+        return StorageManager.shared.fetchFavorites().map { transformToArticleObject(favorite: $0) }
+    }
+        
     var isBookmarked: Bool {
         // надо получать из кор-даты массив типа [Article] и возвращать значение [Article].contains(self)
         get {
-            //TODO: (Для Миши) Article.isBookmarked получать из core-data
             return Article.bookmarkedArticles.contains(self)
         }
         
-        //TODO: (Для Миши) Article.isBookmarked получать и записывать в core-data
         set {
             // если мы убираем кейс из избранного, нужно удалить его из массива
-            if Article.bookmarkedArticles.first(where: {$0.url == self.url}) != nil, !newValue {
-                Article.bookmarkedArticles.removeAll(where: {$0.url == self.url})
+            if Article.bookmarkedArticles.first(where: {$0.title == self.title}) != nil, !newValue {
+//                Article.bookmarkedArticles.removeAll(where: {$0.title == self.title})
+                StorageManager.shared.deleteFavorite(self)
             }
             // если мы добавляем кейс в избранное, нужно его добавить в массив
             if newValue {
-                Article.bookmarkedArticles.append(self)
+//                Article.bookmarkedArticles.append(self)
+                StorageManager.shared.saveToFavorites(self)
             }
         }
     }
     
     static func == (lhs: Article, rhs: Article) -> Bool {
-           return lhs.url == rhs.url
+           return lhs.title == rhs.title
        }
     
     static let promotedNews: [Article] = [
