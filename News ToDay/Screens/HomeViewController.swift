@@ -33,6 +33,7 @@ class HomeViewController: BaseController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
         collectionView.reloadData()
     }
     
@@ -44,6 +45,7 @@ class HomeViewController: BaseController {
         getNews()
         configureDataSource()
     }
+    
     
     
     private func configureSearchBar() {
