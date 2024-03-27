@@ -40,10 +40,10 @@ enum Image {
 
 
 enum ScreenTitle {
-    static let home = NSLocalizedString("Browse", value: "Browse", comment: "Screen title: Browse").localized
-    static let categories = NSLocalizedString("Categories", value: "Categories", comment: "Screen title: Categories").localized
-    static let bookmarks = NSLocalizedString("Bookmarks", value: "Bookmarks", comment: "Screen title: Bookmarks").localized
-    static let user = NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized
+    static let home = NSLocalizedString("Browse", value: "Browse", comment: "Screen title: Browse")
+    static let categories = NSLocalizedString("Categories", value: "Categories", comment: "Screen title: Categories")
+    static let bookmarks = NSLocalizedString("Bookmarks", value: "Bookmarks", comment: "Screen title: Bookmarks")
+    static let user = NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile")
 }
 
 

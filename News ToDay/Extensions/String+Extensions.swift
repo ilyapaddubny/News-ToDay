@@ -6,9 +6,9 @@
 //
 
 import Foundation
-
-extension String {
-    var localized: String {
-        return NSLocalizedString(self, tableName: nil, bundle: Bundle.localizedBundle(), value: "", comment: "")
-    }
-}
+//TODO: Remove file later
+//extension String {
+//    var localized: String {
+//        return NSLocalizedString(self, tableName: nil, bundle: Bundle.localizedBundle(), value: "", comment: "")
+//    }
+//}
