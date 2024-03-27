@@ -39,8 +39,8 @@ enum Image {
 }
 
 
-struct ScreenTitle {
-    static var home: String { NSLocalizedString("Browse", value: "Browse", comment: "Screen title: Browse").localized }
+struct ScreenTitleStrings {
+    static var browse: String { NSLocalizedString("Browse", value: "Browse", comment: "Screen title: Browse").localized }
     static var categories: String { NSLocalizedString("Categories", value: "Categories", comment: "Screen title: Categories").localized }
     static var bookmarks: String { NSLocalizedString("Bookmarks", value: "Bookmarks", comment: "Screen title: Bookmarks").localized }
     static var user: String { NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized }
@@ -52,6 +52,11 @@ struct ProfileStrings {
     static var language: String { NSLocalizedString("LanBtn", value: "Language", comment: "Language button").localized }
     static var termsAndConditions: String { NSLocalizedString("Terms & Conditions Btn", value: "Terms & Conditions", comment: "Terms & Conditions button label").localized }
     static var signOut: String { NSLocalizedString("signOut", value: "Sign Out", comment: "Sign Out button").localized }
+}
+
+struct BrowseStrings {
+    static var seeAll: String { NSLocalizedString("See all", value: "See all", comment: "Recommended header").localized }
+    static var recommendedForYou: String { NSLocalizedString("Recommended for you", value: "Recommended for you", comment: "Recommended header").localized }
 }
 
 struct LanguageStrings {

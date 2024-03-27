@@ -35,14 +35,14 @@ class LanduageViewController: UIViewController {
     }
     
     func updateText() {
-        logoLabel.text = ScreenTitle.language
+        logoLabel.text = ScreenTitleStrings.language
         englishLabel.text = LanguageStrings.english
         russianLabel.text = LanguageStrings.russian
     }
 
     func setUI() {
         
-        logoLabel.text = ScreenTitle.language
+        logoLabel.text = ScreenTitleStrings.language
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .center

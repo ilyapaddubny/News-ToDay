@@ -336,6 +336,17 @@
         }
       }
     },
+    "Recommended for you" : {
+      "comment" : "Recommended header",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рекомендации"
+          }
+        }
+      }
+    },
     "Russian" : {
       "comment" : "Language button",
       "localizations" : {
@@ -412,6 +423,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "2. Принятие Условий"
+          }
+        }
+      }
+    },
+    "See all" : {
+      "comment" : "Recommended header",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все новости"
           }
         }
       }
