@@ -29,6 +29,13 @@ class ProfileViewController: BaseController {
         return stack
     }()
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    
     private lazy var btnStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical

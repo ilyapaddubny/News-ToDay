@@ -33,7 +33,12 @@ class HomeViewController: BaseController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.isHidden = false
+        collectionView.reloadData()
+
         updateAllStrings()
+
     }
     
     override func viewDidLoad() {
@@ -51,6 +56,7 @@ class HomeViewController: BaseController {
         self.tabBarItem.title = nil
         collectionView.reloadData()
     }
+    
     
     private func configureSearchBar() {
         searchBar.delegate = self
