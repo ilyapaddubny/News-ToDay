@@ -30,7 +30,7 @@ class TermsConditionsController: UIViewController {
         setUI()
         view.backgroundColor = .white
     }
-        
+    
     func setUI() {
         
         
@@ -43,6 +43,8 @@ class TermsConditionsController: UIViewController {
         termsLabel.text = termsConditions
         termsLabel.font = UIFont(name: "Inter-Regular" , size: 15)
         termsLabel.textColor = .textSecondaryColor
+        termsLabel.isEditable = false
+        termsLabel.isSelectable = false
         
        
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
