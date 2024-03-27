@@ -31,6 +31,7 @@ public final class StorageManager: NSObject {
         guard let favoriteEntityDescription = NSEntityDescription.entity(forEntityName: "Favorite", in: context) else { return }
         let favorite = Favorite(entity: favoriteEntityDescription, insertInto: context)
         favorite.title = article.title
+        favorite.author = article.author
         favorite.newsDescription = article.description
         favorite.content = article.content
         favorite.urlToImage = article.urlToImage

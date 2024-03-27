@@ -40,6 +40,8 @@
 		53499B402BADBAED00836203 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53499B3F2BADBAED00836203 /* LanguageViewController.swift */; };
 		83253AF02BB1F9E000B43DC0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83253AEF2BB1F9E000B43DC0 /* StorageManager.swift */; };
 		83253AF32BB2003800B43DC0 /* NTDEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83253AF22BB2003800B43DC0 /* NTDEmptyStateView.swift */; };
+		8344B2942BB472CE00722AC7 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344B2902BB472CE00722AC7 /* Favorite+CoreDataProperties.swift */; };
+		8344B2962BB472CE00722AC7 /* Origin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8344B2922BB472CE00722AC7 /* Origin+CoreDataProperties.swift */; };
 		838EC8302BAC6FEC004EBC4C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EC82F2BAC6FEC004EBC4C /* BaseView.swift */; };
 		838EC8332BAC6FF9004EBC4C /* NewsHeaderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EC8322BAC6FF9004EBC4C /* NewsHeaderImageView.swift */; };
 		838EC8362BAC7004004EBC4C /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EC8352BAC7004004EBC4C /* PaddingLabel.swift */; };
@@ -54,7 +56,6 @@
 		838EC84E2BAF1BE9004EBC4C /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EC84D2BAF1BE9004EBC4C /* UIColor+Ext.swift */; };
 		838EC8542BAF3E7A004EBC4C /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838EC8532BAF3E7A004EBC4C /* NewsViewController.swift */; };
 		83C8F0CB2BB3254F00DAC110 /* NewsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F0C92BB3254F00DAC110 /* NewsDataModel.xcdatamodeld */; };
-		83C8F0CF2BB327AC00DAC110 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F0CD2BB327AC00DAC110 /* Favorite+CoreDataProperties.swift */; };
 		83E5FAA62BA8B8D5003D99ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAA52BA8B8D5003D99ED /* Constants.swift */; };
 		83E5FAA92BA8BBBE003D99ED /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAA82BA8BBBE003D99ED /* HomeViewController.swift */; };
 		83E5FAAB2BA8BBD6003D99ED /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E5FAAA2BA8BBD6003D99ED /* CategoriesViewController.swift */; };
@@ -103,6 +104,8 @@
 		53499B3F2BADBAED00836203 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		83253AEF2BB1F9E000B43DC0 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		83253AF22BB2003800B43DC0 /* NTDEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTDEmptyStateView.swift; sourceTree = "<group>"; };
+		8344B2902BB472CE00722AC7 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8344B2922BB472CE00722AC7 /* Origin+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Origin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		838EC82F2BAC6FEC004EBC4C /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		838EC8322BAC6FF9004EBC4C /* NewsHeaderImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsHeaderImageView.swift; sourceTree = "<group>"; };
 		838EC8352BAC7004004EBC4C /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -117,7 +120,6 @@
 		838EC84D2BAF1BE9004EBC4C /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		838EC8532BAF3E7A004EBC4C /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		83C8F0CA2BB3254F00DAC110 /* NewsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsDataModel.xcdatamodel; sourceTree = "<group>"; };
-		83C8F0CD2BB327AC00DAC110 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		83E5FAA52BA8B8D5003D99ED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		83E5FAA82BA8BBBE003D99ED /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		83E5FAAA2BA8BBD6003D99ED /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
@@ -296,7 +298,8 @@
 		83C8F0C82BB324F100DAC110 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				83C8F0CD2BB327AC00DAC110 /* Favorite+CoreDataProperties.swift */,
+				8344B2902BB472CE00722AC7 /* Favorite+CoreDataProperties.swift */,
+				8344B2922BB472CE00722AC7 /* Origin+CoreDataProperties.swift */,
 				83C8F0C92BB3254F00DAC110 /* NewsDataModel.xcdatamodeld */,
 			);
 			path = "Core Data";
@@ -450,8 +453,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				83E5FAC82BAA10DD003D99ED /* Endpoint.swift in Sources */,
-				83C8F0CF2BB327AC00DAC110 /* Favorite+CoreDataProperties.swift in Sources */,
+				8344B2942BB472CE00722AC7 /* Favorite+CoreDataProperties.swift in Sources */,
 				2D3EE9512BB2CF4200477F8B /* UserDefaults+Extensions.swift in Sources */,
+				8344B2962BB472CE00722AC7 /* Origin+CoreDataProperties.swift in Sources */,
 				838EC8542BAF3E7A004EBC4C /* NewsViewController.swift in Sources */,
 				2D3EE9532BB30AF800477F8B /* RecommendedArticlesViewController.swift in Sources */,
 				83E5FAAD2BA8BC17003D99ED /* BookmarksViewController.swift in Sources */,

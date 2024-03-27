@@ -36,8 +36,6 @@ class BookmarksViewController: BaseController {
         setSubtitleText(text: Subtitle.bookmarks)
         configureCollectionView()
         configureDataSource()
-        let favs = StorageManager.shared.fetchFavorites()
-        print("You favorited \(favs.count) items")
     }
     
     private func configureEmptyState() {

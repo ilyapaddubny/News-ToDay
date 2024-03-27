@@ -8,15 +8,17 @@
 import Foundation
 
 fileprivate func transformToArticleObject(favorite: Favorite) -> Article {
+    let source = Source(name: favorite.source?.name ?? "unknown")
     return Article(
-        source: nil,
-        author: nil,
+        source: source,
+        author: favorite.author,
         title: favorite.title,
         description: favorite.newsDescription,
         url: nil,
         urlToImage: favorite.urlToImage,
         publishedAt: nil,
         content: favorite.content)
+    
 }
 
 struct News: Codable {
@@ -38,19 +40,15 @@ struct Article: Codable, Hashable, Equatable {
     
     
     static var bookmarkedArticles: [Article] {
-        let favorites = StorageManager.shared.fetchFavorites()
-        let articles = favorites.map { transformToArticleObject(favorite: $0) }
-        return articles
+        return StorageManager.shared.fetchFavorites().map { transformToArticleObject(favorite: $0) }
     }
         
     var isBookmarked: Bool {
         // надо получать из кор-даты массив типа [Article] и возвращать значение [Article].contains(self)
         get {
-            //TODO: (Для Миши) Article.isBookmarked получать из core-data
             return Article.bookmarkedArticles.contains(self)
         }
         
-        //TODO: (Для Миши) Article.isBookmarked получать и записывать в core-data
         set {
             // если мы убираем кейс из избранного, нужно удалить его из массива
             if Article.bookmarkedArticles.first(where: {$0.title == self.title}) != nil, !newValue {
@@ -66,7 +64,7 @@ struct Article: Codable, Hashable, Equatable {
     }
     
     static func == (lhs: Article, rhs: Article) -> Bool {
-           return lhs.url == rhs.url
+           return lhs.title == rhs.title
        }
     
     static let promotedNews: [Article] = [
