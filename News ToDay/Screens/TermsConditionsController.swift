@@ -35,7 +35,7 @@ class TermsConditionsController: UIViewController {
     }
         
     func setUI() {
-        logoLabel.text = ScreenTitle.termsAndConditions
+        logoLabel.text = ScreenTitleStrings.termsAndConditions
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .center
