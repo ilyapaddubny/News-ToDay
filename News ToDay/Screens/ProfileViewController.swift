@@ -9,11 +9,6 @@ import UIKit
 
 class ProfileViewController: BaseController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setLabelsText()
-    }
-    
     var langLabel: UILabel!
     var termsLabel: UILabel!
     var signOutLabel: UILabel!
@@ -33,6 +28,7 @@ class ProfileViewController: BaseController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        setLabelsText()
     }
     
     
