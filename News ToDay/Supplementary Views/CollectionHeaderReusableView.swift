@@ -34,7 +34,7 @@ class CollectionHeaderReusableView: UICollectionReusableView {
     
     let seeAllButton: UIButton = {
         let button = UIButton()
-        button.setTitle("See All", for: .normal)
+        button.setTitle(BrowseStrings.seeAll, for: .normal)
         button.setTitleColor(.textSecondaryColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "Inter-Regular", size: 14)
         button.setContentHuggingPriority(.required, for: .horizontal)
@@ -74,6 +74,7 @@ class CollectionHeaderReusableView: UICollectionReusableView {
     
     func setTitle(_ title: String) {
         label.text = title
+        seeAllButton.setTitle(BrowseStrings.seeAll, for: .normal)
     }
     
 }

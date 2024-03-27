@@ -14,6 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let currentLanguage = UserDefaults.standard.string(forKey: "language")
+        LocalizeUtils.defaultLocalizer.setSelectedLanguage(lang: "en") // Setting the default language to English
+        
+        if let currentLanguage = currentLanguage {
+            switch currentLanguage {
+            case "Russian":
+                LocalizeUtils.defaultLocalizer.setSelectedLanguage(lang: "ru")
+            default:
+                LocalizeUtils.defaultLocalizer.setSelectedLanguage(lang: "en")
+            }
+        }
         return true
     }
 

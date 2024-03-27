@@ -150,11 +150,11 @@ private extension OnboardingView {
     
     func configureCollectionView() {
         
-//        let firstScreen = OnboardingModel(mainImage: .firstScreen)
-//        let secondScreen = OnboardingModel(mainImage: .secondScreen)
-//        let thirdScreen = OnboardingModel(mainImage: .firstScreen)
-//
-//        onboardingArray = [firstScreen, secondScreen, thirdScreen]
+        let firstScreen = OnboardingModel(mainImage: .firstScreen)
+        let secondScreen = OnboardingModel(mainImage: .secondScreen)
+        let thirdScreen = OnboardingModel(mainImage: .firstScreen)
+
+        onboardingArray = [firstScreen, secondScreen, thirdScreen]
     }
     
     
