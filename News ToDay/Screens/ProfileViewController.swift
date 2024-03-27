@@ -87,23 +87,9 @@ class ProfileViewController: BaseController {
         
         self.view.addSubview(btnStack)
         
-        let langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Language", color: .textOnDisabledButtonColor)
-        let termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Terms & Conditions", color: .textOnDisabledButtonColor)
-        let signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Sign Out", color: .textOnDisabledButtonColor)
-        
-//        langBtn.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
-//        langBtn.configuration?.imagePlacement = .trailing
-        
-    
-        
-//        let langImg = UIImageView()
-//        langImg.image = UIImage(named: "chevron.forward")
-//        langImg.contentMode = .scaleToFill
-//        langImg.translatesAutoresizingMaskIntoConstraints = false
-//        langImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        langImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        
+        let langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.language, color: .textOnDisabledButtonColor)
+        let termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.termsAndConditions, color: .textOnDisabledButtonColor)
+        let signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.signOut, color: .textOnDisabledButtonColor)
         
         self.view.addSubview(langBtn)
         self.view.addSubview(langLabel)

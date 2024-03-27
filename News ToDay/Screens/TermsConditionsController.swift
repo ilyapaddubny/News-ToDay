@@ -9,7 +9,7 @@ import UIKit
 
 class TermsConditionsController: UIViewController {
     let logoLabel = UILabel()
-    let termsLabel = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    let termsTextView = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
     
     lazy var backButton: UIButton = {
         let button = UIButton(primaryAction: back())
@@ -32,24 +32,22 @@ class TermsConditionsController: UIViewController {
     }
         
     func setUI() {
-        
-        
-        
-        logoLabel.text = ("Terms & Conditions")
+        logoLabel.text = ScreenTitle.termsAndConditions
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .center
         
-        termsLabel.text = termsConditions
-        termsLabel.font = UIFont(name: "Inter-Regular" , size: 15)
-        termsLabel.textColor = .textSecondaryColor
+
+        applyAttributedText()
+        termsTextView.textAlignment = .justified
+        termsTextView.textColor = .textSecondaryColor
         
        
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
-        termsLabel.translatesAutoresizingMaskIntoConstraints = false
+        termsTextView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(logoLabel)
-        view.addSubview(termsLabel)
+        view.addSubview(termsTextView)
         view.addSubview(backButton)
         
         NSLayoutConstraint.activate([
@@ -62,12 +60,52 @@ class TermsConditionsController: UIViewController {
             logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             
             
-            termsLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 10),
-            termsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            termsLabel.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            termsLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            termsTextView.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 18),
+            termsTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            termsTextView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            termsTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         
         ])
+    }
+    
+    func applyAttributedText() {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5 // Add space between lines
+        
+        
+        let sections: [(title: String, text: String)] = [
+            (TermsAndConditionsString.firstSectionTitle, TermsAndConditionsString.firstSectionText),
+            (TermsAndConditionsString.secondSectionTitle, TermsAndConditionsString.secondSectionText),
+            (TermsAndConditionsString.thirdSectionTitle, TermsAndConditionsString.thirdSectionText),
+            (TermsAndConditionsString.fourthSectionTitle, TermsAndConditionsString.fourthSectionText),
+            (TermsAndConditionsString.fifthSectionTitle, TermsAndConditionsString.fifthSectionText)
+        ]
+
+        let attributedText = NSMutableAttributedString()
+
+        for section in sections {
+            // Title attributes
+            let titleFont = UIFont(name: "Inter-SemiBold", size: 17) ?? UIFont.boldSystemFont(ofSize: 17)
+            let titleAttributes: [NSAttributedString.Key: Any] = [
+                .font: titleFont,
+                .paragraphStyle: paragraphStyle
+            ]
+            let attributedTitle = NSAttributedString(string: section.title, attributes: titleAttributes)
+            
+            // Text attributes
+            let textFont = UIFont(name: "Inter-Regular", size: 16) ?? UIFont.systemFont(ofSize: 16)
+            let textAttributes: [NSAttributedString.Key: Any] = [
+                .font: textFont,
+                .paragraphStyle: paragraphStyle
+            ]
+            let attributedSectionText = NSAttributedString(string: section.text, attributes: textAttributes)
+            
+            // Append title and text to attributedText
+            attributedText.append(attributedTitle)
+            attributedText.append(attributedSectionText)
+        }
+        
+        termsTextView.attributedText = attributedText
     }
     
     func back() -> UIAction {
@@ -98,3 +136,4 @@ class TermsConditionsController: UIViewController {
 //        func updateUIView(_ uiView: UIViewType, context: Context) { }
 //    }
 //}
+    

@@ -45,6 +45,101 @@
         }
       }
     },
+    "fifthSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nNews Reader is not responsible for the accuracy, completeness, or reliability of any Content. You understand that Content may contain errors or omissions, and News Reader expressly disclaims any liability for such errors or omissions. News Reader is also not responsible for User Content or any other content that you or third parties may provide through the App. You use the App at your own risk.\n"
+          }
+        }
+      }
+    },
+    "fifthSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "5. Content Disclaimer"
+          }
+        }
+      }
+    },
+    "firstSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nThese terms and conditions (“Terms”) govern the relationship between you, the user of the News Reader application (the “App”) and the owner of the App, defined as News Reader Inc. (“News Reader”), regarding your use of the App.\n\n"
+          }
+        }
+      }
+    },
+    "firstSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1. Introduction"
+          }
+        }
+      }
+    },
+    "fourthSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nThe App allows users to submit news articles, photos, videos, or other content (“User Content”). You are solely responsible for the creation, ownership, and legal rights related to the User Content you submit. By submitting User Content to the App, you grant News Reader a non-exclusive, revocable, royalty-free, worldwide license to use, display, distribute, and create derivative works of your User Content in connection with the App, provided that News Reader does not alter the submitted User Content in any way that would constitute misrepresentation.\n\n"
+          }
+        }
+      }
+    },
+    "fourthSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "4. User Content"
+          }
+        }
+      }
+    },
+    "LanBtn" : {
+      "comment" : "Language button",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Language"
+          }
+        }
+      }
+    },
+    "Language" : {
+      "comment" : "Screen title: Language",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык"
+          }
+        }
+      }
+    },
     "Profile" : {
       "comment" : "Screen title: Profile",
       "localizations" : {
@@ -74,6 +169,89 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поиск"
+          }
+        }
+      }
+    },
+    "secondSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nBy downloading, installing, or using the App, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, please do not download, install, or use the App.\n\n"
+          }
+        }
+      }
+    },
+    "secondSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "2. Acceptance of Terms"
+          }
+        }
+      }
+    },
+    "signOut" : {
+      "comment" : "Sign Out button",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sign Out"
+          }
+        }
+      }
+    },
+    "Terms & Conditions" : {
+      "comment" : "Screen title: Terms & Conditions",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Условия пользования"
+          }
+        }
+      }
+    },
+    "Terms & Conditions Btn" : {
+      "comment" : "Terms & Conditions button label",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Terms & Conditions"
+          }
+        }
+      }
+    },
+    "thirdSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nYou acknowledge and agree that all intellectual property rights, including but not limited to copyrights, patents, trademarks, and trade secrets, in the App and its content (collectively, the “Content”) belong to News Reader or its licensors. You may not copy, modify, distribute, transmit, display, perform, reproduce, publish, license, sell, rent, sub-license, or otherwise exploit the Content, in whole or in part, without News Reader’s prior written permission.\n\n"
+          }
+        }
+      }
+    },
+    "thirdSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3. Intellectual Property Rights"
           }
         }
       }

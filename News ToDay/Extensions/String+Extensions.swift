@@ -7,8 +7,9 @@
 
 import Foundation
 //TODO: Remove file later
-//extension String {
-//    var localized: String {
-//        return NSLocalizedString(self, tableName: nil, bundle: Bundle.localizedBundle(), value: "", comment: "")
-//    }
-//}
+
+extension String {
+    var localized: String {
+        return LocalizeUtils.defaultLocalizer.stringForKey(key: self)
+    }
+}

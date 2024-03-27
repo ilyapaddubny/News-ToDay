@@ -36,7 +36,7 @@ class LanduageViewController: UIViewController {
 
     func setUI() {
         
-        logoLabel.text = defaultLocalizer.stringForKey(key: "Search")
+        logoLabel.text = ScreenTitle.language
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .center
