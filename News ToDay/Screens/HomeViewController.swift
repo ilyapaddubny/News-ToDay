@@ -41,7 +41,7 @@ class HomeViewController: BaseController {
         setSubtitleText(text: Subtitle.browse)
         configureSearchBar()
         configureCollectionView()
-//        getNews()
+        getNews()
         configureDataSource()
     }
     
