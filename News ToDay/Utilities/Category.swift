@@ -62,40 +62,40 @@ enum Category: String, Hashable, CaseIterable, Codable {
     
     
     func getButtonName() -> String {
-            switch self {
-            case .general:
-                return "General"
-            case .business:
-                return "Business"
-            case .sports:
-                return "Sports"
-            case .entertainment:
-                return "Leisure"
-            case .science:
-                return "Science"
-            case .health:
-                return " Health "
-            case .technology:
-                return "Digital"
-            }
+        switch self {
+        case .general:
+            return CategoryStrings.general
+        case .business:
+            return CategoryStrings.business
+        case .sports:
+            return CategoryStrings.sports
+        case .entertainment:
+            return CategoryStrings.entertainment
+        case .science:
+            return CategoryStrings.science
+        case .health:
+            return CategoryStrings.health
+        case .technology:
+            return CategoryStrings.technology
+        }
         }
     
     func getNamePlusIconString() -> String {
         switch self {
         case .general:
-            return "🌐  General"
+            return CategoryStringsWithEmoji.general
         case .business:
-            return "💼  Business"
+            return CategoryStringsWithEmoji.business
         case .sports:
-            return "⚽️  Sports"
+            return CategoryStringsWithEmoji.sports
         case .entertainment:
-            return "🎉  Leisure"
+            return CategoryStringsWithEmoji.entertainment
         case .science:
-            return "🔬  Science"
+            return CategoryStringsWithEmoji.science
         case .health:
-            return "💊  Health"
+            return CategoryStringsWithEmoji.health
         case .technology:
-            return "📱  Digital"
+            return CategoryStringsWithEmoji.technology
         }
     }
     
