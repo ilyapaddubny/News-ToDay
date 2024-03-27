@@ -17,6 +17,22 @@ var window: UIWindow?
                 window = UIWindow(frame: UIScreen.main.bounds)
                 window?.rootViewController = splashViewController
                 window?.makeKeyAndVisible()
+        
+        
+        let currentLanguage = UserDefaults.standard.string(forKey: "language")
+        
+        LocalizeUtils.defaultLocalizer.setSelectedLanguage(lang: "en") // Setting the default language to English
+        
+        if let currentLanguage = currentLanguage {
+            switch currentLanguage {
+            case "Russian":
+                LocalizeUtils.defaultLocalizer.setSelectedLanguage(lang: "ru")
+            default:
+                LocalizeUtils.defaultLocalizer.setSelectedLanguage(lang: "en")
+            }
+        }
+        
+        
         return true
     }
 
