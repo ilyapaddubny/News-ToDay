@@ -22,7 +22,10 @@ class TermsConditionsController: UIViewController {
         return button
     }()
    
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUI()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,9 @@ class TermsConditionsController: UIViewController {
         
 
         applyAttributedText()
+        
+        termsTextView.isEditable = false
+        termsTextView.isSelectable = true
         termsTextView.textAlignment = .justified
         termsTextView.textColor = .textSecondaryColor
         
@@ -73,13 +79,13 @@ class TermsConditionsController: UIViewController {
         paragraphStyle.lineSpacing = 5 // Add space between lines
         
         
-        let sections: [(title: String, text: String)] = [
+        var sections: [(title: String, text: String)] {[
             (TermsAndConditionsString.firstSectionTitle, TermsAndConditionsString.firstSectionText),
             (TermsAndConditionsString.secondSectionTitle, TermsAndConditionsString.secondSectionText),
             (TermsAndConditionsString.thirdSectionTitle, TermsAndConditionsString.thirdSectionText),
             (TermsAndConditionsString.fourthSectionTitle, TermsAndConditionsString.fourthSectionText),
             (TermsAndConditionsString.fifthSectionTitle, TermsAndConditionsString.fifthSectionText)
-        ]
+        ]}
 
         let attributedText = NSMutableAttributedString()
 
@@ -112,8 +118,6 @@ class TermsConditionsController: UIViewController {
         let act = UIAction { _ in
             print(4)
             self.navigationController?.popViewController(animated: true)
-//            let vc = ProfileViewController()
-//            self.navigationController?.pushViewController(vc, animated: true)
         }
         return act
     }

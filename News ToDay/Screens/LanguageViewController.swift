@@ -33,6 +33,12 @@ class LanduageViewController: UIViewController {
         setBtn()
         view.backgroundColor = .white
     }
+    
+    func updateText() {
+        logoLabel.text = ScreenTitle.language
+        englishLabel.text = LanguageStrings.english
+        russianLabel.text = LanguageStrings.russian
+    }
 
     func setUI() {
         
@@ -73,7 +79,7 @@ class LanduageViewController: UIViewController {
     }()
     
     lazy var englishLabel: UILabel = {
-        let label = createLabel(size: 17, font: "Inter-SemiBold", text: "English", color: .textOnDisabledButtonColor)
+        let label = createLabel(size: 17, font: "Inter-SemiBold", text: LanguageStrings.english, color: .textOnDisabledButtonColor)
         label.translatesAutoresizingMaskIntoConstraints = false
         if selectedLanguage == nil {
             englishBtn.backgroundColor = .buttonActiveColor
@@ -87,7 +93,7 @@ class LanduageViewController: UIViewController {
     }()
     
     lazy var russianLabel: UILabel = {
-        let label = createLabel(size: 17, font: "Inter-SemiBold", text: "Russian", color: .textOnDisabledButtonColor)
+        let label = createLabel(size: 17, font: "Inter-SemiBold", text: LanguageStrings.russian, color: .textOnDisabledButtonColor)
         label.translatesAutoresizingMaskIntoConstraints = false
         russianBtn.backgroundColor = label.text == UserDefaults.standard.object(forKey: "language") as? String  ? .buttonActiveColor : .buttonDisabledColor
         label.textColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .textOnActiveButtonColor : .textOnDisabledButtonColor
@@ -152,7 +158,6 @@ class LanduageViewController: UIViewController {
     
     func back() -> UIAction {
         let act = UIAction { [weak self] _ in
-            print(7)
             self?.navigationController?.popViewController(animated: true)
         }
         return act
@@ -162,7 +167,6 @@ class LanduageViewController: UIViewController {
     
     func engLang() -> UIAction {
         let act = UIAction { [weak self] _ in
-            print(5)
             self?.englishBtn.backgroundColor = .buttonActiveColor
             self?.englishLabel.textColor = .textOnActiveButtonColor
             self?.russianBtn.backgroundColor = .buttonDisabledColor
@@ -170,14 +174,13 @@ class LanduageViewController: UIViewController {
             UserDefaults.standard.set("English", forKey: "language")
             UserDefaults.standard.set(Country.usa, forKey: "country")
             self?.defaultLocalizer.setSelectedLanguage(lang: "en")
-            self?.setUI()
+            self?.updateText()
         }
         return act
     }
     
     func rusLang() -> UIAction {
         let act = UIAction { [weak self] _ in
-            print(6)
             self?.russianBtn.backgroundColor = .buttonActiveColor
             self?.russianLabel.textColor = .textOnActiveButtonColor
             self?.englishBtn.backgroundColor = .buttonDisabledColor
@@ -185,7 +188,7 @@ class LanduageViewController: UIViewController {
             UserDefaults.standard.set("Russian", forKey: "language")
             UserDefaults.standard.set(Country.russia, forKey: "country")
             self?.defaultLocalizer.setSelectedLanguage(lang: "ru")
-            self?.setUI()
+            self?.updateText()
         }
         return act
     }

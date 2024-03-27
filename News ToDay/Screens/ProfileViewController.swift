@@ -9,6 +9,15 @@ import UIKit
 
 class ProfileViewController: BaseController {
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setLabelsText()
+    }
+    
+    var langLabel: UILabel!
+    var termsLabel: UILabel!
+    var signOutLabel: UILabel!
+    
     private lazy var textStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -49,9 +58,8 @@ class ProfileViewController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setImage()
-        setText()
+        setUserText()
         setBtn()
-
         
     }
     
@@ -61,7 +69,7 @@ class ProfileViewController: BaseController {
         image.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
     }
     
-    private func setText() {
+    private func setUserText() {
         self.view.addSubview(textStack)
         
         let userName = createLabel(size: 20, font: "Inter-SemiBold", text: "Ivan I", color: .textPrimaryColor)
@@ -77,19 +85,20 @@ class ProfileViewController: BaseController {
         ])
     }
     
-    
+    private func setLabelsText() {
+        langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.language, color: .textOnDisabledButtonColor)
+        termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.termsAndConditions, color: .textOnDisabledButtonColor)
+        signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.signOut, color: .textOnDisabledButtonColor)
+    }
+        
     
     private func setBtn() {
-        
+        setLabelsText()
         let langBtn = createButton(action: langAct())
         let termsBtn = createButton(action: termsAct())
         let signOutBtn = createButton(action: signAct())
         
         self.view.addSubview(btnStack)
-        
-        let langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.language, color: .textOnDisabledButtonColor)
-        let termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.termsAndConditions, color: .textOnDisabledButtonColor)
-        let signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.signOut, color: .textOnDisabledButtonColor)
         
         self.view.addSubview(langBtn)
         self.view.addSubview(langLabel)
@@ -117,11 +126,6 @@ class ProfileViewController: BaseController {
             
             signOutLabel.leadingAnchor.constraint(equalTo: signOutBtn.leadingAnchor, constant: 20),
             signOutLabel.topAnchor.constraint(equalTo: signOutBtn.topAnchor, constant: 18),
-            
-//            langImg.trailingAnchor.constraint(equalTo: langBtn.trailingAnchor, constant: -20),
-//            langImg.topAnchor.constraint(equalTo: langBtn.topAnchor, constant: 18),
-//            langImg.bottomAnchor.constraint(equalTo: langBtn.bottomAnchor, constant: -18),
-//            langImg.leadingAnchor.constraint(equalTo: langBtn.trailingAnchor, constant: -40)
             
         ])
        
