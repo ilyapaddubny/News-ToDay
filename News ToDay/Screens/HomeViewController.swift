@@ -45,7 +45,7 @@ class HomeViewController: BaseController {
         super.viewDidLoad()
         configureSearchBar()
         configureCollectionView()
-        getNews()
+//        getNews()
         configureDataSource()
     }
     
@@ -61,9 +61,9 @@ class HomeViewController: BaseController {
     private func configureSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = Placeholder.search
-        searchBar.setLeftImage(Image.searchIcon!, with: 16, tintColor: .systemGray)
+        searchBar.setLeftImage(Image.searchIcon!, with: 10, tintColor: .textOnDisabledButtonColor)
         searchBar.clearBackgroundColor()
-        searchBar.textField?.backgroundColor = .systemGray6
+        searchBar.textField?.backgroundColor = .buttonDisabledColor
         searchBar.updateHeight(height: 56)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(searchBar)
@@ -402,11 +402,13 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: CollectionHeaderDelegate {
     func seeAllButtonTapped(_ header: UICollectionReusableView) {
         let recommendedArticlesVC = RecommendedArticlesViewController()
-        recommendedArticlesVC.title = "For you"
+//        recommendedArticlesVC.title = "Recommended"
         navigationController?.pushViewController(recommendedArticlesVC, animated: true)
 
     }
 }
+
+
 
 
 

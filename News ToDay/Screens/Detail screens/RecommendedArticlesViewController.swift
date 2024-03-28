@@ -8,8 +8,20 @@
 import UIKit
 
 class RecommendedArticlesViewController: BaseController {
-    
+    let logoLabel = UILabel()
     var recommendedArticles = [CollectionItem]()
+    
+    lazy var backButton: UIButton = {
+        let button = UIButton(primaryAction: back())
+        button.setImage(Image.arrowBackWhite, for: .normal)
+        button.tintColor = .textOnDisabledButtonColor
+        button.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 26).isActive = true
+        button.backgroundColor = .clear
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     var activityIndicator: UIActivityIndicatorView!
 
@@ -27,19 +39,51 @@ class RecommendedArticlesViewController: BaseController {
         super.viewWillAppear(animated)
         configureDataSource()
         collectionView.reloadData()
+        logoLabel.text = ScreenTitleStrings.recommended
         getNews()
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         configureActivityIndicator()
         activityIndicator.startAnimating()
+        setUI()
+        configureDataSource()
+        collectionView.delegate = self
+        
+    }
+    
+    
+    func setUI() {
+        logoLabel.text = ScreenTitleStrings.recommended
+        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
+        logoLabel.textColor = .textPrimaryColor
+        logoLabel.textAlignment = .center
+        logoLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        
+        view.addSubview(logoLabel)
+        view.addSubview(backButton)
+        
+        NSLayoutConstraint.activate([
+            
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13),
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            
+            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            
+        ])
+        
+        
         
         configureCollectionView()
-        configureDataSource()
-        
-        collectionView.delegate = self
     }
+    
     
     private func configureActivityIndicator() {
         // Create and configure the activity indicator
@@ -57,11 +101,23 @@ class RecommendedArticlesViewController: BaseController {
     
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
+        self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 15),
+            collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ])
+        
         
         collectionView.register(StandardArticleCollectionViewCell.self,
                                 forCellWithReuseIdentifier: StandardArticleCollectionViewCell.reuseIdentifier)
         configureDataSource()
-        self.view.addSubview(collectionView)
+        
+        
+        
     }
     
     func createLayout() -> UICollectionViewLayout  {
@@ -95,6 +151,8 @@ class RecommendedArticlesViewController: BaseController {
     
     
     func configureDataSource() {
+        navigationController?.navigationBar.isHidden = true
+
         dataSource = .init(collectionView: collectionView, cellProvider: {
             (collectionView, indexPath, item) -> UICollectionViewCell? in
             let section = self.sections[indexPath.section]
@@ -146,7 +204,13 @@ class RecommendedArticlesViewController: BaseController {
         }
     }
     
-    
+    func back() -> UIAction {
+        let action = UIAction(title: "", image: nil) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+            self?.navigationController?.navigationBar.isHidden = false
+        }
+        return action
+    }
         
 }
 
@@ -168,3 +232,5 @@ extension RecommendedArticlesViewController: UICollectionViewDelegate {
     }
     
 }
+
+

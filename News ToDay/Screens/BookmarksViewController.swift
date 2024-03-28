@@ -55,10 +55,22 @@ class BookmarksViewController: BaseController {
         
         collectionView.register(StandardArticleCollectionViewCell.self,
                                 forCellWithReuseIdentifier: StandardArticleCollectionViewCell.reuseIdentifier)
-        configureDataSource()
+        
         self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: margins.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ])
+        
+        
+        configureDataSource()
         updateUI()
     }
+    
     
     func updateUI() {
         if CollectionItem.bookmarkedArticles.isEmpty {

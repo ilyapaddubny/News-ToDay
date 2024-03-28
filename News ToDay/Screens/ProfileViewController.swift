@@ -24,13 +24,26 @@ class ProfileViewController: BaseController {
         return stack
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setImage()
+        setUserText()
+        setBtn()
+        
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        self.navigationItem.title = "Profile"
         setLabelsText()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
     
     private lazy var btnStack: UIStackView = {
         let stack = UIStackView()
@@ -58,13 +71,7 @@ class ProfileViewController: BaseController {
         return image
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setImage()
-        setUserText()
-        setBtn()
-        
-    }
+   
     
     private func setImage() {
         self.view.addSubview(image)
@@ -164,7 +171,6 @@ class ProfileViewController: BaseController {
     
     func langAct() -> UIAction {
         let act = UIAction { _ in
-            print(1)
             let vc = LanduageViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -172,19 +178,17 @@ class ProfileViewController: BaseController {
     }
     
     func termsAct() -> UIAction {
-        let act = UIAction { _ in
-            print(2)
+        let act = UIAction { [weak self] _ in
             let vc = TermsConditionsController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         return act
     }
     
     func signAct() -> UIAction {
-        let act = UIAction { _ in
-            print(3)
+        let act = UIAction { [weak self] _ in
             let vc = SignInViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         return act
     }
