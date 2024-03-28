@@ -35,8 +35,6 @@ class HomeViewController: BaseController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
         collectionView.reloadData()
-//        updateAllStrings()
-//        getNews()
     }
     
     override func viewDidLoad() {
@@ -45,7 +43,15 @@ class HomeViewController: BaseController {
         configureCollectionView()
         getNews()
         configureDataSource()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(languageDidChanged(_:)), name: NSNotification.Name("updateLanguage"), object: nil)
     }
+    
+    
+    @objc func languageDidChanged(_ notification: Notification) {
+        getNews()
+    }
+    
     
     func updateAllStrings() {
         self.title = ScreenTitleStrings.browse
