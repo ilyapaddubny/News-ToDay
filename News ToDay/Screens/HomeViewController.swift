@@ -414,13 +414,16 @@ extension HomeViewController: UICollectionViewDelegate {
             let newsViewController = NewsViewController(category: "entertainment", article: article)
             navigationController?.pushViewController(newsViewController, animated: true)
         case .category(var category):
+            let previouslySelected = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
             category.isSelectedOnTheMainScreen.toggle()
             
             var snapshot = self.dataSource.snapshot()
-            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .categories))
-            self.dataSource.apply(snapshot, animatingDifferences: false)
-            snapshot.appendItems(CollectionItem.categories, toSection: .categories)
-            self.dataSource.apply(snapshot, animatingDifferences: false)
+//            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .categories))
+//            snapshot.appendItems(CollectionItem.categories, toSection: .categories)
+            snapshot.reloadItems(CollectionItem.categories.filter{$0.category?.rawValue == category.rawValue})
+            snapshot.reloadItems(CollectionItem.categories.filter{$0.category?.rawValue == previouslySelected?.rawValue})
+//            snapshot.appendItems(CollectionItem.categories, toSection: .categories)
+            self.dataSource.apply(snapshot, animatingDifferences: true)
             
             
             getPromotedSectionArticles() //updating promoted news on category tag tap
