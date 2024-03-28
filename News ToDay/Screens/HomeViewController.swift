@@ -41,20 +41,6 @@ class HomeViewController: BaseController {
 
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        UIView.animate(withDuration: 0.2) {
-//            self.navigationController?.navigationBar.isHidden = true
-//        }
-//        
-//    }
-//    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        
-//        self.navigationController?.navigationBar.isHidden = false
-//        self.navigationController?.navigationBar.prefersLargeTitles = false
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSearchBar()
@@ -75,9 +61,9 @@ class HomeViewController: BaseController {
     private func configureSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = Placeholder.search
-        searchBar.setLeftImage(Image.searchIcon!, with: 16, tintColor: .systemGray)
+        searchBar.setLeftImage(Image.searchIcon!, with: 10, tintColor: .textOnDisabledButtonColor)
         searchBar.clearBackgroundColor()
-        searchBar.textField?.backgroundColor = .systemGray6
+        searchBar.textField?.backgroundColor = .buttonDisabledColor
         searchBar.updateHeight(height: 56)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(searchBar)

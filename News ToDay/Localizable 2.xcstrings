@@ -1,0 +1,127 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Bookmarks" : {
+      "comment" : "Screen title: Bookmarks",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закладки"
+          }
+        }
+      }
+    },
+    "Browse" : {
+      "comment" : "Screen title: Browse",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Каталог"
+          }
+        }
+      }
+    },
+    "Categories" : {
+      "comment" : "Screen title: Categories",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Категории"
+          }
+        }
+      }
+    },
+    "Discover things of the world" : {
+      "comment" : "Subtitle: Browse",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будь в курсе событий"
+          }
+        }
+      }
+    },
+    "Language" : {
+      "comment" : "Screen title: Language",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык"
+          }
+        }
+      }
+    },
+    "Profile" : {
+      "comment" : "Screen title: Profile",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
+          }
+        }
+      }
+    },
+    "Saved articles to the library" : {
+      "comment" : "Subtitle: Bookmarks",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохраненные статьи"
+          }
+        }
+      }
+    },
+    "Search" : {
+      "comment" : "Placeholder text for search",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск"
+          }
+        }
+      }
+    },
+    "Terms & Conditions" : {
+      "comment" : "Screen title: Terms & Conditions",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Правила использования"
+          }
+        }
+      }
+    },
+    "Thousands of articles in each category" : {
+      "comment" : "Subtitle: Categories",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тысячи новостей в каждой категории"
+          }
+        }
+      }
+    },
+    "You haven't saved any articles yet. Start reading and bookmarking them now" : {
+      "comment" : "Empty bookmarks list message",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы еще не сохранили ни одной статьи. Начните читать новости и добавляйте их в закладки"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
