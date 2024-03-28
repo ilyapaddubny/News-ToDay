@@ -26,18 +26,17 @@ class ProfileViewController: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setImage()
         setUserText()
         setBtn()
-        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-        self.navigationItem.title = "Profile"
+        title = ScreenTitleStrings.profile
+        self.tabBarItem.title = nil
         setLabelsText()
     }
     

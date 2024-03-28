@@ -41,22 +41,12 @@ enum Category: String, Hashable, CaseIterable, Codable {
     // MARK: - Tag Section Logic
     var isSelectedOnTheMainScreen: Bool {
         get {
-            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
-            return categories.contains(self)
+            guard let selectedCategory = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey) else {return false}
+            return self == selectedCategory
         }
 
         set {
-            var categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
-            // если мы убираем кейс из избранного, нужно удалить его из массива
-            if categories.contains(self), !newValue {
-                categories.removeAll(where: {$0 == self})
-            }
-            // если мы добавляем кейс в избранное, нужно его добавить в массив
-            if newValue {
-                categories.append(self)
-            }
-            
-            UserDefaults.standard.setValue(categories, forKey:  UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            UserDefaults.standard.setValue(self, forKey:  UserDefaultsConstants.mainScreenCategoriesSelectedKey)
         }
     }
     

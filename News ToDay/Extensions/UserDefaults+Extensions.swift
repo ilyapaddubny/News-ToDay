@@ -27,4 +27,19 @@ extension UserDefaults {
             
         }
     }
+    
+    func category(forKey key: String) -> Category? {
+        if let jsonData = data(forKey: key),
+           let decodedCategories = try? JSONDecoder().decode(Category.self, from: jsonData) {
+            return decodedCategories
+        } else {
+            return nil
+        }
+    }
+    
+    func setValue(_ category: Category, forKey key: String) {
+        if let encodedData = try? JSONEncoder().encode(category){
+            set(encodedData, forKey: key)
+        }
+    }
 }

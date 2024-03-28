@@ -38,14 +38,14 @@ class HomeViewController: BaseController {
         collectionView.reloadData()
 
         updateAllStrings()
-
+        getNews()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSearchBar()
         configureCollectionView()
-//        getNews()
+        getNews()
         configureDataSource()
     }
     
@@ -268,11 +268,7 @@ class HomeViewController: BaseController {
     }
     
     func getPromotedSectionArticles() {
-        let category = Category.business.rawValue
-        let country = Country.usa
-        
-        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
-        }
+        guard let url = getPromotedUrl() else { return }
         
         Task {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
@@ -290,19 +286,32 @@ class HomeViewController: BaseController {
                 self.dataSource.apply(snapshot, animatingDifferences: true)
             }
         }
+        
+        func getPromotedUrl() -> URL? {
+            
+            let currentLanguage = UserDefaults.standard.string(forKey: "language")
+            var country = Country.usa
+            if let currentLanguage = currentLanguage {
+                switch currentLanguage {
+                case "Russian":
+                    country = Country.russia
+                default:
+                    country = Country.usa
+                }
+            }
+            
+            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            
+            return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
+        }
     }
     
     func getRecommendedSectionArticles() {
-        let category = Category.entertainment.rawValue
-        let country = Country.usa
-        
-        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
-        }
+        guard let url = getRecommendedUrl() else { return }
         
         Task {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
-            //TODO: reload data
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
             print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
@@ -313,11 +322,27 @@ class HomeViewController: BaseController {
                     snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .recommended))
                     snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
                     self.dataSource.apply(snapshot, animatingDifferences: true)
-                
-                // Or, if you want to reload specific sections:
-                //                 collectionView.reloadSections(IndexSet(integer: sectionIndex))
             }
         }
+        
+        func getRecommendedUrl() -> URL? {
+            
+            let currentLanguage = UserDefaults.standard.string(forKey: "language")
+            var country = Country.usa
+            if let currentLanguage = currentLanguage {
+                switch currentLanguage {
+                case "Russian":
+                    country = Country.russia
+                default:
+                    country = Country.usa
+                }
+            }
+            
+            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+            
+            return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
+        }
+        
     }
     
     func configureSearchIcon() -> UIView {
@@ -391,6 +416,14 @@ extension HomeViewController: UICollectionViewDelegate {
         case .category(var category):
             category.isSelectedOnTheMainScreen.toggle()
             
+            var snapshot = self.dataSource.snapshot()
+            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .categories))
+            self.dataSource.apply(snapshot, animatingDifferences: false)
+            snapshot.appendItems(CollectionItem.categories, toSection: .categories)
+            self.dataSource.apply(snapshot, animatingDifferences: false)
+            
+            
+            getPromotedSectionArticles() //updating promoted news on category tag tap
             if let cell = collectionView.cellForItem(at: indexPath) as? CategoryTagCollectionViewCell {
                 cell.configureCellWith(category)
             }
