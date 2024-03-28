@@ -26,20 +26,30 @@ class CategoriesViewController: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
+        configureCollectionView()
         collectionView.delegate = self
-        
-        
-        collectionView.register(CategoryGridCollectionViewCell.self,
-                                forCellWithReuseIdentifier: CategoryGridCollectionViewCell.reuseIdentifier)
-        
         configureDataSource()
-        
-        self.view.addSubview(collectionView)
         
         setSubtitleText(text: Subtitle.categories)
     }
+    
+    
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.register(CategoryGridCollectionViewCell.self,
+                                forCellWithReuseIdentifier: CategoryGridCollectionViewCell.reuseIdentifier)
+        
+        self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: margins.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ])
+    }
+    
     
     
     private func createLayout() -> UICollectionViewLayout {
