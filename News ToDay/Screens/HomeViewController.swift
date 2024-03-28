@@ -33,12 +33,8 @@ class HomeViewController: BaseController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         navigationController?.navigationBar.isHidden = false
         collectionView.reloadData()
-
-        updateAllStrings()
-        getNews()
     }
     
     override func viewDidLoad() {
@@ -47,7 +43,15 @@ class HomeViewController: BaseController {
         configureCollectionView()
         getNews()
         configureDataSource()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(languageDidChanged(_:)), name: NSNotification.Name("updateLanguage"), object: nil)
     }
+    
+    
+    @objc func languageDidChanged(_ notification: Notification) {
+        getNews()
+    }
+    
     
     func updateAllStrings() {
         self.title = ScreenTitleStrings.browse
@@ -345,6 +349,26 @@ class HomeViewController: BaseController {
         
     }
     
+    
+    func getArticles(matching request: String) {
+        guard let url = Endpoint.searchEverything(matching: request).url else { return }
+        
+        Task {
+            let news = try? await NetworkManager.shared.retrieveNews(from: url)
+            guard let news = news else { return }
+            let items = news.articles.map { CollectionItem.news($0, UUID()) }
+            promotedArticles = items.filter({$0.news?.title != "[Removed]"})
+            DispatchQueue.main.async {
+                // Update existing data source snapshot with new promoted articles
+                var snapshot = self.dataSource.snapshot()
+                snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .promoted))
+                snapshot.appendItems(self.promotedArticles, toSection: .promoted)
+                self.dataSource.apply(snapshot, animatingDifferences: true)
+            }
+        }
+    }
+    
+    
     func configureSearchIcon() -> UIView {
         let imageView = UIImageView(image: Icons.search)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -377,14 +401,7 @@ class HomeViewController: BaseController {
 
 // MARK: - Searh delegate
 
-extension HomeViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchString = searchController.searchBar.text,
-           searchString.isEmpty == false {
-            print("User input: \(searchString)") // TODO: Implement the search logic
-            
-        }
-    }
+extension HomeViewController {
     
     func calculateMaxCategoryWidth() -> CGFloat {
         let categories = CollectionItem.categories.map { $0.category! } // Get the category strings
@@ -450,8 +467,10 @@ extension HomeViewController: CollectionHeaderDelegate {
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text ?? "")
+        guard let text = searchBar.text, !text.isEmpty else { return }
         searchBar.text = ""
+        searchBar.resignFirstResponder()
+        self.getArticles(matching: text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
