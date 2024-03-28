@@ -183,7 +183,8 @@ class ProfileViewController: BaseController {
     func signAct() -> UIAction {
         let act = UIAction { _ in
             print(3)
-            //допишу как появится онбординг
+            let vc = SignInViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         return act
     }
