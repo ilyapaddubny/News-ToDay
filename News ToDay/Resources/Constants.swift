@@ -134,7 +134,7 @@ enum Font {
 
 enum UserDefaultsConstants {
     static let bookmarkedCategoriesKey = "categories_bookmarked"
-    static let mainScreenCategoriesSelectedKey = "categories_tags"
+    static let mainScreenCategoriesSelectedKey = "category_tags"
     static let selectedLanguageKey = "selected_language"
     
 //    static let appGroup = "ddbae45c2e33483d9cec5e18eaa5a82c"

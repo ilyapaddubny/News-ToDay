@@ -312,7 +312,6 @@ class HomeViewController: BaseController {
         Task {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
-            //TODO: reload data
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
             print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
@@ -416,6 +415,14 @@ extension HomeViewController: UICollectionViewDelegate {
             navigationController?.pushViewController(newsViewController, animated: true)
         case .category(var category):
             category.isSelectedOnTheMainScreen.toggle()
+            
+            var snapshot = self.dataSource.snapshot()
+            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .categories))
+            self.dataSource.apply(snapshot, animatingDifferences: false)
+            snapshot.appendItems(CollectionItem.categories, toSection: .categories)
+            self.dataSource.apply(snapshot, animatingDifferences: false)
+            
+            
             getPromotedSectionArticles() //updating promoted news on category tag tap
             if let cell = collectionView.cellForItem(at: indexPath) as? CategoryTagCollectionViewCell {
                 cell.configureCellWith(category)
