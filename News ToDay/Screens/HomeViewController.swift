@@ -33,16 +33,28 @@ class HomeViewController: BaseController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.isHidden = false
         collectionView.reloadData()
+
+        updateAllStrings()
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSubtitleText(text: Subtitle.browse)
         configureSearchBar()
         configureCollectionView()
         getNews()
         configureDataSource()
+    }
+    
+    func updateAllStrings() {
+        self.title = ScreenTitleStrings.browse
+        setSubtitleText(text: Subtitle.browse)
+        searchBar.placeholder = Placeholder.search
+        self.tabBarItem.title = nil
+        collectionView.reloadData()
     }
     
     
@@ -221,11 +233,10 @@ class HomeViewController: BaseController {
                 let sectionName: String
                 switch section {
                 case .recommended:
-                    sectionName = "Recommended for you"
+                    sectionName = BrowseStrings.recommendedForYou
                 default:
                     return nil
                 }
-                
                 
                 headerView.setTitle(sectionName)
                 return headerView
@@ -404,7 +415,7 @@ extension HomeViewController: CollectionHeaderDelegate {
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text)
+        print(searchBar.text ?? "")
         searchBar.text = ""
     }
     

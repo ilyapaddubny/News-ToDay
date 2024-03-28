@@ -1,0 +1,559 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    " Health " : {
+      "comment" : "Category: Health",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Здоровье"
+          }
+        }
+      }
+    },
+    "⚽️  Sports" : {
+      "comment" : "Category: Sports",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚽️  Спорт"
+          }
+        }
+      }
+    },
+    "🌐  General" : {
+      "comment" : "Category: General",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🌐  Общее"
+          }
+        }
+      }
+    },
+    "🎉  Leisure" : {
+      "comment" : "Category: Entertainment",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🎉  Отдых"
+          }
+        }
+      }
+    },
+    "💊  Health" : {
+      "comment" : "Category: Health",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "💊  Здоровье"
+          }
+        }
+      }
+    },
+    "💼  Business" : {
+      "comment" : "Category: Business",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "💼  Бизнес"
+          }
+        }
+      }
+    },
+    "📱  Digital" : {
+      "comment" : "Category: Technology",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "📱  Гаджеты"
+          }
+        }
+      }
+    },
+    "🔬  Science" : {
+      "comment" : "Category: Science",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🔬  Наука"
+          }
+        }
+      }
+    },
+    "Bookmarks" : {
+      "comment" : "Screen title: Bookmarks",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закладки"
+          }
+        }
+      }
+    },
+    "Browse" : {
+      "comment" : "Screen title: Browse",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Каталог"
+          }
+        }
+      }
+    },
+    "Business" : {
+      "comment" : "Category: Business",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бизнес"
+          }
+        }
+      }
+    },
+    "Categories" : {
+      "comment" : "Screen title: Categories",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Категории"
+          }
+        }
+      }
+    },
+    "Digital" : {
+      "comment" : "Category: Digital",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гаджеты"
+          }
+        }
+      }
+    },
+    "Discover things of the world" : {
+      "comment" : "Subtitle: Browse",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будь в курсе событий"
+          }
+        }
+      }
+    },
+    "English" : {
+      "comment" : "Language button",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Английский"
+          }
+        }
+      }
+    },
+    "fifthSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nNews Reader is not responsible for the accuracy, completeness, or reliability of any Content. You understand that Content may contain errors or omissions, and News Reader expressly disclaims any liability for such errors or omissions. News Reader is also not responsible for User Content or any other content that you or third parties may provide through the App. You use the App at your own risk.\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "News Reader не несет ответственности за точность, полноту или надежность любого Контента. Вы понимаете, что Контент может содержать ошибки или упущения, и News Reader прямо отказывается от любой ответственности за такие ошибки или упущения. News Reader также не несет ответственности за Пользовательский контент или любой другой контент, который вы или третьи лица можете предоставить через Приложение. Вы используете Приложение на свой страх и риск."
+          }
+        }
+      }
+    },
+    "fifthSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "5. Content Disclaimer"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5. Отказ от ответственности "
+          }
+        }
+      }
+    },
+    "firstSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nThese terms and conditions (“Terms”) govern the relationship between you, the user of the News Reader application (the “App”) and the owner of the App, defined as News Reader Inc. (“News Reader”), regarding your use of the App.\n\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Эти положения и условия («Условия») регулируют отношения между вами, пользователем приложения News Reader («Приложение»), и владельцем Приложения, определяемым как News Reader Inc. («News Reader»), в отношении вашего использования Приложения."
+          }
+        }
+      }
+    },
+    "firstSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1. Introduction"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Введение"
+          }
+        }
+      }
+    },
+    "fourthSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nThe App allows users to submit news articles, photos, videos, or other content (“User Content”). You are solely responsible for the creation, ownership, and legal rights related to the User Content you submit. By submitting User Content to the App, you grant News Reader a non-exclusive, revocable, royalty-free, worldwide license to use, display, distribute, and create derivative works of your User Content in connection with the App, provided that News Reader does not alter the submitted User Content in any way that would constitute misrepresentation.\n\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приложение позволяет пользователям отправлять новостные статьи, фотографии, видео или другой контент («Пользовательский контент»). Вы несете единоличную ответственность за создание, владение и законные права, связанные с Пользовательским контентом, который вы отправляете. Отправляя Пользовательский контент в Приложение, вы предоставляете News Reader неисключительную, отзывную, безвозмездную, всемирную лицензию на использование, отображение, распространение и создание производных работ из вашего Пользовательского контента в связи с Приложением, при условии, что News Reader не изменяет отправленный Пользовательский контент каким-либо образом, что может являться искажением фактов."
+          }
+        }
+      }
+    },
+    "fourthSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "4. User Content"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4. Пользовательский контент"
+          }
+        }
+      }
+    },
+    "General" : {
+      "comment" : "Category: General",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Общее"
+          }
+        }
+      }
+    },
+    "LanBtn" : {
+      "comment" : "Language button",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Language"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык"
+          }
+        }
+      }
+    },
+    "Language" : {
+      "comment" : "Screen title: Language",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык"
+          }
+        }
+      }
+    },
+    "Leisure" : {
+      "comment" : "Category: Leisure",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отдых"
+          }
+        }
+      }
+    },
+    "Profile" : {
+      "comment" : "Screen title: Profile",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
+          }
+        }
+      }
+    },
+    "Recommended for you" : {
+      "comment" : "Recommended header",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рекомендации"
+          }
+        }
+      }
+    },
+    "Russian" : {
+      "comment" : "Language button",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Русский"
+          }
+        }
+      }
+    },
+    "Saved articles to the library" : {
+      "comment" : "Subtitle: Bookmarks",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохраненные статьи"
+          }
+        }
+      }
+    },
+    "Science" : {
+      "comment" : "Category: Science",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Наука"
+          }
+        }
+      }
+    },
+    "Search" : {
+      "comment" : "Placeholder text for search",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск"
+          }
+        }
+      }
+    },
+    "secondSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nBy downloading, installing, or using the App, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, please do not download, install, or use the App.\n\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загружая, устанавливая или используя Приложение, вы подтверждаете, что прочитали, поняли и соглашаетесь соблюдать настоящие Условия. Если вы не согласны с этими Условиями, пожалуйста, не загружайте, не устанавливайте и не используйте Приложение."
+          }
+        }
+      }
+    },
+    "secondSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "2. Acceptance of Terms"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. Принятие Условий"
+          }
+        }
+      }
+    },
+    "See all" : {
+      "comment" : "Recommended header",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все новости"
+          }
+        }
+      }
+    },
+    "signOut" : {
+      "comment" : "Sign Out button",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sign Out"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выйти"
+          }
+        }
+      }
+    },
+    "Sports" : {
+      "comment" : "Category: Sports",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спорт "
+          }
+        }
+      }
+    },
+    "Terms & Conditions" : {
+      "comment" : "Screen title: Terms & Conditions",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Условия пользования"
+          }
+        }
+      }
+    },
+    "Terms & Conditions Btn" : {
+      "comment" : "Terms & Conditions button label",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Terms & Conditions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Условия пользования"
+          }
+        }
+      }
+    },
+    "thirdSectionText" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nYou acknowledge and agree that all intellectual property rights, including but not limited to copyrights, patents, trademarks, and trade secrets, in the App and its content (collectively, the “Content”) belong to News Reader or its licensors. You may not copy, modify, distribute, transmit, display, perform, reproduce, publish, license, sell, rent, sub-license, or otherwise exploit the Content, in whole or in part, without News Reader’s prior written permission.\n\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы признаете и соглашаетесь с тем, что все права на интеллектуальную собственность, включая, помимо прочего, авторские права, патенты, товарные знаки и коммерческую тайну, в отношении Приложения и его содержимого (совместно именуемого «Контент») принадлежат News Reader или его лицензиарам. Вы не можете копировать, изменять, распространять, передавать, отображать, исполнять, воспроизводить, публиковать, лицензировать, продавать, сдавать в аренду, сублицензировать или иным образом использовать Контент, полностью или частично, без предварительного письменного разрешения News Reader."
+          }
+        }
+      }
+    },
+    "thirdSectionTitle" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3. Intellectual Property Rights"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. Права на интеллектуальную собственность"
+          }
+        }
+      }
+    },
+    "Thousands of articles in each category" : {
+      "comment" : "Subtitle: Categories",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тысячи новостей в каждой категории"
+          }
+        }
+      }
+    },
+    "You haven't saved any articles yet. Start reading and bookmarking them now" : {
+      "comment" : "Empty bookmarks list message",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы еще не сохранили ни одной статьи. Начните читать новости  добавляйте их в закладки"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
