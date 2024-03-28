@@ -28,20 +28,14 @@ class ProfileViewController: BaseController {
         super.viewDidLoad()
         setImage()
         setUserText()
+        setLabelsText()
         setBtn()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
-        title = ScreenTitleStrings.profile
-        self.tabBarItem.title = nil
-        setLabelsText()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private lazy var btnStack: UIStackView = {

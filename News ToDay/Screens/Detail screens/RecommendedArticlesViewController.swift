@@ -39,8 +39,8 @@ class RecommendedArticlesViewController: BaseController {
         super.viewWillAppear(animated)
         configureDataSource()
         collectionView.reloadData()
-        logoLabel.text = ScreenTitleStrings.recommended
-        getNews()
+//        logoLabel.text = ScreenTitleStrings.recommended
+//        getNews()
     }
     
     
