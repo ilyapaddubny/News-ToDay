@@ -45,7 +45,7 @@ class NTDTabBarController: UITabBarController {
     
     func createProfileNC() -> UINavigationController {
         let profileVC         = ProfileViewController()
-        profileVC.title       = ScreenTitleStrings.user
+        profileVC.title       = ScreenTitleStrings.profile
         profileVC.tabBarItem  = UITabBarItem(title: nil, image: TabBarImage.user, selectedImage: TabBarSelectedImage.user)
         return UINavigationController(rootViewController: profileVC)
     }

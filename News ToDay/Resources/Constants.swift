@@ -42,6 +42,7 @@ enum Image {
 
 struct ScreenTitleStrings {
     static var browse: String { NSLocalizedString("Browse", value: "Browse", comment: "Screen title: Browse").localized }
+    static var profile: String { NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized }
     static var categories: String { NSLocalizedString("Categories", value: "Categories", comment: "Screen title: Categories").localized }
     static var bookmarks: String { NSLocalizedString("Bookmarks", value: "Bookmarks", comment: "Screen title: Bookmarks").localized }
     static var user: String { NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized }
