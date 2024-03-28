@@ -11,6 +11,8 @@ class TermsConditionsController: UIViewController {
     let logoLabel = UILabel()
     let termsTextView = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
     
+    var textExample: String = ""
+    
     lazy var backButton: UIButton = {
         let button = UIButton(primaryAction: back())
         button.setImage(Image.arrowBackWhite, for: .normal)
@@ -24,7 +26,14 @@ class TermsConditionsController: UIViewController {
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setUI()
+        textExample =  NSLocalizedString("fifthSection", value: """
+                                                
+                                                News Reader is not responsible for the accuracy, completeness, or reliability of any Content. You understand that Content may contain errors or omissions, and News Reader expressly disclaims any liability for such errors or omissions. News Reader is also not responsible for User Content or any other content that you or third parties may provide through the App. You use the App at your own risk.
+                                                
+                                                """, comment: "Terms And Conditions").localized
+        
+        
+        termsTextView.text = textExample
     }
     
     override func viewDidLoad() {
@@ -42,11 +51,12 @@ class TermsConditionsController: UIViewController {
         
 
 
-        applyAttributedText()
+//        applyAttributedText()
         
         termsTextView.isEditable = false
         termsTextView.isSelectable = true
         termsTextView.textAlignment = .justified
+        termsTextView.text = textExample
         termsTextView.textColor = .textSecondaryColor
 
        
@@ -118,10 +128,14 @@ class TermsConditionsController: UIViewController {
     
     func back() -> UIAction {
         let act = UIAction { _ in
-            print(4)
             self.navigationController?.popViewController(animated: true)
         }
         return act
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
     
 }

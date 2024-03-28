@@ -39,7 +39,7 @@ class RecommendedArticlesViewController: BaseController {
         super.viewWillAppear(animated)
         configureDataSource()
         collectionView.reloadData()
-        
+        logoLabel.text = ScreenTitleStrings.recommended
         getNews()
     }
     
@@ -57,7 +57,7 @@ class RecommendedArticlesViewController: BaseController {
     
     
     func setUI() {
-        logoLabel.text = ScreenTitleStrings.termsAndConditions
+        logoLabel.text = ScreenTitleStrings.recommended
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .center

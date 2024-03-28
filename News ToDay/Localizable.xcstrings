@@ -166,6 +166,24 @@
         }
       }
     },
+    "fifthSection" : {
+      "comment" : "Terms And Conditions",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "\nNews Reader is not responsible for the accuracy, completeness, or reliability of any Content. You understand that Content may contain errors or omissions, and News Reader expressly disclaims any liability for such errors or omissions. News Reader is also not responsible for User Content or any other content that you or third parties may provide through the App. You use the App at your own risk.\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "News Reader не несет ответственности за точность, полноту или надежность любого Контента. Вы понимаете, что Контент может содержать ошибки или упущения, и News Reader прямо отказывается от любой ответственности за такие ошибки или упущения. News Reader также не несет ответственности за Пользовательский контент или любой другой контент, который вы или третьи лица можете предоставить через Приложение. Вы используете Приложение на свой страх и риск."
+          }
+        }
+      }
+    },
     "fifthSectionText" : {
       "comment" : "Terms And Conditions",
       "extractionState" : "extracted_with_value",
@@ -332,6 +350,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Профиль"
+          }
+        }
+      }
+    },
+    "Recommended" : {
+      "comment" : "Screen title: Recommended",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рекомендации"
           }
         }
       }

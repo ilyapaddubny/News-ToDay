@@ -46,6 +46,7 @@ struct ScreenTitleStrings {
     static var bookmarks: String { NSLocalizedString("Bookmarks", value: "Bookmarks", comment: "Screen title: Bookmarks").localized }
     static var user: String { NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized }
     static var language: String { NSLocalizedString("Language", value: "Language", comment: "Screen title: Language").localized }
+    static var recommended: String { NSLocalizedString("Recommended", value: "Recommended", comment: "Screen title: Recommended").localized }
     static var termsAndConditions: String { NSLocalizedString("Terms & Conditions", value: "Terms & Conditions", comment: "Screen title: Terms & Conditions").localized}
 }
 

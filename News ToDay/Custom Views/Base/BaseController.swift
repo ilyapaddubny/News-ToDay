@@ -27,9 +27,6 @@ class BaseController: UIViewController {
     func setSubtitleText(text: String) {
         subtitle.text = text
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
 }
 
 

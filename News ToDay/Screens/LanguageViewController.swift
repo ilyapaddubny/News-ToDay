@@ -86,8 +86,8 @@ class LanduageViewController: UIViewController {
             englishBtn.backgroundColor = .buttonActiveColor
             label.textColor = .textOnActiveButtonColor
         } else {
-            englishBtn.backgroundColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .buttonActiveColor : .buttonDisabledColor
-            label.textColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .textOnActiveButtonColor : .textOnDisabledButtonColor
+            englishBtn.backgroundColor = ["Английский", "English"].contains(UserDefaults.standard.object(forKey: "language") as? String) ? .buttonActiveColor : .buttonDisabledColor
+            label.textColor = ["Английский", "English"].contains(UserDefaults.standard.object(forKey: "language") as? String) ? .textOnActiveButtonColor : .textOnDisabledButtonColor
         }
         
         return label
@@ -96,8 +96,8 @@ class LanduageViewController: UIViewController {
     lazy var russianLabel: UILabel = {
         let label = createLabel(size: 17, font: "Inter-SemiBold", text: LanguageStrings.russian, color: .textOnDisabledButtonColor)
         label.translatesAutoresizingMaskIntoConstraints = false
-        russianBtn.backgroundColor = label.text == UserDefaults.standard.object(forKey: "language") as? String  ? .buttonActiveColor : .buttonDisabledColor
-        label.textColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .textOnActiveButtonColor : .textOnDisabledButtonColor
+        russianBtn.backgroundColor = ["Russian", "Русский"].contains(UserDefaults.standard.object(forKey: "language") as? String) ? .buttonActiveColor : .buttonDisabledColor
+        label.textColor = ["Russian", "Русский"].contains(UserDefaults.standard.object(forKey: "language") as? String) ? .textOnActiveButtonColor : .textOnDisabledButtonColor
         
         return label
     }()
@@ -192,6 +192,11 @@ class LanduageViewController: UIViewController {
             self?.updateText()
         }
         return act
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
   
 }
