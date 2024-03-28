@@ -13,12 +13,12 @@ class TermsConditionsController: UIViewController {
     
     lazy var backButton: UIButton = {
         let button = UIButton(primaryAction: back())
-        button.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
-        button.tintColor = .textSecondaryColor
-        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        button.setImage(Image.arrowBackWhite, for: .normal)
+        button.tintColor = .textOnDisabledButtonColor
+        button.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 26).isActive = true
+        button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
    
@@ -60,7 +60,7 @@ class TermsConditionsController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13),
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),

@@ -32,6 +32,7 @@ enum Icons {
 enum Image {
     static let placeholder = UIImage(named: "placeholder-image")
     static let arrowBackWhite = UIImage(named: "BackWhiteIcon")
+    static let arrowBackDark = UIImage(named: "BackIcon")
     static let bookmarkWhite = UIImage(named: "BookmarkWhiteIcon")
     static let shareArrow = UIImage(named: "ForwardWhiteIcon")
     static let searchIcon = UIImage(named: "searchIcon")

@@ -41,11 +41,25 @@ class HomeViewController: BaseController {
 
     }
     
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        UIView.animate(withDuration: 0.2) {
+//            self.navigationController?.navigationBar.isHidden = true
+//        }
+//        
+//    }
+//    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        
+//        self.navigationController?.navigationBar.isHidden = false
+//        self.navigationController?.navigationBar.prefersLargeTitles = false
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSearchBar()
         configureCollectionView()
-        getNews()
+//        getNews()
         configureDataSource()
     }
     
@@ -402,11 +416,13 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: CollectionHeaderDelegate {
     func seeAllButtonTapped(_ header: UICollectionReusableView) {
         let recommendedArticlesVC = RecommendedArticlesViewController()
-        recommendedArticlesVC.title = "For you"
+//        recommendedArticlesVC.title = "Recommended"
         navigationController?.pushViewController(recommendedArticlesVC, animated: true)
 
     }
 }
+
+
 
 
 
