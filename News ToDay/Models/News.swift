@@ -21,14 +21,14 @@ fileprivate func transformToArticleObject(favorite: Favorite) -> Article {
     
 }
 
-struct News: Codable {
+struct News: Codable, Hashable {
     let status: String
     let totalResults: Int
     let articles: [Article]
 }
 
 
-struct Article: Codable, Hashable, Equatable {
+struct Article: Codable, Hashable {
     let source: Source?
     let author: String?
     let title: String?

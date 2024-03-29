@@ -8,7 +8,8 @@
 import UIKit
 
 class CategoriesViewController: BaseController {
-    
+    private let subTitle = NTDLabel(font: Font.interRegular(with: 16), textColor: .textSecondaryColor)
+
     enum Section: Hashable {
         case categories
     }
@@ -22,24 +23,46 @@ class CategoriesViewController: BaseController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        subTitle.text = Subtitle.categories
+        title = ScreenTitleStrings.categories
+        self.tabBarItem.title = nil
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
+        configureCollectionView()
         collectionView.delegate = self
-        
-        
+        configureDataSource()
+    }
+    
+    
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(CategoryGridCollectionViewCell.self,
                                 forCellWithReuseIdentifier: CategoryGridCollectionViewCell.reuseIdentifier)
         
-        configureDataSource()
-        
+        self.view.addSubview(subTitle)
         self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        subTitle.translatesAutoresizingMaskIntoConstraints = false
+        let margins = view.safeAreaLayoutGuide
+        let offset: CGFloat = 16
         
-        setSubtitleText(text: Subtitle.categories)
+        subTitle.numberOfLines = 1
+        
+        
+        NSLayoutConstraint.activate([
+            subTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            subTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: offset),
+            subTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: offset),
+            
+            collectionView.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 15),
+            collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ])
     }
+    
     
     
     private func createLayout() -> UICollectionViewLayout {

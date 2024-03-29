@@ -74,6 +74,7 @@ class NewsViewController: BaseController {
     
     @objc private func dismissViewController() {
         navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.isHidden = false
     }
 }
 

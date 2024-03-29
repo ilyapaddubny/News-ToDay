@@ -168,17 +168,17 @@
     },
     "fifthSectionText" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "\nNews Reader is not responsible for the accuracy, completeness, or reliability of any Content. You understand that Content may contain errors or omissions, and News Reader expressly disclaims any liability for such errors or omissions. News Reader is also not responsible for User Content or any other content that you or third parties may provide through the App. You use the App at your own risk.\n"
+            "value" : "//                                                \n//                                                News Reader is not responsible for the accuracy, completeness, or reliability of any Content. You understand that Content may contain errors or omissions, and News Reader expressly disclaims any liability for such errors or omissions. News Reader is also not responsible for User Content or any other content that you or third parties may provide through the App. You use the App at your own risk.\n//                                                "
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "News Reader не несет ответственности за точность, полноту или надежность любого Контента. Вы понимаете, что Контент может содержать ошибки или упущения, и News Reader прямо отказывается от любой ответственности за такие ошибки или упущения. News Reader также не несет ответственности за Пользовательский контент или любой другой контент, который вы или третьи лица можете предоставить через Приложение. Вы используете Приложение на свой страх и риск."
           }
         }
@@ -186,7 +186,7 @@
     },
     "fifthSectionTitle" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -204,17 +204,17 @@
     },
     "firstSectionText" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "\nThese terms and conditions (“Terms”) govern the relationship between you, the user of the News Reader application (the “App”) and the owner of the App, defined as News Reader Inc. (“News Reader”), regarding your use of the App.\n\n"
+            "value" : "//\n//These terms and conditions (“Terms”) govern the relationship between you, the user of the News Reader application (the “App”) and the owner of the App, defined as News Reader Inc. (“News Reader”), regarding your use of the App.\n//\n//"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Эти положения и условия («Условия») регулируют отношения между вами, пользователем приложения News Reader («Приложение»), и владельцем Приложения, определяемым как News Reader Inc. («News Reader»), в отношении вашего использования Приложения."
           }
         }
@@ -222,7 +222,7 @@
     },
     "firstSectionTitle" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -240,17 +240,17 @@
     },
     "fourthSectionText" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "\nThe App allows users to submit news articles, photos, videos, or other content (“User Content”). You are solely responsible for the creation, ownership, and legal rights related to the User Content you submit. By submitting User Content to the App, you grant News Reader a non-exclusive, revocable, royalty-free, worldwide license to use, display, distribute, and create derivative works of your User Content in connection with the App, provided that News Reader does not alter the submitted User Content in any way that would constitute misrepresentation.\n\n"
+            "value" : "//                                            \n//                                            The App allows users to submit news articles, photos, videos, or other content (“User Content”). You are solely responsible for the creation, ownership, and legal rights related to the User Content you submit. By submitting User Content to the App, you grant News Reader a non-exclusive, revocable, royalty-free, worldwide license to use, display, distribute, and create derivative works of your User Content in connection with the App, provided that News Reader does not alter the submitted User Content in any way that would constitute misrepresentation.\n//                                            \n//                                            "
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Приложение позволяет пользователям отправлять новостные статьи, фотографии, видео или другой контент («Пользовательский контент»). Вы несете единоличную ответственность за создание, владение и законные права, связанные с Пользовательским контентом, который вы отправляете. Отправляя Пользовательский контент в Приложение, вы предоставляете News Reader неисключительную, отзывную, безвозмездную, всемирную лицензию на использование, отображение, распространение и создание производных работ из вашего Пользовательского контента в связи с Приложением, при условии, что News Reader не изменяет отправленный Пользовательский контент каким-либо образом, что может являться искажением фактов."
           }
         }
@@ -258,7 +258,7 @@
     },
     "fourthSectionTitle" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -336,6 +336,17 @@
         }
       }
     },
+    "Recommended" : {
+      "comment" : "Screen title: Recommended",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рекомендации"
+          }
+        }
+      }
+    },
     "Recommended for you" : {
       "comment" : "Recommended header",
       "localizations" : {
@@ -393,17 +404,17 @@
     },
     "secondSectionText" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "\nBy downloading, installing, or using the App, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, please do not download, install, or use the App.\n\n"
+            "value" : "//                                            \n//                                            By downloading, installing, or using the App, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, please do not download, install, or use the App.\n//                                            \n//                                            "
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Загружая, устанавливая или используя Приложение, вы подтверждаете, что прочитали, поняли и соглашаетесь соблюдать настоящие Условия. Если вы не согласны с этими Условиями, пожалуйста, не загружайте, не устанавливайте и не используйте Приложение."
           }
         }
@@ -411,7 +422,7 @@
     },
     "secondSectionTitle" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -498,17 +509,17 @@
     },
     "thirdSectionText" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "\nYou acknowledge and agree that all intellectual property rights, including but not limited to copyrights, patents, trademarks, and trade secrets, in the App and its content (collectively, the “Content”) belong to News Reader or its licensors. You may not copy, modify, distribute, transmit, display, perform, reproduce, publish, license, sell, rent, sub-license, or otherwise exploit the Content, in whole or in part, without News Reader’s prior written permission.\n\n"
+            "value" : "//                                            \n//                                            You acknowledge and agree that all intellectual property rights, including but not limited to copyrights, patents, trademarks, and trade secrets, in the App and its content (collectively, the “Content”) belong to News Reader or its licensors. You may not copy, modify, distribute, transmit, display, perform, reproduce, publish, license, sell, rent, sub-license, or otherwise exploit the Content, in whole or in part, without News Reader’s prior written permission.\n//                                            \n//                                            "
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Вы признаете и соглашаетесь с тем, что все права на интеллектуальную собственность, включая, помимо прочего, авторские права, патенты, товарные знаки и коммерческую тайну, в отношении Приложения и его содержимого (совместно именуемого «Контент») принадлежат News Reader или его лицензиарам. Вы не можете копировать, изменять, распространять, передавать, отображать, исполнять, воспроизводить, публиковать, лицензировать, продавать, сдавать в аренду, сублицензировать или иным образом использовать Контент, полностью или частично, без предварительного письменного разрешения News Reader."
           }
         }
@@ -516,7 +527,7 @@
     },
     "thirdSectionTitle" : {
       "comment" : "Terms And Conditions",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -549,7 +560,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Вы еще не сохранили ни одной статьи. Начните читать новости  добавляйте их в закладки"
+            "value" : "Вы не сохранили ни одной статьи. Начните читать новости и добавлять их в закладки"
           }
         }
       }

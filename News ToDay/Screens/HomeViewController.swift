@@ -33,12 +33,8 @@ class HomeViewController: BaseController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         navigationController?.navigationBar.isHidden = false
         collectionView.reloadData()
-
-        updateAllStrings()
-
     }
     
     override func viewDidLoad() {
@@ -47,7 +43,15 @@ class HomeViewController: BaseController {
         configureCollectionView()
         getNews()
         configureDataSource()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(languageDidChanged(_:)), name: NSNotification.Name("updateLanguage"), object: nil)
     }
+    
+    
+    @objc func languageDidChanged(_ notification: Notification) {
+        getNews()
+    }
+    
     
     func updateAllStrings() {
         self.title = ScreenTitleStrings.browse
@@ -61,9 +65,9 @@ class HomeViewController: BaseController {
     private func configureSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = Placeholder.search
-        searchBar.setLeftImage(Image.searchIcon!, with: 16, tintColor: .systemGray)
+        searchBar.setLeftImage(Image.searchIcon!, with: 10, tintColor: .textOnDisabledButtonColor)
         searchBar.clearBackgroundColor()
-        searchBar.textField?.backgroundColor = .systemGray6
+        searchBar.textField?.backgroundColor = .buttonDisabledColor
         searchBar.updateHeight(height: 56)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(searchBar)
@@ -268,11 +272,7 @@ class HomeViewController: BaseController {
     }
     
     func getPromotedSectionArticles() {
-        let category = Category.business.rawValue
-        let country = Country.usa
-        
-        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
-        }
+        guard let url = getPromotedUrl() else { return }
         
         Task {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
@@ -290,19 +290,32 @@ class HomeViewController: BaseController {
                 self.dataSource.apply(snapshot, animatingDifferences: true)
             }
         }
+        
+        func getPromotedUrl() -> URL? {
+            
+            let currentLanguage = UserDefaults.standard.string(forKey: "language")
+            var country = Country.usa
+            if let currentLanguage = currentLanguage {
+                switch currentLanguage {
+                case "Russian":
+                    country = Country.russia
+                default:
+                    country = Country.usa
+                }
+            }
+            
+            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            
+            return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
+        }
     }
     
     func getRecommendedSectionArticles() {
-        let category = Category.entertainment.rawValue
-        let country = Country.usa
-        
-        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
-        }
+        guard let url = getRecommendedUrl() else { return }
         
         Task {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
-            //TODO: reload data
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
             print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
@@ -313,12 +326,48 @@ class HomeViewController: BaseController {
                     snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .recommended))
                     snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
                     self.dataSource.apply(snapshot, animatingDifferences: true)
-                
-                // Or, if you want to reload specific sections:
-                //                 collectionView.reloadSections(IndexSet(integer: sectionIndex))
+            }
+        }
+        
+        func getRecommendedUrl() -> URL? {
+            
+            let currentLanguage = UserDefaults.standard.string(forKey: "language")
+            var country = Country.usa
+            if let currentLanguage = currentLanguage {
+                switch currentLanguage {
+                case "Russian":
+                    country = Country.russia
+                default:
+                    country = Country.usa
+                }
+            }
+            
+            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+            
+            return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
+        }
+        
+    }
+    
+    
+    func getArticles(matching request: String) {
+        guard let url = Endpoint.searchEverything(matching: request).url else { return }
+        
+        Task {
+            let news = try? await NetworkManager.shared.retrieveNews(from: url)
+            guard let news = news else { return }
+            let items = news.articles.map { CollectionItem.news($0, UUID()) }
+            promotedArticles = items.filter({$0.news?.title != "[Removed]"})
+            DispatchQueue.main.async {
+                // Update existing data source snapshot with new promoted articles
+                var snapshot = self.dataSource.snapshot()
+                snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .promoted))
+                snapshot.appendItems(self.promotedArticles, toSection: .promoted)
+                self.dataSource.apply(snapshot, animatingDifferences: true)
             }
         }
     }
+    
     
     func configureSearchIcon() -> UIView {
         let imageView = UIImageView(image: Icons.search)
@@ -352,14 +401,7 @@ class HomeViewController: BaseController {
 
 // MARK: - Searh delegate
 
-extension HomeViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchString = searchController.searchBar.text,
-           searchString.isEmpty == false {
-            print("User input: \(searchString)") // TODO: Implement the search logic
-            
-        }
-    }
+extension HomeViewController {
     
     func calculateMaxCategoryWidth() -> CGFloat {
         let categories = CollectionItem.categories.map { $0.category! } // Get the category strings
@@ -391,6 +433,14 @@ extension HomeViewController: UICollectionViewDelegate {
         case .category(var category):
             category.isSelectedOnTheMainScreen.toggle()
             
+            var snapshot = self.dataSource.snapshot()
+            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .categories))
+            self.dataSource.apply(snapshot, animatingDifferences: false)
+            snapshot.appendItems(CollectionItem.categories, toSection: .categories)
+            self.dataSource.apply(snapshot, animatingDifferences: false)
+            
+            
+            getPromotedSectionArticles() //updating promoted news on category tag tap
             if let cell = collectionView.cellForItem(at: indexPath) as? CategoryTagCollectionViewCell {
                 cell.configureCellWith(category)
             }
@@ -402,11 +452,13 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: CollectionHeaderDelegate {
     func seeAllButtonTapped(_ header: UICollectionReusableView) {
         let recommendedArticlesVC = RecommendedArticlesViewController()
-        recommendedArticlesVC.title = "For you"
+//        recommendedArticlesVC.title = "Recommended"
         navigationController?.pushViewController(recommendedArticlesVC, animated: true)
 
     }
 }
+
+
 
 
 
@@ -415,8 +467,10 @@ extension HomeViewController: CollectionHeaderDelegate {
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text ?? "")
+        guard let text = searchBar.text, !text.isEmpty else { return }
         searchBar.text = ""
+        searchBar.resignFirstResponder()
+        self.getArticles(matching: text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

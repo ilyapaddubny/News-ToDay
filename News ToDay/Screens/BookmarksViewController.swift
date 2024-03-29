@@ -8,8 +8,9 @@
 import UIKit
 
 class BookmarksViewController: BaseController {
-    
-    let emptyStateView = NTDEmptyStateView(message: EmptyListHelper.noBookmarks)
+    private let subTitle = NTDLabel(font: Font.interRegular(with: 16), textColor: .textSecondaryColor)
+
+    var emptyStateView = NTDEmptyStateView(message: EmptyListHelper.noBookmarks)
     
     enum Section: Hashable {
         case recommended
@@ -24,26 +25,37 @@ class BookmarksViewController: BaseController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        
         collectionView.reloadData()
         collectionView.delegate = self
-
-        configureDataSource()
-        configureEmptyState()
+        
+        emptyStateView.messageLabel.text = EmptyListHelper.noBookmarks
+        subTitle.text = Subtitle.bookmarks
+        title = ScreenTitleStrings.bookmarks
+        self.tabBarItem.title = nil
+        
         updateUI()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSubtitleText(text: Subtitle.bookmarks)
         configureCollectionView()
         configureDataSource()
     }
     
     private func configureEmptyState() {
         view.addSubview(emptyStateView)
+        self.view.addSubview(subTitle)
+        subTitle.translatesAutoresizingMaskIntoConstraints = false
+        let offset: CGFloat = 16
+        subTitle.numberOfLines = 1
         
         let margins = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
+            subTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            subTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: offset),
+            subTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: offset),
+            
             emptyStateView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
             emptyStateView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             emptyStateView.centerYAnchor.constraint(equalTo: margins.centerYAnchor)
@@ -55,12 +67,36 @@ class BookmarksViewController: BaseController {
         
         collectionView.register(StandardArticleCollectionViewCell.self,
                                 forCellWithReuseIdentifier: StandardArticleCollectionViewCell.reuseIdentifier)
-        configureDataSource()
+        
         self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(subTitle)
+        subTitle.translatesAutoresizingMaskIntoConstraints = false
+        let offset: CGFloat = 16
+        subTitle.numberOfLines = 1
+        
+        let margins = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            subTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            subTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: offset),
+            subTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: offset),
+            
+            collectionView.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 15),
+            collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        ])
+        
+        
+        configureDataSource()
         updateUI()
     }
     
+    
     func updateUI() {
+        configureEmptyState()
+        configureDataSource()
         if CollectionItem.bookmarkedArticles.isEmpty {
             // Collection is empty, show empty state
             emptyStateView.isHidden = false

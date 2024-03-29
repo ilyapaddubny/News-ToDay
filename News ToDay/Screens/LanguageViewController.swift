@@ -18,11 +18,12 @@ class LanduageViewController: UIViewController {
     
     lazy var backButton: UIButton = {
         let button = UIButton(primaryAction: back())
-        button.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
-        button.tintColor = .textSecondaryColor
-        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 15).isActive = true
-        
+        button.setImage(Image.arrowBackWhite, for: .normal)
+        button.tintColor = .textOnDisabledButtonColor
+        button.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 26).isActive = true
+        button.backgroundColor = .clear
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -38,6 +39,7 @@ class LanduageViewController: UIViewController {
         logoLabel.text = ScreenTitleStrings.language
         englishLabel.text = LanguageStrings.english
         russianLabel.text = LanguageStrings.russian
+        NotificationCenter.default.post(name: NSNotification.Name("updateLanguage"), object: nil)
     }
 
     func setUI() {
@@ -54,7 +56,7 @@ class LanduageViewController: UIViewController {
         view.addSubview(backButton)
         
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 13),
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -85,8 +87,8 @@ class LanduageViewController: UIViewController {
             englishBtn.backgroundColor = .buttonActiveColor
             label.textColor = .textOnActiveButtonColor
         } else {
-            englishBtn.backgroundColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .buttonActiveColor : .buttonDisabledColor
-            label.textColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .textOnActiveButtonColor : .textOnDisabledButtonColor
+            englishBtn.backgroundColor = ["Английский", "English"].contains(UserDefaults.standard.object(forKey: "language") as? String) ? .buttonActiveColor : .buttonDisabledColor
+            label.textColor = ["Английский", "English"].contains(UserDefaults.standard.object(forKey: "language") as? String) ? .textOnActiveButtonColor : .textOnDisabledButtonColor
         }
         
         return label
@@ -95,8 +97,8 @@ class LanduageViewController: UIViewController {
     lazy var russianLabel: UILabel = {
         let label = createLabel(size: 17, font: "Inter-SemiBold", text: LanguageStrings.russian, color: .textOnDisabledButtonColor)
         label.translatesAutoresizingMaskIntoConstraints = false
-        russianBtn.backgroundColor = label.text == UserDefaults.standard.object(forKey: "language") as? String  ? .buttonActiveColor : .buttonDisabledColor
-        label.textColor = label.text == UserDefaults.standard.object(forKey: "language") as? String ? .textOnActiveButtonColor : .textOnDisabledButtonColor
+        russianBtn.backgroundColor = ["Russian", "Русский"].contains(UserDefaults.standard.object(forKey: "language") as? String) ? .buttonActiveColor : .buttonDisabledColor
+        label.textColor = ["Russian", "Русский"].contains(UserDefaults.standard.object(forKey: "language") as? String) ? .textOnActiveButtonColor : .textOnDisabledButtonColor
         
         return label
     }()
@@ -192,23 +194,10 @@ class LanduageViewController: UIViewController {
         }
         return act
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
   
 }
-
-
-//
-////import SwiftUI
-////
-////struct Landuage: PreviewProvider {
-////    static var previews: some View {
-////        ContainerView().ignoresSafeArea()
-////    }
-////    struct ContainerView: UIViewRepresentable {
-////        let view = LanduageViewController()
-////        
-////        func makeUIView(context: Context) -> some UIView {
-////            return view
-////        }
-////        func updateUIView(_ uiView: UIViewType, context: Context) { }
-////    }
-////}
