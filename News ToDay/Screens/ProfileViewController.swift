@@ -28,14 +28,15 @@ class ProfileViewController: BaseController {
         super.viewDidLoad()
         setImage()
         setUserText()
-        setLabelsText()
         setBtn()
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        updateLabelsText()
+        
     }
     
 
@@ -69,7 +70,7 @@ class ProfileViewController: BaseController {
     private lazy var btnStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 25
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         return stack
@@ -116,15 +117,24 @@ class ProfileViewController: BaseController {
         ])
     }
     
-    private func setLabelsText() {
+    private func createLabels() {
         langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.language, color: .textOnDisabledButtonColor)
         termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.termsAndConditions, color: .textOnDisabledButtonColor)
         signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.signOut, color: .textOnDisabledButtonColor)
     }
+    
+    private func updateLabelsText() {
+        title = ScreenTitleStrings.profile
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.tabBarItem.title = nil
+        langLabel.text = ProfileStrings.language
+        termsLabel.text = ProfileStrings.termsAndConditions
+        signOutLabel.text = ProfileStrings.signOut
+    }
         
     
     private func setBtn() {
-        setLabelsText()
+        createLabels()
         let langBtn = createButton(action: langAct())
         let termsBtn = createButton(action: termsAct())
         let signOutBtn = createButton(action: signAct())
@@ -144,7 +154,7 @@ class ProfileViewController: BaseController {
         btnStack.addArrangedSubview(signOutBtn)
         
         NSLayoutConstraint.activate([
-            btnStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            btnStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             btnStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             btnStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
@@ -153,22 +163,22 @@ class ProfileViewController: BaseController {
             langBtn.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20),
             
             langLabel.leadingAnchor.constraint(equalTo: langBtn.leadingAnchor, constant: 20),
-            langLabel.topAnchor.constraint(equalTo: langBtn.topAnchor, constant: 18),
+            langLabel.centerYAnchor.constraint(equalTo: langBtn.centerYAnchor),
             
             termsLabel.leadingAnchor.constraint(equalTo: termsBtn.leadingAnchor, constant: 20),
-            termsLabel.topAnchor.constraint(equalTo: termsBtn.topAnchor, constant: 18),
+            termsLabel.centerYAnchor.constraint(equalTo: termsBtn.centerYAnchor),
             
             signOutLabel.leadingAnchor.constraint(equalTo: signOutBtn.leadingAnchor, constant: 20),
-            signOutLabel.topAnchor.constraint(equalTo: signOutBtn.topAnchor, constant: 18),
+            signOutLabel.centerYAnchor.constraint(equalTo: signOutBtn.centerYAnchor),
             
             signOutIcon.trailingAnchor.constraint(equalTo: signOutBtn.trailingAnchor, constant: -40),
-            signOutIcon.topAnchor.constraint(equalTo: signOutBtn.topAnchor, constant: 20),
+            signOutIcon.topAnchor.constraint(equalTo: signOutBtn.topAnchor, constant: 18),
             
             arrowIcon.trailingAnchor.constraint(equalTo: langBtn.trailingAnchor, constant: -35),
-            arrowIcon.topAnchor.constraint(equalTo: langBtn.topAnchor, constant: 25),
+            arrowIcon.topAnchor.constraint(equalTo: langBtn.topAnchor, constant: 23),
             
             arrowIcon2.trailingAnchor.constraint(equalTo: termsBtn.trailingAnchor, constant: -35),
-            arrowIcon2.topAnchor.constraint(equalTo: termsBtn.topAnchor, constant: 25),
+            arrowIcon2.topAnchor.constraint(equalTo: termsBtn.topAnchor, constant: 23),
         ])
        
         
@@ -195,7 +205,7 @@ class ProfileViewController: BaseController {
         button.layer.cornerRadius = 15
         button.backgroundColor = .buttonDisabledColor
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         return button
         
     }

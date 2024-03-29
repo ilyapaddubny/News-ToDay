@@ -38,9 +38,8 @@ class RecommendedArticlesViewController: BaseController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureDataSource()
-        collectionView.reloadData()
-//        logoLabel.text = ScreenTitleStrings.recommended
-//        getNews()
+        logoLabel.text = ScreenTitleStrings.recommended
+        getNews()
     }
     
     
@@ -143,6 +142,7 @@ class RecommendedArticlesViewController: BaseController {
                                                               trailing: 20)
                 
                 let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
                 return section
             }
         }
@@ -177,30 +177,40 @@ class RecommendedArticlesViewController: BaseController {
     // MARK: - Retriving data
     
     func getNews() {
-        let category = Category.entertainment.rawValue
-        let country = Country.usa
-        activityIndicator.isHidden = false
-        collectionView.isHidden = true
-        guard let url = Endpoint.searchTopHeadlines(categories: [category], countries: [country]).url else { return
-        }
+        guard let url = getRecommendedUrl() else { return }
         
         Task {
             let news = try? await NetworkManager.shared.retrieveNews(from: url)
             guard let news = news else { return }
-            //TODO: reload data
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
-            print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
+            print(items.isEmpty ? "⚠️ No recommended articles from API" : "\(items.count) recommended articles retrived from API")
             recommendedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
-                // Update existing data source snapshot with new recommended articles
-                var snapshot = self.dataSource.snapshot()
-                snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .recommended))
-                snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
-                self.dataSource.apply(snapshot, animatingDifferences: true)
-                self.activityIndicator.isHidden = true
-                self.collectionView.isHidden = false
+                    // Update existing data source snapshot with new recommended articles
+                    var snapshot = self.dataSource.snapshot()
+                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .recommended))
+                    snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
+                    self.dataSource.apply(snapshot, animatingDifferences: true)
             }
+        }
+        
+        func getRecommendedUrl() -> URL? {
+            
+            let currentLanguage = UserDefaults.standard.string(forKey: "language")
+            var country = Country.usa
+            if let currentLanguage = currentLanguage {
+                switch currentLanguage {
+                case "Russian":
+                    country = Country.russia
+                default:
+                    country = Country.usa
+                }
+            }
+            
+            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+            
+            return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
         }
     }
     
