@@ -38,6 +38,34 @@ class ProfileViewController: BaseController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+
+    private lazy var signOutIcon: UIView = {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let image = UIImage(named: "SignOutIcon")
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        view.addSubview(imageView)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var arrowIcon: UIView = {
+        let view = createIcon(name: "ArrowIcon")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var arrowIcon2: UIView = {
+        let view = createIcon(name: "ArrowIcon")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+
     private lazy var btnStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -107,6 +135,9 @@ class ProfileViewController: BaseController {
         self.view.addSubview(langLabel)
         self.view.addSubview(termsLabel)
         self.view.addSubview(signOutLabel)
+        self.view.addSubview(signOutIcon)
+        self.view.addSubview(arrowIcon)
+        self.view.addSubview(arrowIcon2)
 //        self.view.addSubview(langImg)
       
         btnStack.addArrangedSubview(termsBtn)
@@ -130,6 +161,14 @@ class ProfileViewController: BaseController {
             signOutLabel.leadingAnchor.constraint(equalTo: signOutBtn.leadingAnchor, constant: 20),
             signOutLabel.topAnchor.constraint(equalTo: signOutBtn.topAnchor, constant: 18),
             
+            signOutIcon.trailingAnchor.constraint(equalTo: signOutBtn.trailingAnchor, constant: -40),
+            signOutIcon.topAnchor.constraint(equalTo: signOutBtn.topAnchor, constant: 20),
+            
+            arrowIcon.trailingAnchor.constraint(equalTo: langBtn.trailingAnchor, constant: -35),
+            arrowIcon.topAnchor.constraint(equalTo: langBtn.topAnchor, constant: 25),
+            
+            arrowIcon2.trailingAnchor.constraint(equalTo: termsBtn.trailingAnchor, constant: -35),
+            arrowIcon2.topAnchor.constraint(equalTo: termsBtn.topAnchor, constant: 25),
         ])
        
         
@@ -157,9 +196,19 @@ class ProfileViewController: BaseController {
         button.backgroundColor = .buttonDisabledColor
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
         return button
         
+    }
+    
+    func createIcon(name: String) -> UIView {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let image = UIImage(named: name)
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        view.addSubview(imageView)
+        
+        return view
     }
     
     func langAct() -> UIAction {
