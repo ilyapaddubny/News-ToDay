@@ -39,6 +39,7 @@ class CategoriesViewController: BaseController {
     
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.isScrollEnabled = false
         collectionView.register(CategoryGridCollectionViewCell.self,
                                 forCellWithReuseIdentifier: CategoryGridCollectionViewCell.reuseIdentifier)
         

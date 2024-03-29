@@ -63,6 +63,10 @@ struct BrowseStrings {
     static var recommendedForYou: String { NSLocalizedString("Recommended for you", value: "Recommended for you", comment: "Recommended header").localized }
 }
 
+struct OnboardingStrings {
+    static var nextButton: String { NSLocalizedString("Next", value: "Next", comment: "Next button").localized }
+}
+
 struct LanguageStrings {
     static var russian: String { NSLocalizedString("Russian", value: "Russian", comment: "Language button").localized }
     static var english: String { NSLocalizedString("English", value: "English", comment: "Language button").localized }

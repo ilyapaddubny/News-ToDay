@@ -11,7 +11,9 @@ import UIKit
 
 class OnboardingCategoriesViewController: BaseController {
     private let subTitle = NTDLabel(font: Font.interRegular(with: 16), textColor: .textSecondaryColor)
-
+    var signOutLabel: UILabel!
+    var signOutBtn: UIButton!
+    
     enum Section: Hashable {
         case categories
     }
@@ -39,6 +41,11 @@ class OnboardingCategoriesViewController: BaseController {
         collectionView.isScrollEnabled = false
     }
     
+    func configureNextButtonLabel() {
+        signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.signOut, color: .textOnDisabledButtonColor)
+        signOutLabel.textColor = .textOnActiveButtonColor
+    }
+    
     
     func reloadStrings() {
         let paragraphStyle = NSMutableParagraphStyle()
@@ -47,9 +54,16 @@ class OnboardingCategoriesViewController: BaseController {
         
         subTitle.attributedText = attributedText
         title = ScreenTitleStrings.categoriesOnboarding
+        signOutLabel.text = OnboardingStrings.nextButton
     }
     
     private func configureCollectionView() {
+        configureNextButtonLabel()
+        signOutBtn = createButton(action: signAct())
+        
+        view.addSubview(signOutBtn)
+        view.addSubview(signOutLabel)
+        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(CategoryGridGrayCollectionViewCell.self,
                                 forCellWithReuseIdentifier: CategoryGridGrayCollectionViewCell.reuseIdentifier)
@@ -70,10 +84,17 @@ class OnboardingCategoriesViewController: BaseController {
             subTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: offset),
             subTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: offset),
             
+            signOutBtn.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20),
+            signOutBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            signOutBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            signOutLabel.centerXAnchor.constraint(equalTo: signOutBtn.centerXAnchor),
+            signOutLabel.centerYAnchor.constraint(equalTo: signOutBtn.centerYAnchor),
+            
             collectionView.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 15),
             collectionView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+            collectionView.heightAnchor.constraint(equalToConstant: 370)
         ])
     }
     
@@ -135,6 +156,39 @@ class OnboardingCategoriesViewController: BaseController {
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
+    }
+    
+    
+    private func createLabel(size: CGFloat, font: String, text: String, color: UIColor) -> UILabel {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints  = false
+        label.text = text
+        label.font = UIFont(name: font, size: size)
+        label.textColor = color
+        
+        return label
+    }
+    
+    func signAct() -> UIAction {
+        let act = UIAction { [weak self] _ in
+//            let vc = SignInViewController()
+//            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        return act
+    }
+    
+    private func createButton(action: UIAction) -> UIButton {
+        
+        let button = UIButton(primaryAction: action)
+//        button.setTitleColor(.textOnDisabledButtonColor, for: .normal)
+//        button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
+        button.layer.cornerRadius = 15
+        button.backgroundColor = .buttonActiveColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        return button
+        
     }
     
 }

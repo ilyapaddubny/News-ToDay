@@ -28,7 +28,7 @@ class NTDTabBarController: UITabBarController {
     
     
     func createCategoriesNC() -> UINavigationController {
-        let categoriesVC         = OnboardingCategoriesViewController()
+        let categoriesVC         = CategoriesViewController()
         categoriesVC.title       = ScreenTitleStrings.categories
         categoriesVC.tabBarItem  = UITabBarItem(title: nil, image: TabBarImage.categories, selectedImage: TabBarSelectedImage.categories)
         return UINavigationController(rootViewController: categoriesVC)

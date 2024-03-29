@@ -325,6 +325,17 @@
         }
       }
     },
+    "Next" : {
+      "comment" : "Next button",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Далее"
+          }
+        }
+      }
+    },
     "Profile" : {
       "comment" : "Screen title: Profile",
       "localizations" : {
