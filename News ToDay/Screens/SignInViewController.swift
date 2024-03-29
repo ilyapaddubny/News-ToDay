@@ -11,9 +11,14 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     var passwordIsSecure = true
     let logoLabel = UILabel()
     let textLabel = UILabel()
+    var loginText = SignInStrings.email
+    var passwordText = SignInStrings.password
+    var loginEnterText = SignInStrings.enterEmail
+    var passwordEnterText = SignInStrings.enterPassword
+    
     lazy var button: UIButton = {
         let button = UIButton(primaryAction: buttonTapped())
-        button.setTitle("Sign In", for: .normal)
+        button.setTitle(SignInStrings.signIn, for: .normal)
         button.setTitleColor(.textOnActiveButtonColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
@@ -24,7 +29,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     lazy var questionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Don't have an account?"
+        label.text = SignInStrings.label
         label.textColor = .textSecondaryColor
         label.heightAnchor.constraint(equalToConstant: 15).isActive = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +39,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     lazy var signUpButton: UIButton = {
         let button = UIButton(primaryAction: signUpAction())
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle(SignInStrings.signUp, for: .normal)
         button.setTitleColor(.textPrimaryColor, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 15).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -70,22 +75,17 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }()
     
     lazy var login: UITextField =  {
-        let field = createTextField(name: "Email adress", imName: envelope)
+        let field = createTextField(name: loginText, imName: envelope)
         field.keyboardType = .emailAddress
         return field
     }()
     
     lazy var password: UITextField =  {
-        let field = createTextField(name: "Password", imName: lock)
+        let field = createTextField(name: passwordText, imName: lock)
         field.isSecureTextEntry = true
         return field
     }()
     
-//    init() {
-//        super.init(frame: CGRect())
-//        setupUI()
-//        
-//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -101,13 +101,20 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLabelsText()
+        
+    }
+    
+    
     func setupUI() {
-        logoLabel.text = ("Welcome back 👋")
+        logoLabel.text = SignInStrings.title
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .left
         
-        textLabel.text = ("I am happy to see you again. You can continue where you left off by logging in.")
+        textLabel.text = SignInStrings.text
         textLabel.font = UIFont(name: "Inter-Regular" , size: 18)
         textLabel.textColor = .textSecondaryColor
         textLabel.textAlignment = .left
@@ -150,34 +157,23 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             
             stack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             stack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 0)
-//            stack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-//            stack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
     }
-    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     
     func createTextField(name: String, imName: UIView) -> UITextField {
         let field = UITextField()
         field.attributedPlaceholder = NSAttributedString(string: name, attributes: [NSAttributedString.Key.foregroundColor: UIColor.textSecondaryColor])
-       
-//        field.placeholder = name
         field.leftView = imName
         field.backgroundColor = .buttonDisabledColor
         field.leftViewMode = .always
         field.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        field.borderStyle = .roundedRect
         field.layer.cornerRadius = 15
         field.clipsToBounds = true
-//        field.layer.borderWidth  = 0.5
         field.autocorrectionType = .no
         field.spellCheckingType = .no
         field.keyboardAppearance = .light
         
         field.translatesAutoresizingMaskIntoConstraints = false
-//        field.tintColor = .textSecondaryColor
         return field
     }
     
@@ -191,31 +187,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return view
     }
     
-//    func createButtonForField(name: String, color: UIColor) -> UIView {
-//        let imageView = UIImageView(frame: CGRect(x: 10, y: 9, width: 25, height: 25))
-//        let image = UIImage(systemName: name)
-//        let button = UIButton(primaryAction: self.eyeAction())
-////        button.setImage(image, for: .normal)
-//        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//        button.widthAnchor.constraint(equalToConstant: 30).isActive = true
-////        imageView.addSubview(image)
-//        imageView.image = image
-////        imageView.backgroundColor = .clear
-////        imageView.tintColor = color
-//        imageView.contentMode = .scaleAspectFit
-//        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .green
-//        view.addSubview(imageView)
-//        view.addSubview(button)
-//        
-//       
-//        button.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -10).isActive = true
-//        button.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 10).isActive = true
-////
-//        
-//        return view
-//    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
           if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
@@ -225,6 +196,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
           }
           return false
        }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.backgroundColor = .white
         if textField == login {
@@ -235,12 +207,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.buttonActiveColor.cgColor
         if textField == password {
-    
-//            var rightButton  = UIButton(primaryAction: act)
-//            rightButton.frame = CGRect(x:-5, y:0, width:30, height:30)
-//            rightButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            
             textField.rightView = createImageForField(name: "EyeIcon")
-//            textField.rightView = rightButton
             textField.rightViewMode = .always
             
             let eyeBtn = UIButton(primaryAction: eyeAction())
@@ -253,32 +221,44 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
-//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-////        check()
-//    }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         check()
         return true
     }
     
     func check()  {
-        if self.login.text != "" && self.password.text != "" {
+        if self.login.text!.trimmingCharacters(in: .whitespaces) != "" && self.password.text!.trimmingCharacters(in: .whitespaces) != "" {
             self.button.isUserInteractionEnabled = true
             self.button.alpha = 1.0
         }
     }
     
+    private func updateLabelsText() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabBarItem.title = nil
+        logoLabel.text = SignInStrings.title
+        textLabel.text = SignInStrings.text
+        loginText = SignInStrings.email
+        passwordText = SignInStrings.password
+        loginEnterText = SignInStrings.enterEmail
+        passwordEnterText = SignInStrings.enterPassword
+        button.setTitle(SignInStrings.signUp, for: .normal)
+        signUpButton.setTitle(SignInStrings.signIn, for: .normal)
+        
+    }
+    
     func buttonTapped() -> UIAction {
         let act = UIAction { _ in
-            if self.login.text != "" && self.password.text != "" {
+            if self.login.text!.trimmingCharacters(in: .whitespaces) != "" && self.password.text!.trimmingCharacters(in: .whitespaces) != "" {
                 print("sign in")
             }
-            if self.login.text == "" {
-                self.login.attributedPlaceholder = NSAttributedString(string: "enter your mail", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            if self.login.text!.trimmingCharacters(in: .whitespaces) == "" {
+                self.login.attributedPlaceholder = NSAttributedString(string: SignInStrings.enterEmail, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.login.layer.borderColor = UIColor.red.cgColor
             }
-            if self.password.text == "" {
-                self.password.attributedPlaceholder = NSAttributedString(string: "enter your password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            if self.password.text!.trimmingCharacters(in: .whitespaces) == "" {
+                self.password.attributedPlaceholder = NSAttributedString(string: SignInStrings.enterPassword, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.password.layer.borderColor = UIColor.red.cgColor
             }
         }
@@ -311,21 +291,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-
-
-
-//uitextfield
-//placeholder - текст до введения данных
-//borderstyle - разобраться
-//clear button - appears while editing ili always
-//corrections не нужна?
-//spell checking выкл
-//keyboard type
-//keyboard appearence
-//keyboard lock
-//auto enable return key
-//secure text entry
-//смотри метод на скрине для перемещения курсора 
 
 //import SwiftUI
 //
