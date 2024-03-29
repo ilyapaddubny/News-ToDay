@@ -449,6 +449,28 @@
         }
       }
     },
+    "Select favorite topics" : {
+      "comment" : "Screen title: Categories",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Любимые категории"
+          }
+        }
+      }
+    },
+    "Select some of your favorite topics to let us suggest better news for you" : {
+      "comment" : "Subtitle: onboarding Categories",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите несколько категорий, для лучшей персонализации новостей"
+          }
+        }
+      }
+    },
     "Sign Out" : {
       "comment" : "Sign Out button",
       "localizations" : {
