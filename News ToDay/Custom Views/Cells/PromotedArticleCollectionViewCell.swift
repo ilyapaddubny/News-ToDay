@@ -134,7 +134,8 @@ class PromotedArticleCollectionViewCell: UICollectionViewCell {
     func configureCellWith(_ article: Article) {
         self.article = article
         bookmarkView.image = article.isBookmarked ? Icons.bookmarkFilled : Icons.bookmarkStroke
-        categoryLabel.text = article.description ?? "no description"
+//        categoryLabel.text = article.description ?? "no description"
+        categoryLabel.text = "entertainment".capitalized
         headlineLabel.text = article.title
         cancellable = loadImage(for: article).sink(receiveValue: { [unowned self] image in
             showImage(image: image)
