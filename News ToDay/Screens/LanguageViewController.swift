@@ -39,6 +39,7 @@ class LanduageViewController: UIViewController {
         logoLabel.text = ScreenTitleStrings.language
         englishLabel.text = LanguageStrings.english
         russianLabel.text = LanguageStrings.russian
+        NotificationCenter.default.post(name: NSNotification.Name("updateLanguage"), object: nil)
     }
 
     func setUI() {
@@ -200,21 +201,3 @@ class LanduageViewController: UIViewController {
     }
   
 }
-
-
-//
-////import SwiftUI
-////
-////struct Landuage: PreviewProvider {
-////    static var previews: some View {
-////        ContainerView().ignoresSafeArea()
-////    }
-////    struct ContainerView: UIViewRepresentable {
-////        let view = LanduageViewController()
-////        
-////        func makeUIView(context: Context) -> some UIView {
-////            return view
-////        }
-////        func updateUIView(_ uiView: UIViewType, context: Context) { }
-////    }
-////}
