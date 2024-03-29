@@ -44,6 +44,7 @@ struct ScreenTitleStrings {
     static var browse: String { NSLocalizedString("Browse", value: "Browse", comment: "Screen title: Browse").localized }
     static var profile: String { NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized }
     static var categories: String { NSLocalizedString("Categories", value: "Categories", comment: "Screen title: Categories").localized }
+    static var categoriesOnboarding: String { NSLocalizedString("Select favorite topics", value: "Select favorite topics", comment: "Screen title: Categories").localized }
     static var bookmarks: String { NSLocalizedString("Bookmarks", value: "Bookmarks", comment: "Screen title: Bookmarks").localized }
     static var user: String { NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized }
     static var language: String { NSLocalizedString("Language", value: "Language", comment: "Screen title: Language").localized }
@@ -60,6 +61,10 @@ struct ProfileStrings {
 struct BrowseStrings {
     static var seeAll: String { NSLocalizedString("See all", value: "See all", comment: "Recommended header").localized }
     static var recommendedForYou: String { NSLocalizedString("Recommended for you", value: "Recommended for you", comment: "Recommended header").localized }
+}
+
+struct OnboardingStrings {
+    static var nextButton: String { NSLocalizedString("Next", value: "Next", comment: "Next button").localized }
 }
 
 struct LanguageStrings {
@@ -94,6 +99,7 @@ struct CategoryStrings {
 
 struct Subtitle {
     static var categories: String { NSLocalizedString("Thousands of articles in each category", value: "Thousands of articles in each category", comment: "Subtitle: Categories").localized}
+    static var categoriesOnboarding: String { NSLocalizedString("Select some of your favorite topics to let us suggest better news for you", value: "Select some of your favorite topics to let us suggest better news for you", comment: "Subtitle: onboarding Categories").localized}
     static var browse: String { NSLocalizedString("Discover things of the world", value: "Discover things of the world", comment: "Subtitle: Browse").localized }
     static var bookmarks: String { NSLocalizedString("Saved articles to the library", value: "Saved articles to the library", comment: "Subtitle: Bookmarks").localized }
 }
