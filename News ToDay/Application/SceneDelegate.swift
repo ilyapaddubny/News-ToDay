@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.overrideUserInterfaceStyle = .light
-        window?.rootViewController = NTDTabBarController()
+        window?.rootViewController = vc
         window?.makeKeyAndVisible()
     }
     

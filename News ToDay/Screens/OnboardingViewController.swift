@@ -44,8 +44,8 @@ private extension OnboardingViewController {
     func setConstraints() {
         NSLayoutConstraint.activate([
             onboardingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            onboardingView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            onboardingView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            onboardingView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            onboardingView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             onboardingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }

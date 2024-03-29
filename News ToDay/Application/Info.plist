@@ -5,9 +5,11 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Adamina-Regular-400.ttf</string>
+		<string>Adamina-Regular.ttf</string>
 		<string>Inter-Regular-400.ttf</string>
 		<string>Inter-SemiBold-600.ttf</string>
 		<string>Inter-Bold-700.ttf</string>
+		<string>launghScreen</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

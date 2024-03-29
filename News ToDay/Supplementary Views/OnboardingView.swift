@@ -18,15 +18,17 @@ final class OnboardingView: UIView {
     
     
     //MARK: - UI
-    
+
     private let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
+        let layout = CarouselFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 288, height: 336)
+        layout.sideItemAlpha = 1
+        layout.sideItemScale = 0.68
+        layout.spacingMode = .fixed(spacing: 28)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(OnboardingCollectionViewCell.self, forCellWithReuseIdentifier: OnboardingCollectionViewCell.idOnboardingCell)
-        collectionView.backgroundColor = .white
-        collectionView.isScrollEnabled = false
+        collectionView.isScrollEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -80,12 +82,8 @@ final class OnboardingView: UIView {
 
 //MARK: - UICollectionViewDelegateFlowLayout
 
-extension OnboardingView: UICollectionViewDelegateFlowLayout {
+extension OnboardingView: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width,
-               height: collectionView.frame.height)
-    }
 }
 
 
@@ -139,7 +137,6 @@ private extension OnboardingView {
     
     func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        
         setupViews()
         configureCollectionView()
         configurePageControl()
@@ -150,11 +147,11 @@ private extension OnboardingView {
     
     func configureCollectionView() {
         
-//        let firstScreen = OnboardingModel(mainImage: .firstScreen)
-//        let secondScreen = OnboardingModel(mainImage: .secondScreen)
-//        let thirdScreen = OnboardingModel(mainImage: .firstScreen)
-//
-//        onboardingArray = [firstScreen, secondScreen, thirdScreen]
+        let firstScreen = OnboardingModel(mainImage: .firstScreen)
+        let secondScreen = OnboardingModel(mainImage: .secondScreen)
+        let thirdScreen = OnboardingModel(mainImage: .firstScreen)
+
+        onboardingArray = [firstScreen, secondScreen, thirdScreen]
     }
     
     
@@ -197,7 +194,7 @@ private extension OnboardingView {
             collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 50),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 340),
+            collectionView.heightAnchor.constraint(equalToConstant: 250),
             
             pageControl.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 40),
             pageControl.centerXAnchor.constraint(equalTo: centerXAnchor),
