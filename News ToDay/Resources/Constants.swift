@@ -54,7 +54,7 @@ struct ScreenTitleStrings {
 struct ProfileStrings {
     static var language: String { NSLocalizedString("LanBtn", value: "Language", comment: "Language button").localized }
     static var termsAndConditions: String { NSLocalizedString("Terms & Conditions Btn", value: "Terms & Conditions", comment: "Terms & Conditions button label").localized }
-    static var signOut: String { NSLocalizedString("signOut", value: "Sign Out", comment: "Sign Out button").localized }
+    static var signOut: String { NSLocalizedString("Sign Out", value: "Sign Out", comment: "Sign Out button").localized }
 }
 
 struct BrowseStrings {

@@ -28,14 +28,15 @@ class ProfileViewController: BaseController {
         super.viewDidLoad()
         setImage()
         setUserText()
-        setLabelsText()
         setBtn()
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        updateLabelsText()
+        
     }
     
 
@@ -116,15 +117,24 @@ class ProfileViewController: BaseController {
         ])
     }
     
-    private func setLabelsText() {
+    private func createLabels() {
         langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.language, color: .textOnDisabledButtonColor)
         termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.termsAndConditions, color: .textOnDisabledButtonColor)
         signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.signOut, color: .textOnDisabledButtonColor)
     }
+    
+    private func updateLabelsText() {
+        title = ScreenTitleStrings.profile
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.tabBarItem.title = nil
+        langLabel.text = ProfileStrings.language
+        termsLabel.text = ProfileStrings.termsAndConditions
+        signOutLabel.text = ProfileStrings.signOut
+    }
         
     
     private func setBtn() {
-        setLabelsText()
+        createLabels()
         let langBtn = createButton(action: langAct())
         let termsBtn = createButton(action: termsAct())
         let signOutBtn = createButton(action: signAct())

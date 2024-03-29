@@ -35,6 +35,7 @@ class HomeViewController: BaseController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
         collectionView.reloadData()
+        getRecommendedSectionArticles()
         updateAllStrings()
     }
     
@@ -53,7 +54,6 @@ class HomeViewController: BaseController {
         getNews()
     }
     
-    
     func updateAllStrings() {
         self.title = ScreenTitleStrings.browse
         setSubtitleText(text: Subtitle.browse)
@@ -64,6 +64,9 @@ class HomeViewController: BaseController {
     
     
     private func configureSearchBar() {
+        //rebome keyboard on tap to any area
+        
+        
         searchBar.delegate = self
         searchBar.placeholder = Placeholder.search
         searchBar.setLeftImage(Image.searchIcon!, with: 10, tintColor: .textOnDisabledButtonColor)
