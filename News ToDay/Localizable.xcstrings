@@ -413,6 +413,17 @@
         }
       }
     },
+    "Next" : {
+      "comment" : "Next button",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Далее"
+          }
+        }
+      }
+    },
     "Password" : {
       "comment" : "Password title",
       "localizations" : {
@@ -420,17 +431,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пароль"
-          }
-        }
-      }
-    },
-    "Leisure" : {
-      "comment" : "Next button",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Далее"
           }
         }
       }
@@ -581,17 +581,6 @@
         }
       }
     },
-    "Sign in" : {
-      "comment" : "Sign in button",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Зарегистрироваться"
-          }
-        }
-      }
-    },
     "Select favorite topics" : {
       "comment" : "Screen title: Categories",
       "localizations" : {
@@ -610,7 +599,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выберите несколько категорий, для лучшей персонализации новостей"
-
+          }
+        }
+      }
+    },
+    "Sign in" : {
+      "comment" : "Sign in button",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зарегистрироваться"
           }
         }
       }
