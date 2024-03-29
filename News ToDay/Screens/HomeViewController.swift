@@ -456,6 +456,7 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - SeeAll header delegate
 extension HomeViewController: CollectionHeaderDelegate {
     func seeAllButtonTapped(_ header: UICollectionReusableView) {
+//        let recommendedArticlesVC = RecommendedArticlesViewController()
         let recommendedArticlesVC = RecommendedArticlesViewController()
         navigationController?.pushViewController(recommendedArticlesVC, animated: true)
 
