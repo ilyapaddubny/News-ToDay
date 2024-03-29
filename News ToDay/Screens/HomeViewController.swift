@@ -35,6 +35,7 @@ class HomeViewController: BaseController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
         collectionView.reloadData()
+        updateAllStrings()
     }
     
     override func viewDidLoad() {
@@ -180,7 +181,7 @@ class HomeViewController: BaseController {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .absolute(112))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 2)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 2)
                 
                 
                 let groupSize = NSCollectionLayoutSize( widthDimension: .fractionalWidth(0.9),
@@ -194,7 +195,7 @@ class HomeViewController: BaseController {
                 let section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .groupPagingCentered
                 section.boundarySupplementaryItems = [headerItem]
-                
+
                 return section
             }
         }
@@ -304,9 +305,11 @@ class HomeViewController: BaseController {
                 }
             }
             
-            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            guard let selectedCategory = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey) else {
+                return Endpoint.searchTopHeadlines(categories: [], countries: [country]).url
+            }
             
-            return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
+            return Endpoint.searchTopHeadlines(categories: [selectedCategory.rawValue], countries: [country]).url
         }
     }
     
@@ -318,7 +321,7 @@ class HomeViewController: BaseController {
             guard let news = news else { return }
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
-            print(items.isEmpty ? "⚠️ No reccomended articles from API" : "\(items.count) reccomended articles retrived from API")
+            print(items.isEmpty ? "⚠️ No recommended articles from API" : "\(items.count) recommended articles retrived from API")
             recommendedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
                     // Update existing data source snapshot with new recommended articles
@@ -435,11 +438,7 @@ extension HomeViewController: UICollectionViewDelegate {
             category.isSelectedOnTheMainScreen.toggle()
             
             var snapshot = self.dataSource.snapshot()
-//            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .categories))
-//            snapshot.appendItems(CollectionItem.categories, toSection: .categories)
-            snapshot.reloadItems(CollectionItem.categories.filter{$0.category?.rawValue == category.rawValue})
-            snapshot.reloadItems(CollectionItem.categories.filter{$0.category?.rawValue == previouslySelected?.rawValue})
-//            snapshot.appendItems(CollectionItem.categories, toSection: .categories)
+            snapshot.reloadItems(CollectionItem.categories.filter{($0.category?.rawValue == category.rawValue) || ($0.category?.rawValue == previouslySelected?.rawValue)})
             self.dataSource.apply(snapshot, animatingDifferences: true)
             
             
@@ -455,7 +454,6 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: CollectionHeaderDelegate {
     func seeAllButtonTapped(_ header: UICollectionReusableView) {
         let recommendedArticlesVC = RecommendedArticlesViewController()
-//        recommendedArticlesVC.title = "Recommended"
         navigationController?.pushViewController(recommendedArticlesVC, animated: true)
 
     }

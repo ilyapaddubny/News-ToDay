@@ -25,6 +25,7 @@ class CategoriesViewController: BaseController {
         navigationController?.navigationBar.isHidden = false
         subTitle.text = Subtitle.categories
         title = ScreenTitleStrings.categories
+        collectionView.reloadData()
         self.tabBarItem.title = nil
     }
     
