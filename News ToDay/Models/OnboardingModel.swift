@@ -9,17 +9,17 @@ import UIKit
 
 //MARK: - MockData
 
-enum OnboardingMockData {
+struct OnboardingMockData {
+    static var firstMainLabel: String { NSLocalizedString("First to know", value: "First to know", comment: "First to know").localized }
+    static var secondMainLabel: String { NSLocalizedString("World News", value: "World News", comment: "World News").localized }
+    static var thirdMainLabel: String { NSLocalizedString("Customization", value: "Customization", comment: "Customization").localized }
     
-    static let firstMainLabel = "First to know"
-    static let secondMainLabel = "World News"
-    static let thirdMainLabel = "News today"
+    static var firstDescriptionlabel: String { NSLocalizedString("All news in one place, be the first to know last news", value: "All news in one place, be the first to know last news", comment: "All news in one place, be the first to know last news").localized }
+    static var secondDescriptionlabel: String { NSLocalizedString("The most important news in different categories from different countries", value: "The most important news in different categories from different countries", comment: "The most important news in different categories from different countries").localized }
+    static var thirdDescriptionlabel: String { NSLocalizedString("Customize your feeds to get anly topics you are interested in", value: "Customize your feeds to get anly topics you are interested in", comment: "Customize your feeds to get anly topics you are interested in").localized }
     
-    static let firstDescriptionlabel = "All news in one place, be the first to know last news"
-    static let secondDescriptionlabel = "The most important news in different categories"
-    static let thirdDescriptionlabel = "Read what is interesting and like"
     
-    static let nextButton = "Next"
+    static let nextButton = "nextButton"
     static let getStartedButton = "Get Started"
 }
 
