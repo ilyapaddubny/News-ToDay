@@ -47,7 +47,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.text = SignUpStrings.label
         label.textColor = .textSecondaryColor
-        label.heightAnchor.constraint(equalToConstant: 15).isActive = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -57,7 +56,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let button = UIButton(primaryAction: signInAction())
         button.setTitle(SignUpStrings.signIn, for: .normal)
         button.setTitleColor(.textPrimaryColor, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
