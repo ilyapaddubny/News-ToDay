@@ -328,8 +328,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     // Handle the case where any of the required fields is nil
                     return
                 }
-
-                self.users.append(User(name: name, email: email, password: password))
+                let newUser = User(name: name, email: email, password: password, fafouriteCategories: [])
+                UserDefaults.standard.setValue(newUser, forKey: UserDefaultsConstants.userLoggedIn)
+                self.users.append(newUser)
                 print("Users in the app: \(self.users)")
                 
                 guard let router = self.router else { return }

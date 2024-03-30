@@ -20,13 +20,18 @@ enum Category: String, Hashable, CaseIterable, Codable {
     // MARK: - Bookmark categories logic
     var isBookmarked: Bool {
         get {
-            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+//            var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)
+            let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)
+            print(currentUser)
+            let categories = currentUser?.fafouriteCategories ?? []
+            print(categories)
             return categories.contains(self)
         }
         
         set {
-            var categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
-            // если мы убираем кейс из избранного, нужно удалить его из массива
+            guard var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)  else {return}
+            guard var currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return}
+            var categories = currentUser.fafouriteCategories
             if categories.contains(self), !newValue {
                 categories.removeAll(where: {$0 == self})
             }
@@ -34,7 +39,16 @@ enum Category: String, Hashable, CaseIterable, Codable {
             if newValue {
                 categories.append(self)
             }
-            UserDefaults.standard.setValue(categories, forKey:  UserDefaultsConstants.bookmarkedCategoriesKey)
+            currentUser.fafouriteCategories = categories
+            
+            if let index = users.firstIndex(where: { $0 == currentUser }) {
+                // Update the user in the users array
+                users[index] = currentUser
+                
+                // Update the list of users in UserDefaults
+                UserDefaults.standard.setValue(users, forKey: UserDefaultsConstants.listOfUsers)
+                UserDefaults.standard.setValue(currentUser, forKey: UserDefaultsConstants.userLoggedIn)
+            }
         }
     }
     
