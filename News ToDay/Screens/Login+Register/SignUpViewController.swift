@@ -39,7 +39,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
         button.backgroundColor = .buttonActiveColor
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         return button
     }()
     
@@ -154,7 +154,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     func setupUI() {
         logoLabel.text = SignUpStrings.title
-        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
+        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 27)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .left
         
@@ -162,7 +162,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         textLabel.font = UIFont(name: "Inter-Regular" , size: 18)
         textLabel.textColor = .textSecondaryColor
         textLabel.textAlignment = .left
-        textLabel.numberOfLines = 3
+        textLabel.numberOfLines = 4
         
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -181,11 +181,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         view.addSubviews(stack)
         
         NSLayoutConstraint.activate([
-            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             logoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 20),
+            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 15),
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
