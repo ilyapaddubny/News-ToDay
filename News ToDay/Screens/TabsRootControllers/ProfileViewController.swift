@@ -242,7 +242,7 @@ class ProfileViewController: BaseController {
     func signAct() -> UIAction {
         let act = UIAction { [weak self] _ in
             guard let self = self else { return }
-            self.router?.authFlow()
+            self.router?.onboardingFlow()
         }
         return act
     }

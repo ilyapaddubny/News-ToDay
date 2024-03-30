@@ -11,6 +11,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     var router: RouterProtocol?
     
+    var users: [User] {
+        get {
+            UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers) ?? []
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey:  UserDefaultsConstants.listOfUsers)
+        }
+    }
+    
     var passwordIsSecure = true
     let logoLabel = UILabel()
     let textLabel = UILabel()
@@ -312,7 +321,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 self.repeatPassword.layer.borderColor = UIColor.red.cgColor
             }
             if self.password.text == self.repeatPassword.text {
-                print("sign up")
+                //Sign UP here
+                guard let name = self.userName.text,
+                      let email = self.login.text,
+                      let password = self.password.text else {
+                    // Handle the case where any of the required fields is nil
+                    return
+                }
+
+                self.users.append(User(name: name, email: email, password: password))
+                print("Users in the app: \(self.users)")
+                
+                guard let router = self.router else { return }
+                let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
+                self.navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
+                FirstLaunchStorage.setFirstLaunchComplete()
             } else{
                 print("nfn")
             }

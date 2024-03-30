@@ -185,7 +185,7 @@ class OnboardingCategoriesViewController: BaseController {
     func signAct() -> UIAction {
         let act = UIAction { [weak self] _ in
             guard let self = self else { return }
-            self.router.registerFlow()
+            self.router.mainFlow()
         }
         return act
     }

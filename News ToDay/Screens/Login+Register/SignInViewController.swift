@@ -354,7 +354,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     func signUpAction() -> UIAction {
         let act = UIAction { [weak self] _ in
             guard let self = self else { return }
-            self.router?.onboardingFlow()
+            self.router?.registerFlow()
         }
         return act
     }
