@@ -290,10 +290,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     // User email found, check password
                     if user.password == enteredPassword {
                         // Password correct, perform main flow
-//                        guard let router = self.router else { return }
-//                        let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
-//                        navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
-//                        FirstLaunchStorage.setFirstLaunchComplete()
                         guard var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)  else {return}
                         if let index = users.firstIndex(where: { $0 == user }) {
                             UserDefaults.standard.setValue(users[index], forKey: UserDefaultsConstants.userLoggedIn)
@@ -309,11 +305,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     // Email not found, show alert
                     if enteredEmail.capitalized == "Test" && enteredPassword.capitalized == "Test" {
-//                        guard let router = self.router else { return }
-//                        let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
-//                        navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
-//                        FirstLaunchStorage.setFirstLaunchComplete()
-//                        
                         self.router?.mainFlow()
                     } else {
                         showAlert(message: "Email not registered. Please sign up or use a different email.")

@@ -20,11 +20,8 @@ enum Category: String, Hashable, CaseIterable, Codable {
     // MARK: - Bookmark categories logic
     var isBookmarked: Bool {
         get {
-//            var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)
             let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)
-            print(currentUser)
             let categories = currentUser?.fafouriteCategories ?? []
-            print(categories)
             return categories.contains(self)
         }
         
@@ -55,12 +52,25 @@ enum Category: String, Hashable, CaseIterable, Codable {
     // MARK: - Tag Section Logic
     var isSelectedOnTheMainScreen: Bool {
         get {
-            guard let selectedCategory = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey) else {return false}
-            return self == selectedCategory
+            guard let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return false}
+            let tagCategory = currentUser.tagCategory
+            return self == tagCategory
         }
 
         set {
-            UserDefaults.standard.setValue(self, forKey:  UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            guard var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)  else {return}
+            guard var currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return}
+
+            currentUser.tagCategory = self
+            if let index = users.firstIndex(where: { $0 == currentUser }) {
+                // Update the user in the users array
+                users[index] = currentUser
+                
+                // Update the list of users in UserDefaults
+                UserDefaults.standard.setValue(users, forKey: UserDefaultsConstants.listOfUsers)
+                UserDefaults.standard.setValue(currentUser, forKey: UserDefaultsConstants.userLoggedIn)
+            }
+            
         }
     }
     
