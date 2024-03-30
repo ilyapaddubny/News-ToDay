@@ -106,8 +106,14 @@ class ProfileViewController: BaseController {
     private func setUserText() {
         self.view.addSubview(textStack)
         
-        let userName = createLabel(size: 20, font: "Inter-SemiBold", text: "Ivan I", color: .textPrimaryColor)
-        let userMail = createLabel(size: 17, font: "Inter-Regular", text: "Ivan@gmail.com", color: .textSecondaryColor)
+        let userName = createLabel(size: 20, 
+                                   font: "Inter-SemiBold",
+                                   text: UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)?.name ?? "Ivan I",
+                                   color: .textPrimaryColor)
+        let userMail = createLabel(size: 17, 
+                                   font: "Inter-Regular",
+                                   text: UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)?.email ?? "ivan@gmail.com",
+                                   color: .textSecondaryColor)
         
         textStack.addArrangedSubview(userName)
         textStack.addArrangedSubview(userMail)
