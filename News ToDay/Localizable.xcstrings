@@ -89,6 +89,17 @@
         }
       }
     },
+    "All news in one place, be the first to know last news" : {
+      "comment" : "All news in one place, be the first to know last news",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будь в курсе самых актуальных новостей. Все новости в одном месте"
+          }
+        }
+      }
+    },
     "Already have an account?" : {
       "comment" : "Already have an account label",
       "localizations" : {
@@ -140,6 +151,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Категории"
+          }
+        }
+      }
+    },
+    "Customization" : {
+      "comment" : "Customization",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Кастомизацию ленты"
+          }
+        }
+      }
+    },
+    "Customize your feeds to get anly topics you are interested in" : {
+      "comment" : "Customize your feeds to get anly topics you are interested in",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настрой ленту под себя и читай только интересующие новости"
           }
         }
       }
@@ -264,6 +297,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "5. Отказ от ответственности "
+          }
+        }
+      }
+    },
+    "First to know" : {
+      "comment" : "First to know",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Актуальные новости"
           }
         }
       }
@@ -694,6 +738,17 @@
         }
       }
     },
+    "The most important news in different categories from different countries" : {
+      "comment" : "The most important news in different categories from different countries",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Получай самые важные новости из разных уголков планеты"
+          }
+        }
+      }
+    },
     "thirdSectionText" : {
       "comment" : "Terms And Conditions",
       "extractionState" : "stale",
@@ -770,6 +825,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Добро пожаловать!"
+          }
+        }
+      }
+    },
+    "World News" : {
+      "comment" : "World News",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мировые новости"
           }
         }
       }
