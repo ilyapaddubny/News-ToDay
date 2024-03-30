@@ -37,6 +37,8 @@
 		2DCC534B2BB430870022637B /* LocalizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCC534A2BB430860022637B /* LocalizeUtils.swift */; };
 		2DD651002BB36C5E0067B706 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2DD650FF2BB36C5E0067B706 /* Localizable.xcstrings */; };
 		2DDDA6432BADA24500357F44 /* NTDSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDDA6422BADA24500357F44 /* NTDSearchView.swift */; };
+		2DFBF62F2BB6DFE300B80F31 /* OnboardingCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFBF62E2BB6DFE300B80F31 /* OnboardingCategoriesViewController.swift */; };
+		2DFBF6312BB6E02F00B80F31 /* CategoryGridGrayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFBF6302BB6E02F00B80F31 /* CategoryGridGrayCollectionViewCell.swift */; };
 		53499B392BADA1CF00836203 /* Terms&Conditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53499B382BADA1CF00836203 /* Terms&Conditions.swift */; };
 		53499B3B2BADA25100836203 /* TermsConditionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53499B3A2BADA25100836203 /* TermsConditionsController.swift */; };
 		53499B402BADBAED00836203 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53499B3F2BADBAED00836203 /* LanguageViewController.swift */; };
@@ -108,6 +110,8 @@
 		2DD650FE2BB36A010067B706 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2DD650FF2BB36C5E0067B706 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		2DDDA6422BADA24500357F44 /* NTDSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTDSearchView.swift; sourceTree = "<group>"; };
+		2DFBF62E2BB6DFE300B80F31 /* OnboardingCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCategoriesViewController.swift; sourceTree = "<group>"; };
+		2DFBF6302BB6E02F00B80F31 /* CategoryGridGrayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridGrayCollectionViewCell.swift; sourceTree = "<group>"; };
 		53499B382BADA1CF00836203 /* Terms&Conditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Terms&Conditions.swift"; path = "News ToDay/Models/Terms&Conditions.swift"; sourceTree = SOURCE_ROOT; };
 		53499B3A2BADA25100836203 /* TermsConditionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionsController.swift; sourceTree = "<group>"; };
 		53499B3F2BADBAED00836203 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				2D0ED7132BA9E71200DFF4DC /* StandardArticleCollectionViewCell.swift */,
 				2D0ED7112BA9E70B00DFF4DC /* CategoryTagCollectionViewCell.swift */,
 				2D6DD5AF2BB17E9F00F2E33B /* CategoryGridCollectionViewCell.swift */,
+				2DFBF6302BB6E02F00B80F31 /* CategoryGridGrayCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 			children = (
 				838EC8532BAF3E7A004EBC4C /* NewsViewController.swift */,
 				2D3EE9522BB30AF800477F8B /* RecommendedArticlesViewController.swift */,
+				2DFBF62E2BB6DFE300B80F31 /* OnboardingCategoriesViewController.swift */,
 			);
 			path = "Detail screens";
 			sourceTree = "<group>";
@@ -483,6 +489,7 @@
 				83E5FAB22BA8BD25003D99ED /* BaseController.swift in Sources */,
 				838EC8382BAC703E004EBC4C /* NetworkManager.swift in Sources */,
 				A05DB9792BB30DEA00C98209 /* FirstLaunghStorage.swift in Sources */,
+				2DFBF6312BB6E02F00B80F31 /* CategoryGridGrayCollectionViewCell.swift in Sources */,
 				83E5FAA92BA8BBBE003D99ED /* HomeViewController.swift in Sources */,
 				838EC84C2BAED535004EBC4C /* UISearchBar + ext.swift in Sources */,
 				83C8F0CB2BB3254F00DAC110 /* NewsDataModel.xcdatamodeld in Sources */,
@@ -524,6 +531,7 @@
 				838EC8362BAC7004004EBC4C /* PaddingLabel.swift in Sources */,
 				83E5FAC12BAA0FA0003D99ED /* Category.swift in Sources */,
 				838EC8332BAC6FF9004EBC4C /* NewsHeaderImageView.swift in Sources */,
+				2DFBF62F2BB6DFE300B80F31 /* OnboardingCategoriesViewController.swift in Sources */,
 				53E0E7362BB440FA00CE3E33 /* SignInViewController.swift in Sources */,
 				838EC8302BAC6FEC004EBC4C /* BaseView.swift in Sources */,
 				2D0ED7142BA9E71300DFF4DC /* StandardArticleCollectionViewCell.swift in Sources */,
