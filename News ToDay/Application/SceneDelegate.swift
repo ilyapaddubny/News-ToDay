@@ -18,17 +18,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let vc: UIViewController
+        let navController = UINavigationController()
+        let moduleBuilder = ModuleBuilder()
+        let router = AppRouter(
+            navigationController: navController,
+            builder: moduleBuilder
+        )
+       
         if FirstLaunchStorage.isFirstLaunchComplete {
-            vc = NTDTabBarController()
+            router.mainFlow()
         } else {
-            vc = UINavigationController(rootViewController: OnboardingViewController())
-            
+            router.onboardingFlow()
         }
         
         window = UIWindow(windowScene: windowScene)
         window?.overrideUserInterfaceStyle = .light
-        window?.rootViewController = vc
+        window?.rootViewController = navController
         window?.makeKeyAndVisible()
     }
     

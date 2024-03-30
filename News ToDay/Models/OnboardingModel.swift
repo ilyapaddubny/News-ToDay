@@ -27,5 +27,5 @@ struct OnboardingMockData {
 //MARK: - Model
 
 struct OnboardingModel {
-    let mainImage: UIImage
+    let mainImage: UIImage?
 }

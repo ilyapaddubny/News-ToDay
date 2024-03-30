@@ -37,6 +37,8 @@ enum Image {
     static let shareArrow = UIImage(named: "ForwardWhiteIcon")
     static let searchIcon = UIImage(named: "searchIcon")
     static let emptyBookmarksIcon = UIImage(named: "EmptyBookmarksIcon")
+    static let onboardingFirst = UIImage(named: "firstScreen")
+    static let onboardingSecond = UIImage(named: "secondScreen")
 }
 
 
@@ -144,7 +146,7 @@ struct EmptyListHelper {
 
 
 enum Key {
-    static let apiKey = "479c5ce55e1f4a1abc3d42d383da8a96"
+    static let apiKey = "ddbae45c2e33483d9cec5e18eaa5a82c "
 }
 
 

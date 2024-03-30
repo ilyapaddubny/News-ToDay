@@ -182,10 +182,6 @@ private extension OnboardingView {
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .textSecondaryColor
         pageControl.currentPageIndicatorTintColor = .buttonActiveColor
-        
-//        if #available(iOS 14.0, *) {
-//            pageControl.preferredIndicatorImage = .largeIndicator
-//        }
     }
     
     

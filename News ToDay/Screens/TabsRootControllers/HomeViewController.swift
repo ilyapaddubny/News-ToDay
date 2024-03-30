@@ -55,10 +55,8 @@ class HomeViewController: BaseController {
     }
     
     func updateAllStrings() {
-        self.title = ScreenTitleStrings.browse
         setSubtitleText(text: Subtitle.browse)
         searchBar.placeholder = Placeholder.search
-        self.tabBarItem.title = nil
         collectionView.reloadData()
     }
     
@@ -284,7 +282,6 @@ class HomeViewController: BaseController {
             //TODO: reload data
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
-            print(items.isEmpty ? "⚠️ No promoted articles from API" : "\(items.count) promoted articles retrived from API")
             promotedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
                 // Update existing data source snapshot with new promoted articles
@@ -324,7 +321,6 @@ class HomeViewController: BaseController {
             guard let news = news else { return }
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
-            print(items.isEmpty ? "⚠️ No recommended articles from API" : "\(items.count) recommended articles retrived from API")
             recommendedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
                     // Update existing data source snapshot with new recommended articles

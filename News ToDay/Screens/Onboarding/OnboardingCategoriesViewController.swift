@@ -10,6 +10,21 @@ import Foundation
 import UIKit
 
 class OnboardingCategoriesViewController: BaseController {
+    
+    var router: RouterProtocol
+    
+    
+    init(router: RouterProtocol) {
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     private let subTitle = NTDLabel(font: Font.interRegular(with: 16), textColor: .textSecondaryColor)
     var signOutLabel: UILabel!
     var signOutBtn: UIButton!
@@ -26,11 +41,8 @@ class OnboardingCategoriesViewController: BaseController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
         reloadStrings()
-        
         collectionView.reloadData()
-        self.tabBarItem.title = nil
     }
     
     override func viewDidLoad() {
@@ -172,8 +184,8 @@ class OnboardingCategoriesViewController: BaseController {
     
     func signAct() -> UIAction {
         let act = UIAction { [weak self] _ in
-//            let vc = SignInViewController()
-//            self?.navigationController?.pushViewController(vc, animated: true)
+            guard let self = self else { return }
+            self.router.registerFlow()
         }
         return act
     }
@@ -181,8 +193,6 @@ class OnboardingCategoriesViewController: BaseController {
     private func createButton(action: UIAction) -> UIButton {
         
         let button = UIButton(primaryAction: action)
-//        button.setTitleColor(.textOnDisabledButtonColor, for: .normal)
-//        button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
         button.backgroundColor = .buttonActiveColor
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -191,6 +201,10 @@ class OnboardingCategoriesViewController: BaseController {
         
     }
     
+    
+    deinit {
+        print("deinit from OnboardingCategoriesViewController")
+    }
 }
 
 extension OnboardingCategoriesViewController: UICollectionViewDelegate {
@@ -198,12 +212,10 @@ extension OnboardingCategoriesViewController: UICollectionViewDelegate {
 
         if var selectedItem = dataSource.itemIdentifier(for: indexPath)?.category {
             selectedItem.isBookmarked.toggle()
-            
-            // Update cell with the updated data
+
             if let cell = collectionView.cellForItem(at: indexPath) as? CategoryGridGrayCollectionViewCell {
                 cell.configureCellWith(selectedItem)
             }
         }
     }
-    
 }
