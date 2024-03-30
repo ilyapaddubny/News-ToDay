@@ -11,6 +11,15 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     var router: RouterProtocol?
     
+    var users: [User] {
+        get {
+            UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers) ?? []
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey:  UserDefaultsConstants.listOfUsers)
+        }
+    }
+    
     var passwordIsSecure = true
     let logoLabel = UILabel()
     let textLabel = UILabel()
@@ -235,6 +244,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // MARK: - Logic + Actions
+    
     func check()  {
         if self.login.text!.trimmingCharacters(in: .whitespaces) != "" && self.password.text!.trimmingCharacters(in: .whitespaces) != "" {
             self.button.isUserInteractionEnabled = true
@@ -256,13 +267,61 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func showAlert(message: String) {
+        // You need to implement your alert logic here, whether it's UIAlertController or some custom alert view
+        print("Alert: \(message)")
+        // For example:
+         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+         self.present(alertController, animated: true, completion: nil)
+    }
+
+    
     func buttonTapped() -> UIAction {
         let act = UIAction { [weak self] _ in
             guard let self = self else { return }
-            if self.login.text!.trimmingCharacters(in: .whitespaces) != "" && self.password.text!.trimmingCharacters(in: .whitespaces) != "" {
-                self.router?.mainFlow()
-                print("sign in")
+            
+            
+            if let enteredEmail = self.login.text?.trimmingCharacters(in: .whitespaces),
+               let enteredPassword = self.password.text?.trimmingCharacters(in: .whitespaces) {
+                
+                // Check if the entered email exists in the list of users
+                if let user = self.users.first(where: { $0.email == enteredEmail }) {
+                    // User email found, check password
+                    if user.password == enteredPassword {
+                        // Password correct, perform main flow
+                        guard let router = self.router else { return }
+                        let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
+                        navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
+                        FirstLaunchStorage.setFirstLaunchComplete()
+                        
+                        
+//                        self.router?.mainFlow()
+                        print("User signed in with email: \(enteredEmail)")
+                    } else {
+                        // Password incorrect, show alert
+                        showAlert(message: "Incorrect password. Please try again.")
+                    }
+                } else {
+                    // Email not found, show alert
+                    if enteredEmail.capitalized == "Test" && enteredPassword.capitalized == "Test" {
+                        guard let router = self.router else { return }
+                        let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
+                        navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
+                        FirstLaunchStorage.setFirstLaunchComplete()
+//                        
+//                        self.router?.mainFlow()
+                    } else {
+                        showAlert(message: "Email not registered. Please sign up or use a different email.")
+
+                    }
+                }
+                
+                
             }
+                
+                
+                
             if self.login.text!.trimmingCharacters(in: .whitespaces) == "" {
                 self.login.attributedPlaceholder = NSAttributedString(string: SignInStrings.enterEmail, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.login.layer.borderColor = UIColor.red.cgColor

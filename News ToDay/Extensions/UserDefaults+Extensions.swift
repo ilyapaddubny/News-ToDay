@@ -43,6 +43,8 @@ extension UserDefaults {
         }
     }
     
+    
+    //one user
     func user(forKey key: String) -> User? {
         if let jsonData = data(forKey: key),
            let user = try? JSONDecoder().decode(User.self, from: jsonData) {
@@ -58,4 +60,19 @@ extension UserDefaults {
         }
     }
     
+    //array of users
+    func users(forKey key: String) -> [User]? {
+        if let jsonData = data(forKey: key),
+           let users = try? JSONDecoder().decode([User].self, from: jsonData) {
+            return users
+        } else {
+            return nil
+        }
+    }
+    
+    func setValue(_ users: [User], forKey key: String) {
+        if let encodedData = try? JSONEncoder().encode(users){
+            set(encodedData, forKey: key)
+        }
+    }
 }
