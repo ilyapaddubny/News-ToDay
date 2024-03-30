@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: BaseController {
+    
+    var router: RouterProtocol?
     
     
     //MARK: - UI
@@ -29,6 +31,10 @@ final class OnboardingViewController: UIViewController {
 //        
 //        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.onboarding)
 //    }
+    
+    deinit {
+        print("deinit from OnboardingViewController")
+    }
 }
 
 
@@ -56,10 +62,9 @@ private extension OnboardingViewController {
 
 extension OnboardingViewController: OnboardingViewProtocol {
     func actionButtonPressed() {
-            let rootVC = NTDTabBarController()
-        
-            rootVC.modalPresentationStyle = .fullScreen
-        present(rootVC, animated: true) {
+        if let router = router {
+            let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
+            navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
             FirstLaunchStorage.setFirstLaunchComplete()
         }
     }

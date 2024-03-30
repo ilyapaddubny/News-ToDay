@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileViewController: BaseController {
     
+    var router: RouterProtocol?
+    
     var langLabel: UILabel!
     var termsLabel: UILabel!
     var signOutLabel: UILabel!
@@ -239,10 +241,12 @@ class ProfileViewController: BaseController {
     
     func signAct() -> UIAction {
         let act = UIAction { [weak self] _ in
-            let vc = SignInViewController()
-            self?.navigationController?.pushViewController(vc, animated: true)
+            guard let self = self else { return }
+            self.router?.authFlow()
         }
         return act
     }
+    
+    
     
 }

@@ -44,7 +44,7 @@ var window: UIWindow?
             if let error {
                 print(error.localizedDescription)
             } else {
-                print("DB url -", description.url?.absoluteString)
+                //print("DB url -", description.url?.absoluteString)
             }
         }
         return container
