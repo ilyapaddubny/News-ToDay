@@ -27,6 +27,18 @@ class LanduageViewController: UIViewController {
         return button
     }()
     
+    private lazy var checkEngIcon: UIView = {
+        var view = createIcon(name: "CheckIcon")
+
+        return view
+    }()
+    
+    private lazy var checkRusIcon: UIView = {
+        var view = createIcon(name: "CheckIcon")
+
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -110,9 +122,24 @@ class LanduageViewController: UIViewController {
         view.addSubview(englishLabel)
         view.addSubview(russianLabel)
         
+        view.addSubview(checkEngIcon)
+        view.addSubview(checkRusIcon)
+        
+        if selectedLanguage == nil {
+            view.sendSubviewToBack(checkRusIcon)
+        } else {
+            if ["Английский", "English"].contains(UserDefaults.standard.object(forKey: "language") as? String) {
+                view.sendSubviewToBack(checkRusIcon)
+            } else {
+                view.sendSubviewToBack(checkEngIcon)
+            }
+            
+        }
         
         englishLabel.translatesAutoresizingMaskIntoConstraints = false
         russianLabel.translatesAutoresizingMaskIntoConstraints = false
+        checkEngIcon.translatesAutoresizingMaskIntoConstraints = false
+        checkRusIcon.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
@@ -129,11 +156,15 @@ class LanduageViewController: UIViewController {
             
             russianLabel.leadingAnchor.constraint(equalTo: russianBtn.leadingAnchor, constant: 20),
             russianLabel.centerYAnchor.constraint(equalTo: russianBtn.centerYAnchor),
+            
+            checkEngIcon.trailingAnchor.constraint(equalTo: englishBtn.trailingAnchor, constant: -40),
+            checkEngIcon.topAnchor.constraint(equalTo: englishBtn.topAnchor, constant: 20),
+            
+            checkRusIcon.trailingAnchor.constraint(equalTo: russianBtn.trailingAnchor, constant: -40),
+            checkRusIcon.topAnchor.constraint(equalTo: russianBtn.topAnchor, constant: 20),
+            
         ])
     }
-    
-    
-    
     
     private func createButton(action: UIAction) -> UIButton {
         
@@ -158,6 +189,17 @@ class LanduageViewController: UIViewController {
         return label
     }
     
+    func createIcon(name: String) -> UIView {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+        let image = UIImage(named: name)
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        view.addSubview(imageView)
+        
+        return view
+    }
+    
     func back() -> UIAction {
         let act = UIAction { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
@@ -165,7 +207,6 @@ class LanduageViewController: UIViewController {
         return act
     }
     
-   
     
     func engLang() -> UIAction {
         let act = UIAction { [weak self] _ in
@@ -173,6 +214,8 @@ class LanduageViewController: UIViewController {
             self?.englishLabel.textColor = .textOnActiveButtonColor
             self?.russianBtn.backgroundColor = .buttonDisabledColor
             self?.russianLabel.textColor = .textOnDisabledButtonColor
+            self?.view.sendSubviewToBack(self!.checkRusIcon)
+            self?.view.bringSubviewToFront(self!.checkEngIcon)
             UserDefaults.standard.set("English", forKey: "language")
             UserDefaults.standard.set(Country.usa, forKey: "country")
             self?.defaultLocalizer.setSelectedLanguage(lang: "en")
@@ -187,6 +230,8 @@ class LanduageViewController: UIViewController {
             self?.russianLabel.textColor = .textOnActiveButtonColor
             self?.englishBtn.backgroundColor = .buttonDisabledColor
             self?.englishLabel.textColor = .textOnDisabledButtonColor
+            self?.view.bringSubviewToFront(self!.checkRusIcon)
+            self?.view.sendSubviewToBack(self!.checkEngIcon)
             UserDefaults.standard.set("Russian", forKey: "language")
             UserDefaults.standard.set(Country.russia, forKey: "country")
             self?.defaultLocalizer.setSelectedLanguage(lang: "ru")
