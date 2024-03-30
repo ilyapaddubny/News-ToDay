@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "firstScreen.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "firstScreen@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "firstScreen@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "front-view-journalist-holding-a-microphone.jpg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

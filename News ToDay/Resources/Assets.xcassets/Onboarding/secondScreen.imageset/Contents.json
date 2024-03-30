@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "secondScreen.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "secondScreen@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "secondScreen@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "worker-reading-news-with-tablet.jpg",
+      "idiom" : "universal"
     }
   ],
   "info" : {
