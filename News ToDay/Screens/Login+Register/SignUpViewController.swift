@@ -77,12 +77,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }()
     
     lazy var lock: UIView = {
-        let image = createImageForField(name: "LockIcon")
+        let image = createImageForField(name: "lockIcon")
         return image
     }()
     
     lazy var lock2: UIView = {
-        let image = createImageForField(name: "LockIcon")
+        let image = createImageForField(name: "lockIcon")
         return image
     }()
     
@@ -250,9 +250,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         case login:
             textField.leftView = createImageForField(name: "EmailSelectedIcon")
         case password:
-            textField.leftView = createImageForField(name: "LockSelectedIcon")
+            textField.leftView = createImageForField(name: "lockSelectedIcon")
         case repeatPassword:
-            textField.leftView = createImageForField(name: "LockSelectedIcon")
+            textField.leftView = createImageForField(name: "lockSelectedIcon")
         default:
             break
         }

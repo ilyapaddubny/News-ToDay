@@ -73,7 +73,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }()
     
     lazy var lock: UIView = {
-        let image = createImageForField(name: "LockIcon")
+        let image = createImageForField(name: "lockIcon")
         return image
     }()
     
@@ -210,7 +210,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         if textField == login {
             textField.leftView = createImageForField(name: "EmailSelectedIcon")
         } else {
-            textField.leftView = createImageForField(name: "LockSelectedIcon")
+            textField.leftView = createImageForField(name: "lockSelectedIcon")
         }
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.buttonActiveColor.cgColor
