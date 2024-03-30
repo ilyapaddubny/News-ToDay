@@ -35,7 +35,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
         button.backgroundColor = .buttonActiveColor
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         return button
     }()
     
@@ -43,7 +43,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.text = SignInStrings.label
         label.textColor = .textSecondaryColor
-        label.heightAnchor.constraint(equalToConstant: 15).isActive = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -53,7 +52,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         let button = UIButton(primaryAction: signUpAction())
         button.setTitle(SignInStrings.signUp, for: .normal)
         button.setTitleColor(.textPrimaryColor, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -127,7 +125,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     func setupUI() {
         logoLabel.text = SignInStrings.title
-        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
+        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 27)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .left
         
@@ -135,7 +133,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         textLabel.font = UIFont(name: "Inter-Regular" , size: 18)
         textLabel.textColor = .textSecondaryColor
         textLabel.textAlignment = .left
-        textLabel.numberOfLines = 3
+        textLabel.numberOfLines = 4
         
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -152,11 +150,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(stack)
         
         NSLayoutConstraint.activate([
-            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             logoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 20),
+            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 15),
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
@@ -183,7 +181,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         field.leftView = imName
         field.backgroundColor = .buttonDisabledColor
         field.leftViewMode = .always
-        field.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        field.heightAnchor.constraint(equalToConstant: 60).isActive = true
         field.layer.cornerRadius = 15
         field.clipsToBounds = true
         field.autocorrectionType = .no
@@ -290,13 +288,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     // User email found, check password
                     if user.password == enteredPassword {
                         // Password correct, perform main flow
-                        guard let router = self.router else { return }
-                        let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
-                        navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
-                        FirstLaunchStorage.setFirstLaunchComplete()
+                        guard var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)  else {return}
+                        if let index = users.firstIndex(where: { $0 == user }) {
+                            UserDefaults.standard.setValue(users[index], forKey: UserDefaultsConstants.userLoggedIn)
+                            self.router?.mainFlow()
+                        }
                         
                         
-//                        self.router?.mainFlow()
                         print("User signed in with email: \(enteredEmail)")
                     } else {
                         // Password incorrect, show alert
@@ -305,12 +303,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     // Email not found, show alert
                     if enteredEmail.capitalized == "Test" && enteredPassword.capitalized == "Test" {
-                        guard let router = self.router else { return }
-                        let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
-                        navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
-                        FirstLaunchStorage.setFirstLaunchComplete()
-//                        
-//                        self.router?.mainFlow()
+                        self.router?.mainFlow()
                     } else {
                         showAlert(message: "Email not registered. Please sign up or use a different email.")
 

@@ -39,7 +39,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
         button.backgroundColor = .buttonActiveColor
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         return button
     }()
     
@@ -47,7 +47,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.text = SignUpStrings.label
         label.textColor = .textSecondaryColor
-        label.heightAnchor.constraint(equalToConstant: 15).isActive = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -57,7 +56,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let button = UIButton(primaryAction: signInAction())
         button.setTitle(SignUpStrings.signIn, for: .normal)
         button.setTitleColor(.textPrimaryColor, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
@@ -154,7 +152,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     func setupUI() {
         logoLabel.text = SignUpStrings.title
-        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
+        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 27)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .left
         
@@ -162,7 +160,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         textLabel.font = UIFont(name: "Inter-Regular" , size: 18)
         textLabel.textColor = .textSecondaryColor
         textLabel.textAlignment = .left
-        textLabel.numberOfLines = 3
+        textLabel.numberOfLines = 4
         
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -181,11 +179,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         view.addSubviews(stack)
         
         NSLayoutConstraint.activate([
-            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             logoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 20),
+            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 15),
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
@@ -221,7 +219,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         field.leftView = imName
         field.backgroundColor = .buttonDisabledColor
         field.leftViewMode = .always
-        field.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        field.heightAnchor.constraint(equalToConstant: 60).isActive = true
         field.layer.cornerRadius = 15
         field.clipsToBounds = true
         field.autocorrectionType = .no
@@ -328,8 +326,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     // Handle the case where any of the required fields is nil
                     return
                 }
-
-                self.users.append(User(name: name, email: email, password: password))
+                let newUser = User(name: name, email: email, password: password, fafouriteCategories: [])
+                UserDefaults.standard.setValue(newUser, forKey: UserDefaultsConstants.userLoggedIn)
+                self.users.append(newUser)
                 print("Users in the app: \(self.users)")
                 
                 guard let router = self.router else { return }

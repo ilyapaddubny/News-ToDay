@@ -395,6 +395,17 @@
         }
       }
     },
+    "Get Started" : {
+      "comment" : "FGet Started",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать"
+          }
+        }
+      }
+    },
     "Hello, I guess you are new around here. You can start using the application after sign up." : {
       "comment" : "text",
       "localizations" : {
@@ -460,6 +471,24 @@
     "Next" : {
       "comment" : "Next button",
       "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Далее"
+          }
+        }
+      }
+    },
+    "nextButton" : {
+      "comment" : "Next Button",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Next"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",

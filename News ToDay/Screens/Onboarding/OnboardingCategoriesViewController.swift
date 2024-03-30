@@ -43,6 +43,8 @@ class OnboardingCategoriesViewController: BaseController {
         super.viewWillAppear(animated)
         reloadStrings()
         collectionView.reloadData()
+        
+
     }
     
     override func viewDidLoad() {
@@ -51,6 +53,7 @@ class OnboardingCategoriesViewController: BaseController {
         collectionView.delegate = self
         configureDataSource()
         collectionView.isScrollEnabled = false
+        self.navigationItem.hidesBackButton = true
     }
     
     func configureNextButtonLabel() {
@@ -63,6 +66,8 @@ class OnboardingCategoriesViewController: BaseController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 5
         let attributedText = NSAttributedString(string: Subtitle.categoriesOnboarding, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
         
         subTitle.attributedText = attributedText
         title = ScreenTitleStrings.categoriesOnboarding

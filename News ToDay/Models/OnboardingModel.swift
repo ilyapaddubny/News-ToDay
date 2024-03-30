@@ -18,9 +18,9 @@ struct OnboardingMockData {
     static var secondDescriptionlabel: String { NSLocalizedString("The most important news in different categories from different countries", value: "The most important news in different categories from different countries", comment: "The most important news in different categories from different countries").localized }
     static var thirdDescriptionlabel: String { NSLocalizedString("Customize your feeds to get anly topics you are interested in", value: "Customize your feeds to get anly topics you are interested in", comment: "Customize your feeds to get anly topics you are interested in").localized }
     
+    static var nextButton: String { NSLocalizedString("nextButton", value: "Next", comment: "Next Button").localized }
+    static var getStartedButton: String { NSLocalizedString("Get Started", value: "Get Started", comment: "FGet Started").localized }
     
-    static let nextButton = "nextButton"
-    static let getStartedButton = "Get Started"
 }
 
 
