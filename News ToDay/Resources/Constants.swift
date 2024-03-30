@@ -175,5 +175,9 @@ enum UserDefaultsConstants {
     static let mainScreenCategoriesSelectedKey = "category_tags"
     static let selectedLanguageKey = "selected_language"
     
+    
+    static let userLoggedIn = "userLoggedIn"
+    static let listOfUsers = "listOfUsers"
+    
 //    static let appGroup = "ddbae45c2e33483d9cec5e18eaa5a82c"
 }

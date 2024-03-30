@@ -11,7 +11,6 @@ final class OnboardingViewController: BaseController {
     
     var router: RouterProtocol?
     
-    
     //MARK: - UI
     
     private let onboardingView = OnboardingView()
@@ -63,9 +62,12 @@ private extension OnboardingViewController {
 extension OnboardingViewController: OnboardingViewProtocol {
     func actionButtonPressed() {
         if let router = router {
-            let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
-            navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
-            FirstLaunchStorage.setFirstLaunchComplete()
+            router.registerFlow()
+            
+            //TODO: use it after user logged in (Signs in)
+//            let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
+//            navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
+//            FirstLaunchStorage.setFirstLaunchComplete()
         }
     }
 }
