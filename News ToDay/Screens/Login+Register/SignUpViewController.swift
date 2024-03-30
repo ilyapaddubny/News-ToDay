@@ -221,7 +221,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         field.leftView = imName
         field.backgroundColor = .buttonDisabledColor
         field.leftViewMode = .always
-        field.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        field.heightAnchor.constraint(equalToConstant: 60).isActive = true
         field.layer.cornerRadius = 15
         field.clipsToBounds = true
         field.autocorrectionType = .no
