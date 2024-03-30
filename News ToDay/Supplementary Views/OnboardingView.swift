@@ -209,8 +209,8 @@ private extension OnboardingView {
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
             
             actionButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            actionButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             actionButton.heightAnchor.constraint(equalToConstant: 55)
         ])
     }
