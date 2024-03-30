@@ -125,10 +125,10 @@ class LanduageViewController: UIViewController {
             russianBtn.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
         
             englishLabel.leadingAnchor.constraint(equalTo: englishBtn.leadingAnchor, constant: 20),
-            englishLabel.topAnchor.constraint(equalTo: englishBtn.topAnchor, constant: 18),
+            englishLabel.centerYAnchor.constraint(equalTo: englishBtn.centerYAnchor),
             
             russianLabel.leadingAnchor.constraint(equalTo: russianBtn.leadingAnchor, constant: 20),
-            russianLabel.topAnchor.constraint(equalTo: russianBtn.topAnchor, constant: 18),
+            russianLabel.centerYAnchor.constraint(equalTo: russianBtn.centerYAnchor),
         ])
     }
     
@@ -140,7 +140,7 @@ class LanduageViewController: UIViewController {
         let button = UIButton(primaryAction: action)
         button.layer.cornerRadius = 15
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         
         return button
         

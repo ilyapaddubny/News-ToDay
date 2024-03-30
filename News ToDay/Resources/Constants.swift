@@ -44,6 +44,7 @@ struct ScreenTitleStrings {
     static var browse: String { NSLocalizedString("Browse", value: "Browse", comment: "Screen title: Browse").localized }
     static var profile: String { NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized }
     static var categories: String { NSLocalizedString("Categories", value: "Categories", comment: "Screen title: Categories").localized }
+    static var categoriesOnboarding: String { NSLocalizedString("Select favorite topics", value: "Select favorite topics", comment: "Screen title: Categories").localized }
     static var bookmarks: String { NSLocalizedString("Bookmarks", value: "Bookmarks", comment: "Screen title: Bookmarks").localized }
     static var user: String { NSLocalizedString("Profile", value: "Profile", comment: "Screen title: Profile").localized }
     static var language: String { NSLocalizedString("Language", value: "Language", comment: "Screen title: Language").localized }
@@ -54,12 +55,46 @@ struct ScreenTitleStrings {
 struct ProfileStrings {
     static var language: String { NSLocalizedString("LanBtn", value: "Language", comment: "Language button").localized }
     static var termsAndConditions: String { NSLocalizedString("Terms & Conditions Btn", value: "Terms & Conditions", comment: "Terms & Conditions button label").localized }
-    static var signOut: String { NSLocalizedString("signOut", value: "Sign Out", comment: "Sign Out button").localized }
+    static var signOut: String { NSLocalizedString("Sign Out", value: "Sign Out", comment: "Sign Out button").localized }
+}
+
+struct SignInStrings {
+    static var title: String { NSLocalizedString("Welcome back 👋", value: "Welcome back 👋", comment: "Welcome title").localized }
+    static var text: String { NSLocalizedString("I am happy to see you again. You can continue where you left off by logging in.", value: "I am happy to see you again. You can continue where you left off by logging in.", comment: "text").localized }
+    static var email: String { NSLocalizedString("Email adress", value: "Email adress", comment: "Email adress title" ).localized }
+    static var password: String { NSLocalizedString("Password", value: "Password", comment: "Password title").localized }
+    static var enterEmail: String { NSLocalizedString("Enter your mail!", value: "Enter your mail!", comment: "Enter mail title").localized }
+    static var enterPassword: String { NSLocalizedString("Enter your password!", value: "Enter your password!", comment: "Enter your password title").localized }
+    static var signUp: String { NSLocalizedString("Sign Up", value: "Sign Up", comment: "Sign Up button").localized }
+    static var signIn: String { NSLocalizedString("Sign in", value: "Sign in", comment: "Sign in button").localized }
+    static var label: String { NSLocalizedString("Don't have an account?", value: "Don't have an account?", comment: "Don't have an account label").localized }
+   
+}
+
+struct SignUpStrings {
+    static var title: String { NSLocalizedString("Welcome to NewsToDay", value: "Welcome to NewsToDay", comment: "Welcome title").localized }
+    static var text: String { NSLocalizedString("Hello, I guess you are new around here. You can start using the application after sign up.", value: "Hello, I guess you are new around here. You can start using the application after sign up.", comment: "text").localized }
+    static var name: String { NSLocalizedString("User name", value: "User name", comment: "User name title").localized }
+    static var email: String { NSLocalizedString("Email adress", value: "Email adress", comment: "Email adress title" ).localized }
+    static var password: String { NSLocalizedString("Password", value: "Password", comment: "Password title").localized }
+    static var repeatPassword: String { NSLocalizedString("Repeat Password", value: "Repeat Password", comment: "Repeat Password title").localized }
+    static var enterName: String { NSLocalizedString("Enter your name!", value: "Enter your name!", comment: "Enter name title").localized }
+    static var enterEmail: String { NSLocalizedString("Enter your mail!", value: "Enter your mail!", comment: "Enter mail title").localized }
+    static var enterPassword: String { NSLocalizedString("Enter your password!", value: "Enter your password!", comment: "Enter your password title").localized }
+    static var enterRepeatPassword: String { NSLocalizedString("Repeat your Password!", value: "Repeat your Password!", comment: "Repeat your Password title").localized }
+    static var signUp: String { NSLocalizedString("Sign Up", value: "Sign Up", comment: "Sign Up button").localized }
+    static var signIn: String { NSLocalizedString("Sign in", value: "Sign in", comment: "Sign in button").localized }
+    static var label: String { NSLocalizedString("Already have an account?", value: "Already have an account?", comment: "Already have an account label").localized }
+   
 }
 
 struct BrowseStrings {
     static var seeAll: String { NSLocalizedString("See all", value: "See all", comment: "Recommended header").localized }
     static var recommendedForYou: String { NSLocalizedString("Recommended for you", value: "Recommended for you", comment: "Recommended header").localized }
+}
+
+struct OnboardingStrings {
+    static var nextButton: String { NSLocalizedString("Next", value: "Next", comment: "Next button").localized }
 }
 
 struct LanguageStrings {
@@ -94,6 +129,7 @@ struct CategoryStrings {
 
 struct Subtitle {
     static var categories: String { NSLocalizedString("Thousands of articles in each category", value: "Thousands of articles in each category", comment: "Subtitle: Categories").localized}
+    static var categoriesOnboarding: String { NSLocalizedString("Select some of your favorite topics to let us suggest better news for you", value: "Select some of your favorite topics to let us suggest better news for you", comment: "Subtitle: onboarding Categories").localized}
     static var browse: String { NSLocalizedString("Discover things of the world", value: "Discover things of the world", comment: "Subtitle: Browse").localized }
     static var bookmarks: String { NSLocalizedString("Saved articles to the library", value: "Saved articles to the library", comment: "Subtitle: Bookmarks").localized }
 }
@@ -108,7 +144,7 @@ struct EmptyListHelper {
 
 
 enum Key {
-    static let apiKey = "ddbae45c2e33483d9cec5e18eaa5a82c"
+    static let apiKey = "479c5ce55e1f4a1abc3d42d383da8a96"
 }
 
 

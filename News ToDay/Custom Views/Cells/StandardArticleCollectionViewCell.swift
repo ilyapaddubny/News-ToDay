@@ -92,7 +92,8 @@ class StandardArticleCollectionViewCell: UICollectionViewCell {
     
     func configureCellWith(_ article: Article) {
         headlineLabel.text = article.title
-        categoryLabel.text = article.description ?? "no description"
+//        categoryLabel.text = article.description ?? "no description"
+        categoryLabel.text = "entertainment".capitalized
         
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 12.0

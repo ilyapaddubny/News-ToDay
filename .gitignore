@@ -90,4 +90,6 @@ fastlane/test_output
 iOSInjectionProject/
 News ToDay/Screens/LanguageViewController.swift
 News ToDay.xcodeproj/project.pbxproj
+
 .DS_Store
+News ToDay/.DS_Store

@@ -11,9 +11,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     var passwordIsSecure = true
     let logoLabel = UILabel()
     let textLabel = UILabel()
+    var nameText = SignUpStrings.name
+    var loginText = SignUpStrings.email
+    var passwordText = SignUpStrings.password
+    var repeatPasswordText = SignUpStrings.repeatPassword
+    var nameEnterText = SignUpStrings.enterName
+    var loginEnterText = SignUpStrings.enterEmail
+    var passwordEnterText = SignUpStrings.enterPassword
+    var repeatPasswordEnterText = SignUpStrings.enterRepeatPassword
+    
     lazy var button: UIButton = {
         let button = UIButton(primaryAction: buttonTapped())
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle(SignUpStrings.signIn, for: .normal)
         button.setTitleColor(.textOnActiveButtonColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
@@ -24,7 +33,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     lazy var questionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Already have an account?"
+        label.text = SignUpStrings.label
         label.textColor = .textSecondaryColor
         label.heightAnchor.constraint(equalToConstant: 15).isActive = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -32,9 +41,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         return label
     }()
     
-    lazy var signUpButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Sign In", for: .normal)
+    lazy var signInButton: UIButton = {
+        let button = UIButton(primaryAction: signInAction())
+        button.setTitle(SignUpStrings.signUp, for: .normal)
         button.setTitleColor(.textPrimaryColor, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 15).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -75,25 +84,25 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }()
     
     lazy var userName: UITextField =  {
-        let field = createTextField(name: "User name", imName: userIcon)
+        let field = createTextField(name: nameText, imName: userIcon)
         field.keyboardType = .emailAddress
         return field
     }()
     
     lazy var login: UITextField =  {
-        let field = createTextField(name: "Email adress", imName: envelope)
+        let field = createTextField(name: loginText, imName: envelope)
         field.keyboardType = .emailAddress
         return field
     }()
     
     lazy var password: UITextField =  {
-        let field = createTextField(name: "Password", imName: lock)
+        let field = createTextField(name: passwordText, imName: lock)
         field.isSecureTextEntry = true
         return field
     }()
     
     lazy var repeatPassword: UITextField =  {
-        let field = createTextField(name: "Repeat Password", imName: lock2)
+        let field = createTextField(name: repeatPasswordText, imName: lock2)
         field.isSecureTextEntry = true
         return field
     }()
@@ -119,13 +128,19 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLabelsText()
+        
+    }
+    
     func setupUI() {
-        logoLabel.text = ("Welcome to NewsToDay")
+        logoLabel.text = SignUpStrings.title
         logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .left
         
-        textLabel.text = ("Hello, I guess you are new around here. You can start using the application after sign up.")
+        textLabel.text = SignUpStrings.text
         textLabel.font = UIFont(name: "Inter-Regular" , size: 18)
         textLabel.textColor = .textSecondaryColor
         textLabel.textAlignment = .left
@@ -136,7 +151,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         stack.addArrangedSubview(questionLabel)
-        stack.addArrangedSubview(signUpButton)
+        stack.addArrangedSubview(signInButton)
         
         view.addSubviews(logoLabel)
         view.addSubviews(textLabel)
@@ -241,28 +256,49 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
 
     func check()  {
-        if self.login.text != "" && self.password.text != "" && self.userName.text! != "" && self.repeatPassword.text! != "" {
+        if self.login.text!.trimmingCharacters(in: .whitespaces) != "" && self.password.text!.trimmingCharacters(in: .whitespaces) != "" && self.userName.text!.trimmingCharacters(in: .whitespaces) != "" && self.repeatPassword.text!.trimmingCharacters(in: .whitespaces) != "" {
             self.button.isUserInteractionEnabled = true
             self.button.alpha = 1.0
         }
     }
     
+    private func updateLabelsText() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabBarItem.title = nil
+        logoLabel.text = SignUpStrings.title
+        textLabel.text = SignUpStrings.text
+        
+        nameText = SignUpStrings.name
+        loginText = SignUpStrings.email
+        passwordText = SignUpStrings.password
+        repeatPasswordText = SignUpStrings.repeatPassword
+        
+        nameEnterText = SignUpStrings.enterName
+        loginEnterText = SignUpStrings.enterEmail
+        passwordEnterText = SignUpStrings.enterPassword
+        repeatPasswordEnterText = SignUpStrings.enterRepeatPassword
+        
+        button.setTitle(SignUpStrings.signIn, for: .normal)
+        signInButton.setTitle(SignUpStrings.signUp, for: .normal)
+        
+    }
+    
     func buttonTapped() -> UIAction {
         let act = UIAction { _ in
-            if self.login.text == "" {
-                self.login.attributedPlaceholder = NSAttributedString(string: "enter your mail", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            if self.login.text!.trimmingCharacters(in: .whitespaces) == "" {
+                self.login.attributedPlaceholder = NSAttributedString(string: SignUpStrings.enterEmail, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.login.layer.borderColor = UIColor.red.cgColor
             }
-            if self.password.text == "" {
-                self.password.attributedPlaceholder = NSAttributedString(string: "enter your password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            if self.password.text!.trimmingCharacters(in: .whitespaces) == "" {
+                self.password.attributedPlaceholder = NSAttributedString(string: SignUpStrings.enterPassword, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.password.layer.borderColor = UIColor.red.cgColor
             }
-            if self.userName.text == "" {
-                self.userName.attributedPlaceholder = NSAttributedString(string: "enter your name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            if self.userName.text!.trimmingCharacters(in: .whitespaces) == "" {
+                self.userName.attributedPlaceholder = NSAttributedString(string: SignUpStrings.enterName, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.userName.layer.borderColor = UIColor.red.cgColor
             }
-            if self.repeatPassword.text == "" {
-                self.repeatPassword.attributedPlaceholder = NSAttributedString(string: "repeat your password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            if self.repeatPassword.text!.trimmingCharacters(in: .whitespaces) == "" {
+                self.repeatPassword.attributedPlaceholder = NSAttributedString(string: SignUpStrings.enterRepeatPassword, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.repeatPassword.layer.borderColor = UIColor.red.cgColor
             }
             if self.password.text == self.repeatPassword.text {
@@ -274,4 +310,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         return act
     }
     
+    func signInAction() -> UIAction {
+        let act = UIAction { _ in
+            let vc = SignInViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        return act
+    }
 }
