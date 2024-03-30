@@ -88,3 +88,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+News ToDay/Screens/LanguageViewController.swift
+News ToDay.xcodeproj/project.pbxproj
+News ToDay/.DS_Store

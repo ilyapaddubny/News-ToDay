@@ -9,6 +9,10 @@ import UIKit
 
 class ProfileViewController: BaseController {
     
+    var langLabel: UILabel!
+    var termsLabel: UILabel!
+    var signOutLabel: UILabel!
+    
     private lazy var textStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -20,10 +24,53 @@ class ProfileViewController: BaseController {
         return stack
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setImage()
+        setUserText()
+        setBtn()
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateLabelsText()
+        
+    }
+    
+
+    private lazy var signOutIcon: UIView = {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let image = UIImage(named: "SignOutIcon")
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        view.addSubview(imageView)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var arrowIcon: UIView = {
+        let view = createIcon(name: "ArrowIcon")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var arrowIcon2: UIView = {
+        let view = createIcon(name: "ArrowIcon")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+
     private lazy var btnStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 25
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         return stack
@@ -46,14 +93,7 @@ class ProfileViewController: BaseController {
         return image
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setImage()
-        setText()
-        setBtn()
-
-        
-    }
+   
     
     private func setImage() {
         self.view.addSubview(image)
@@ -61,7 +101,7 @@ class ProfileViewController: BaseController {
         image.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
     }
     
-    private func setText() {
+    private func setUserText() {
         self.view.addSubview(textStack)
         
         let userName = createLabel(size: 20, font: "Inter-SemiBold", text: "Ivan I", color: .textPrimaryColor)
@@ -77,45 +117,44 @@ class ProfileViewController: BaseController {
         ])
     }
     
+    private func createLabels() {
+        langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.language, color: .textOnDisabledButtonColor)
+        termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.termsAndConditions, color: .textOnDisabledButtonColor)
+        signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: ProfileStrings.signOut, color: .textOnDisabledButtonColor)
+    }
     
+    private func updateLabelsText() {
+        title = ScreenTitleStrings.profile
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.tabBarItem.title = nil
+        langLabel.text = ProfileStrings.language
+        termsLabel.text = ProfileStrings.termsAndConditions
+        signOutLabel.text = ProfileStrings.signOut
+    }
+        
     
     private func setBtn() {
-        
+        createLabels()
         let langBtn = createButton(action: langAct())
         let termsBtn = createButton(action: termsAct())
         let signOutBtn = createButton(action: signAct())
         
         self.view.addSubview(btnStack)
         
-        let langLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Language", color: .textOnDisabledButtonColor)
-        let termsLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Terms & Conditions", color: .textOnDisabledButtonColor)
-        let signOutLabel = createLabel(size: 17, font: "Inter-SemiBold", text: "Sign Out", color: .textOnDisabledButtonColor)
-        
-//        langBtn.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
-//        langBtn.configuration?.imagePlacement = .trailing
-        
-    
-        
-//        let langImg = UIImageView()
-//        langImg.image = UIImage(named: "chevron.forward")
-//        langImg.contentMode = .scaleToFill
-//        langImg.translatesAutoresizingMaskIntoConstraints = false
-//        langImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        langImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        
-        
         self.view.addSubview(langBtn)
         self.view.addSubview(langLabel)
         self.view.addSubview(termsLabel)
         self.view.addSubview(signOutLabel)
+        self.view.addSubview(signOutIcon)
+        self.view.addSubview(arrowIcon)
+        self.view.addSubview(arrowIcon2)
 //        self.view.addSubview(langImg)
       
         btnStack.addArrangedSubview(termsBtn)
         btnStack.addArrangedSubview(signOutBtn)
         
         NSLayoutConstraint.activate([
-            btnStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            btnStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             btnStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             btnStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
@@ -124,19 +163,22 @@ class ProfileViewController: BaseController {
             langBtn.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20),
             
             langLabel.leadingAnchor.constraint(equalTo: langBtn.leadingAnchor, constant: 20),
-            langLabel.topAnchor.constraint(equalTo: langBtn.topAnchor, constant: 18),
+            langLabel.centerYAnchor.constraint(equalTo: langBtn.centerYAnchor),
             
             termsLabel.leadingAnchor.constraint(equalTo: termsBtn.leadingAnchor, constant: 20),
-            termsLabel.topAnchor.constraint(equalTo: termsBtn.topAnchor, constant: 18),
+            termsLabel.centerYAnchor.constraint(equalTo: termsBtn.centerYAnchor),
             
             signOutLabel.leadingAnchor.constraint(equalTo: signOutBtn.leadingAnchor, constant: 20),
-            signOutLabel.topAnchor.constraint(equalTo: signOutBtn.topAnchor, constant: 18),
+            signOutLabel.centerYAnchor.constraint(equalTo: signOutBtn.centerYAnchor),
             
-//            langImg.trailingAnchor.constraint(equalTo: langBtn.trailingAnchor, constant: -20),
-//            langImg.topAnchor.constraint(equalTo: langBtn.topAnchor, constant: 18),
-//            langImg.bottomAnchor.constraint(equalTo: langBtn.bottomAnchor, constant: -18),
-//            langImg.leadingAnchor.constraint(equalTo: langBtn.trailingAnchor, constant: -40)
+            signOutIcon.trailingAnchor.constraint(equalTo: signOutBtn.trailingAnchor, constant: -40),
+            signOutIcon.topAnchor.constraint(equalTo: signOutBtn.topAnchor, constant: 18),
             
+            arrowIcon.trailingAnchor.constraint(equalTo: langBtn.trailingAnchor, constant: -35),
+            arrowIcon.topAnchor.constraint(equalTo: langBtn.topAnchor, constant: 23),
+            
+            arrowIcon2.trailingAnchor.constraint(equalTo: termsBtn.trailingAnchor, constant: -35),
+            arrowIcon2.topAnchor.constraint(equalTo: termsBtn.topAnchor, constant: 23),
         ])
        
         
@@ -163,15 +205,24 @@ class ProfileViewController: BaseController {
         button.layer.cornerRadius = 15
         button.backgroundColor = .buttonDisabledColor
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         return button
         
     }
     
+    func createIcon(name: String) -> UIView {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        let image = UIImage(named: name)
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        view.addSubview(imageView)
+        
+        return view
+    }
+    
     func langAct() -> UIAction {
         let act = UIAction { _ in
-            print(1)
             let vc = LanduageViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -179,18 +230,17 @@ class ProfileViewController: BaseController {
     }
     
     func termsAct() -> UIAction {
-        let act = UIAction { _ in
-            print(2)
+        let act = UIAction { [weak self] _ in
             let vc = TermsConditionsController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         return act
     }
     
     func signAct() -> UIAction {
-        let act = UIAction { _ in
-            print(3)
-            //допишу как появится онбординг
+        let act = UIAction { [weak self] _ in
+            let vc = SignInViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         return act
     }

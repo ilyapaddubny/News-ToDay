@@ -47,6 +47,8 @@ class NewsViewController: BaseController {
         cancellable = loadImage(for: article).sink(receiveValue: { [unowned self] image in
             headerImageView.image = image
         })
+        
+        
         subtitleLabel.text  = article.description
         newsTextView.text   = article.content
         headerTextView.configure(category: category, article: article)
@@ -71,7 +73,8 @@ class NewsViewController: BaseController {
     
     
     @objc private func dismissViewController() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.isHidden = false
     }
 }
 

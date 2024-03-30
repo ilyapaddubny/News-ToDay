@@ -41,61 +41,51 @@ enum Category: String, Hashable, CaseIterable, Codable {
     // MARK: - Tag Section Logic
     var isSelectedOnTheMainScreen: Bool {
         get {
-            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
-            return categories.contains(self)
+            guard let selectedCategory = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey) else {return false}
+            return self == selectedCategory
         }
 
         set {
-            var categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
-            // если мы убираем кейс из избранного, нужно удалить его из массива
-            if categories.contains(self), !newValue {
-                categories.removeAll(where: {$0 == self})
-            }
-            // если мы добавляем кейс в избранное, нужно его добавить в массив
-            if newValue {
-                categories.append(self)
-            }
-            
-            UserDefaults.standard.setValue(categories, forKey:  UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            UserDefaults.standard.setValue(self, forKey:  UserDefaultsConstants.mainScreenCategoriesSelectedKey)
         }
     }
     
     
     func getButtonName() -> String {
-            switch self {
-            case .general:
-                return "General"
-            case .business:
-                return "Business"
-            case .sports:
-                return "Sports"
-            case .entertainment:
-                return "Leisure"
-            case .science:
-                return "Science"
-            case .health:
-                return " Health "
-            case .technology:
-                return "Digital"
-            }
+        switch self {
+        case .general:
+            return CategoryStrings.general
+        case .business:
+            return CategoryStrings.business
+        case .sports:
+            return CategoryStrings.sports
+        case .entertainment:
+            return CategoryStrings.entertainment
+        case .science:
+            return CategoryStrings.science
+        case .health:
+            return CategoryStrings.health
+        case .technology:
+            return CategoryStrings.technology
+        }
         }
     
     func getNamePlusIconString() -> String {
         switch self {
         case .general:
-            return "🌐  General"
+            return CategoryStringsWithEmoji.general
         case .business:
-            return "💼  Business"
+            return CategoryStringsWithEmoji.business
         case .sports:
-            return "⚽️  Sports"
+            return CategoryStringsWithEmoji.sports
         case .entertainment:
-            return "🎉  Leisure"
+            return CategoryStringsWithEmoji.entertainment
         case .science:
-            return "🔬  Science"
+            return CategoryStringsWithEmoji.science
         case .health:
-            return "💊  Health"
+            return CategoryStringsWithEmoji.health
         case .technology:
-            return "📱  Digital"
+            return CategoryStringsWithEmoji.technology
         }
     }
     
