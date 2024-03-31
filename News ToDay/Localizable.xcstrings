@@ -682,7 +682,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Зарегистрироваться"
+            "value" : "Войти"
           }
         }
       }
@@ -704,7 +704,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Войти"
+            "value" : "Зарегистрироваться"
           }
         }
       }
