@@ -89,6 +89,17 @@
         }
       }
     },
+    "Alert" : {
+      "comment" : "Alert",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Предупреждение"
+          }
+        }
+      }
+    },
     "All news in one place, be the first to know last news" : {
       "comment" : "All news in one place, be the first to know last news",
       "localizations" : {
@@ -107,6 +118,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Уже есть аккаунт?"
+          }
+        }
+      }
+    },
+    "Are you sure you want to sign out?" : {
+      "comment" : "Alert: Sign Out Message",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы уверены, что хотите выйти?"
           }
         }
       }
@@ -199,6 +221,35 @@
         }
       }
     },
+    "Dismiss" : {
+      "comment" : "Alert: Dismiss button",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отклонить"
+          }
+        }
+      }
+    },
+    "Dismiss button" : {
+      "comment" : "Alert: Dismiss button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Dismiss"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отклонить"
+          }
+        }
+      }
+    },
     "Don't have an account?" : {
       "comment" : "Don't have an account label",
       "localizations" : {
@@ -217,6 +268,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Почта"
+          }
+        }
+      }
+    },
+    "Email not registered. Please sign up or use a different email." : {
+      "comment" : "Alert: wrongEmail",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет пользователя с данной почтой. Зарегистрируйтесь, или используйте другой адрес."
           }
         }
       }
@@ -424,6 +486,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Мы рады видеть Вас вновь! Вы можете продолжить с места, где остановились, если войдете в аккаунт."
+          }
+        }
+      }
+    },
+    "Incorrect password. Please try again." : {
+      "comment" : "Alert: wrongPasswordMessage",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неправильный пароль."
           }
         }
       }
@@ -694,6 +767,42 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выйти"
+          }
+        }
+      }
+    },
+    "Sign Out button" : {
+      "comment" : "Alert: Sign Out button",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sign Out"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выйти"
+          }
+        }
+      }
+    },
+    "Sign Out message" : {
+      "comment" : "Alert: Sign Out Message",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Are you sure you want to sign out?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы уверены, что хотите выйти?"
           }
         }
       }

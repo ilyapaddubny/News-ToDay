@@ -248,7 +248,21 @@ class ProfileViewController: BaseController {
     func signAct() -> UIAction {
         let act = UIAction { [weak self] _ in
             guard let self = self else { return }
-            self.router?.onboardingFlow()
+            
+            let alert = UIAlertController(title: AlertStrings.alertTitle,
+                                          message: AlertStrings.signOutMessage,
+                                          preferredStyle: .alert)
+            
+            // Add actions to the alert
+            alert.addAction(UIAlertAction(title: AlertStrings.signOutOption, style: .destructive) { _ in
+                // Perform sign out action
+                self.router?.onboardingFlow()
+            })
+            
+            alert.addAction(UIAlertAction(title: AlertStrings.signOutDismissOutOption, style: .cancel, handler: nil))
+            
+            // Present the alert
+            self.present(alert, animated: true, completion: nil)
         }
         return act
     }
