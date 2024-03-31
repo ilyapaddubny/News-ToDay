@@ -8,6 +8,18 @@
 import UIKit
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
+    
+    var router: RouterProtocol?
+    
+    var users: [User] {
+        get {
+            UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers) ?? []
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey:  UserDefaultsConstants.listOfUsers)
+        }
+    }
+    
     var passwordIsSecure = true
     let logoLabel = UILabel()
     let textLabel = UILabel()
@@ -23,7 +35,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
         button.backgroundColor = .buttonActiveColor
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         return button
     }()
     
@@ -31,7 +43,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.text = SignInStrings.label
         label.textColor = .textSecondaryColor
-        label.heightAnchor.constraint(equalToConstant: 15).isActive = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -41,7 +52,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         let button = UIButton(primaryAction: signUpAction())
         button.setTitle(SignInStrings.signUp, for: .normal)
         button.setTitleColor(.textPrimaryColor, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -70,7 +80,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }()
     
     lazy var lock: UIView = {
-        let image = createImageForField(name: "LockIcon")
+        let image = createImageForField(name: "lockIcon")
         return image
     }()
     
@@ -98,19 +108,24 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         button.isUserInteractionEnabled = false
         button.alpha = 0.5
-        
+        createDismissKeyboardTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateLabelsText()
-        
+    }
+    
+    
+    private func createDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
     }
     
     
     func setupUI() {
         logoLabel.text = SignInStrings.title
-        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
+        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 27)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .left
         
@@ -118,7 +133,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         textLabel.font = UIFont(name: "Inter-Regular" , size: 18)
         textLabel.textColor = .textSecondaryColor
         textLabel.textAlignment = .left
-        textLabel.numberOfLines = 3
+        textLabel.numberOfLines = 4
         
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -135,11 +150,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(stack)
         
         NSLayoutConstraint.activate([
-            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             logoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 20),
+            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 15),
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
@@ -166,7 +181,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         field.leftView = imName
         field.backgroundColor = .buttonDisabledColor
         field.leftViewMode = .always
-        field.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        field.heightAnchor.constraint(equalToConstant: 60).isActive = true
         field.layer.cornerRadius = 15
         field.clipsToBounds = true
         field.autocorrectionType = .no
@@ -202,7 +217,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         if textField == login {
             textField.leftView = createImageForField(name: "EmailSelectedIcon")
         } else {
-            textField.leftView = createImageForField(name: "LockSelectedIcon")
+            textField.leftView = createImageForField(name: "lockSelectedIcon")
         }
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.buttonActiveColor.cgColor
@@ -227,6 +242,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // MARK: - Logic + Actions
+    
     func check()  {
         if self.login.text!.trimmingCharacters(in: .whitespaces) != "" && self.password.text!.trimmingCharacters(in: .whitespaces) != "" {
             self.button.isUserInteractionEnabled = true
@@ -243,16 +260,57 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         passwordText = SignInStrings.password
         loginEnterText = SignInStrings.enterEmail
         passwordEnterText = SignInStrings.enterPassword
-        button.setTitle(SignInStrings.signUp, for: .normal)
-        signUpButton.setTitle(SignInStrings.signIn, for: .normal)
+        button.setTitle(SignInStrings.signIn, for: .normal)
+        signUpButton.setTitle(SignInStrings.signUp, for: .normal)
         
     }
     
+    func showAlert(message: String) {
+        // You need to implement your alert logic here, whether it's UIAlertController or some custom alert view
+        // For example:
+        let alertController = UIAlertController(title: AlertStrings.alertTitle, message: message, preferredStyle: .alert)
+         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+         self.present(alertController, animated: true, completion: nil)
+    }
+
+    
     func buttonTapped() -> UIAction {
-        let act = UIAction { _ in
-            if self.login.text!.trimmingCharacters(in: .whitespaces) != "" && self.password.text!.trimmingCharacters(in: .whitespaces) != "" {
-                print("sign in")
+        let act = UIAction { [weak self] _ in
+            guard let self = self else { return }
+            
+            
+            if let enteredEmail = self.login.text?.trimmingCharacters(in: .whitespaces),
+               let enteredPassword = self.password.text?.trimmingCharacters(in: .whitespaces) {
+                
+                // Check if the entered email exists in the list of users
+                if let user = self.users.first(where: { $0.email == enteredEmail }) {
+                    // User email found, check password
+                    if user.password == enteredPassword {
+                        // Password correct, perform main flow
+                        guard var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)  else {return}
+                        if let index = users.firstIndex(where: { $0 == user }) {
+                            UserDefaults.standard.setValue(users[index], forKey: UserDefaultsConstants.userLoggedIn)
+                            self.router?.mainFlow()
+                        }
+                        
+                    } else {
+                        // Password incorrect, show alert
+                        showAlert(message: AlertStrings.wrongPasswordMessage)
+                    }
+                } else {
+                    // Email not found, show alert
+                    if enteredEmail.capitalized == "Test" && enteredPassword.capitalized == "Test" {
+                        self.router?.mainFlow()
+                    } else {
+                        showAlert(message: AlertStrings.wrongEmail)
+                    }
+                }
+                
+                
             }
+                
+                
+                
             if self.login.text!.trimmingCharacters(in: .whitespaces) == "" {
                 self.login.attributedPlaceholder = NSAttributedString(string: SignInStrings.enterEmail, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.login.layer.borderColor = UIColor.red.cgColor
@@ -266,7 +324,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func eyeAction() -> UIAction {
-        let act = UIAction { _ in
+        let act = UIAction { [weak self] _ in
+            guard let self = self else { return }
             print("eye")
             if self.passwordIsSecure {
                 self.passwordIsSecure = false
@@ -282,28 +341,16 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func signUpAction() -> UIAction {
-        let act = UIAction { _ in
-            let vc = SignUpViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+        let act = UIAction { [weak self] _ in
+            guard let self = self else { return }
+            self.router?.registerFlow()
         }
         return act
     }
     
+    
+    deinit {
+        print("deinit from SignInViewController")
+    }
 }
 
-
-//import SwiftUI
-//
-//struct Landuage: PreviewProvider {
-//    static var previews: some View {
-//        ContainerView().ignoresSafeArea()
-//    }
-//    struct ContainerView: UIViewRepresentable {
-//        let view = SignInViewController()
-//
-//        func makeUIView(context: Context) -> some UIView {
-//            return view
-//        }
-//        func updateUIView(_ uiView: UIViewType, context: Context) { }
-//    }
-//}

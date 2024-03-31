@@ -8,6 +8,18 @@
 import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
+    
+    var router: RouterProtocol?
+    
+    var users: [User] {
+        get {
+            UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers) ?? []
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey:  UserDefaultsConstants.listOfUsers)
+        }
+    }
+    
     var passwordIsSecure = true
     let logoLabel = UILabel()
     let textLabel = UILabel()
@@ -27,7 +39,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 20)
         button.layer.cornerRadius = 15
         button.backgroundColor = .buttonActiveColor
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 55).isActive = true
         return button
     }()
     
@@ -35,7 +47,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.text = SignUpStrings.label
         label.textColor = .textSecondaryColor
-        label.heightAnchor.constraint(equalToConstant: 15).isActive = true
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -43,23 +54,22 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     lazy var signInButton: UIButton = {
         let button = UIButton(primaryAction: signInAction())
-        button.setTitle(SignUpStrings.signUp, for: .normal)
+        button.setTitle(SignUpStrings.signIn, for: .normal)
         button.setTitleColor(.textPrimaryColor, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 15).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return button
     }()
     
     lazy var stack: UIStackView = {
         let stack = UIStackView()
-       
+
         stack.axis = .horizontal
         stack.spacing = 3
         stack.alignment = .center
         stack.distribution = .fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return stack
     }()
     
@@ -74,12 +84,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }()
     
     lazy var lock: UIView = {
-        let image = createImageForField(name: "LockIcon")
+        let image = createImageForField(name: "lockIcon")
         return image
     }()
     
     lazy var lock2: UIView = {
-        let image = createImageForField(name: "LockIcon")
+        let image = createImageForField(name: "lockIcon")
         return image
     }()
     
@@ -125,18 +135,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         button.isUserInteractionEnabled = false
         button.alpha = 0.5
-        
+        createDismissKeyboardTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateLabelsText()
-        
     }
+    
+    
+    private func createDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
+    }
+    
     
     func setupUI() {
         logoLabel.text = SignUpStrings.title
-        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 25)
+        logoLabel.font = UIFont(name: "Inter-SemiBold" , size: 27)
         logoLabel.textColor = .textPrimaryColor
         logoLabel.textAlignment = .left
         
@@ -144,7 +160,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         textLabel.font = UIFont(name: "Inter-Regular" , size: 18)
         textLabel.textColor = .textSecondaryColor
         textLabel.textAlignment = .left
-        textLabel.numberOfLines = 3
+        textLabel.numberOfLines = 4
         
         logoLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -163,11 +179,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         view.addSubviews(stack)
         
         NSLayoutConstraint.activate([
-            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            logoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             logoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             logoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 20),
+            textLabel.topAnchor.constraint(equalTo: logoLabel.bottomAnchor, constant: 15),
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
@@ -203,7 +219,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         field.leftView = imName
         field.backgroundColor = .buttonDisabledColor
         field.leftViewMode = .always
-        field.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        field.heightAnchor.constraint(equalToConstant: 60).isActive = true
         field.layer.cornerRadius = 15
         field.clipsToBounds = true
         field.autocorrectionType = .no
@@ -241,9 +257,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         case login:
             textField.leftView = createImageForField(name: "EmailSelectedIcon")
         case password:
-            textField.leftView = createImageForField(name: "LockSelectedIcon")
+            textField.leftView = createImageForField(name: "lockSelectedIcon")
         case repeatPassword:
-            textField.leftView = createImageForField(name: "LockSelectedIcon")
+            textField.leftView = createImageForField(name: "lockSelectedIcon")
         default:
             break
         }
@@ -278,13 +294,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         passwordEnterText = SignUpStrings.enterPassword
         repeatPasswordEnterText = SignUpStrings.enterRepeatPassword
         
-        button.setTitle(SignUpStrings.signIn, for: .normal)
-        signInButton.setTitle(SignUpStrings.signUp, for: .normal)
+        button.setTitle(SignUpStrings.signUp, for: .normal)
+//        signInButton.setTitle(SignUpStrings.signUp, for: .normal)
         
     }
     
     func buttonTapped() -> UIAction {
-        let act = UIAction { _ in
+        let act = UIAction { [weak self] _ in
+            guard let self = self else { return }
             if self.login.text!.trimmingCharacters(in: .whitespaces) == "" {
                 self.login.attributedPlaceholder = NSAttributedString(string: SignUpStrings.enterEmail, attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 self.login.layer.borderColor = UIColor.red.cgColor
@@ -302,7 +319,22 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 self.repeatPassword.layer.borderColor = UIColor.red.cgColor
             }
             if self.password.text == self.repeatPassword.text {
-                print("sign up")
+                //Sign UP here
+                guard let name = self.userName.text,
+                      let email = self.login.text,
+                      let password = self.password.text else {
+                    // Handle the case where any of the required fields is nil
+                    return
+                }
+                let newUser = User(name: name, email: email, password: password, fafouriteCategories: [])
+                UserDefaults.standard.setValue(newUser, forKey: UserDefaultsConstants.userLoggedIn)
+                self.users.append(newUser)
+                print("Users in the app: \(self.users)")
+                
+                guard let router = self.router else { return }
+                let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
+                self.navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
+                FirstLaunchStorage.setFirstLaunchComplete()
             } else{
                 print("nfn")
             }
@@ -311,10 +343,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     func signInAction() -> UIAction {
-        let act = UIAction { _ in
-            let vc = SignInViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+        let act = UIAction { [weak self] _ in
+            self?.router?.authFlow()
         }
         return act
+    }
+    
+    
+    deinit {
+        print("deinit from SignUpViewController")
     }
 }

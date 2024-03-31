@@ -7,8 +7,9 @@
 
 import UIKit
 
-final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: BaseController {
     
+    var router: RouterProtocol?
     
     //MARK: - UI
     
@@ -22,6 +23,16 @@ final class OnboardingViewController: UIViewController {
         setupViews()
         setConstraints()
         onboardingView.delegate = self
+    }
+    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        
+//        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.onboarding)
+//    }
+    
+    deinit {
+        print("deinit from OnboardingViewController")
     }
 }
 
@@ -50,11 +61,13 @@ private extension OnboardingViewController {
 
 extension OnboardingViewController: OnboardingViewProtocol {
     func actionButtonPressed() {
-            let rootVC = NTDTabBarController()
-        
-            rootVC.modalPresentationStyle = .fullScreen
-        present(rootVC, animated: true) {
-            FirstLaunchStorage.setFirstLaunchComplete()
+        if let router = router {
+            router.registerFlow()
+            
+            //TODO: use it after user logged in (Signs in)
+//            let onboardingCategoriesViewController = OnboardingCategoriesViewController(router: router)
+//            navigationController?.pushViewController(onboardingCategoriesViewController, animated: true)
+//            FirstLaunchStorage.setFirstLaunchComplete()
         }
     }
 }

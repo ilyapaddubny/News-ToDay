@@ -22,7 +22,7 @@ final class OnboardingView: UIView {
     private let collectionView: UICollectionView = {
         let layout = CarouselFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 288, height: 336)
+        layout.itemSize = CGSize(width: 280, height: 330)
         layout.sideItemAlpha = 1
         layout.sideItemScale = 0.68
         layout.spacingMode = .fixed(spacing: 28)
@@ -46,10 +46,10 @@ final class OnboardingView: UIView {
     
     private let mainLabel = CustomLabel(text: OnboardingMockData.firstMainLabel,
                                         textColor: .black,
-                                        font: UIFont.size(Constants.textSize, weight: .bold))
-//                                        font: Font.getFont(.bold, size: 24))
+                                        font: UIFont(name: "Inter-SemiBold", size: 25)!)
     
-    private let descriptionLabel = CustomLabel(text: OnboardingMockData.firstDescriptionlabel)
+    private var descriptionLabel = CustomLabel(text: OnboardingMockData.firstDescriptionlabel, textColor: .textSecondary, font: UIFont(name: "Inter-Regular", size: 17)!)
+
     
     private lazy var actionButton = BlueButton(text: OnboardingMockData.nextButton)
     
@@ -149,7 +149,7 @@ private extension OnboardingView {
         
         let firstScreen = OnboardingModel(mainImage: .firstScreen)
         let secondScreen = OnboardingModel(mainImage: .secondScreen)
-        let thirdScreen = OnboardingModel(mainImage: .firstScreen)
+        let thirdScreen = OnboardingModel(mainImage: .thirdScreen)
 
         onboardingArray = [firstScreen, secondScreen, thirdScreen]
     }
@@ -182,21 +182,17 @@ private extension OnboardingView {
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .textSecondaryColor
         pageControl.currentPageIndicatorTintColor = .buttonActiveColor
-        
-//        if #available(iOS 14.0, *) {
-//            pageControl.preferredIndicatorImage = .largeIndicator
-//        }
     }
     
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 250),
+            collectionView.heightAnchor.constraint(equalToConstant: 350),
             
-            pageControl.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 40),
+            pageControl.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20),
             pageControl.centerXAnchor.constraint(equalTo: centerXAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 30),
             
@@ -208,7 +204,7 @@ private extension OnboardingView {
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
             
-            actionButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            actionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             actionButton.heightAnchor.constraint(equalToConstant: 55)

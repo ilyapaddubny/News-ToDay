@@ -19,6 +19,7 @@ extension Favorite {
     @NSManaged public var title: String?
     @NSManaged public var urlToImage: String?
     @NSManaged public var author: String?
+    @NSManaged public var user: String?
     @NSManaged public var source: Origin?
 
 }

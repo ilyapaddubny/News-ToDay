@@ -55,10 +55,8 @@ class HomeViewController: BaseController {
     }
     
     func updateAllStrings() {
-        self.title = ScreenTitleStrings.browse
         setSubtitleText(text: Subtitle.browse)
         searchBar.placeholder = Placeholder.search
-        self.tabBarItem.title = nil
         collectionView.reloadData()
     }
     
@@ -284,7 +282,6 @@ class HomeViewController: BaseController {
             //TODO: reload data
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
-            print(items.isEmpty ? "⚠️ No promoted articles from API" : "\(items.count) promoted articles retrived from API")
             promotedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
                 // Update existing data source snapshot with new promoted articles
@@ -308,7 +305,9 @@ class HomeViewController: BaseController {
                 }
             }
             
-            guard let selectedCategory = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey) else {
+            guard let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return Endpoint.searchTopHeadlines(categories: [], countries: [country]).url}
+            
+            guard let selectedCategory = currentUser.tagCategory else {
                 return Endpoint.searchTopHeadlines(categories: [], countries: [country]).url
             }
             
@@ -324,7 +323,6 @@ class HomeViewController: BaseController {
             guard let news = news else { return }
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
-            print(items.isEmpty ? "⚠️ No recommended articles from API" : "\(items.count) recommended articles retrived from API")
             recommendedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
                     // Update existing data source snapshot with new recommended articles
@@ -347,8 +345,8 @@ class HomeViewController: BaseController {
                     country = Country.usa
                 }
             }
-            
-            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+            let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)
+            let categories = currentUser?.fafouriteCategories ?? []
             
             return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
         }
@@ -437,7 +435,8 @@ extension HomeViewController: UICollectionViewDelegate {
             let newsViewController = NewsViewController(category: "entertainment", article: article)
             navigationController?.pushViewController(newsViewController, animated: true)
         case .category(var category):
-            let previouslySelected = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            guard let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return}
+            let previouslySelected = currentUser.tagCategory
             category.isSelectedOnTheMainScreen.toggle()
             
             var snapshot = self.dataSource.snapshot()
@@ -456,7 +455,6 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - SeeAll header delegate
 extension HomeViewController: CollectionHeaderDelegate {
     func seeAllButtonTapped(_ header: UICollectionReusableView) {
-//        let recommendedArticlesVC = RecommendedArticlesViewController()
         let recommendedArticlesVC = RecommendedArticlesViewController()
         navigationController?.pushViewController(recommendedArticlesVC, animated: true)
 

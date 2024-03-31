@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Image.png",
+      "filename" : "animal-seal-1447746.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "animal-seal-1447746@2x.jpeg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "animal-seal-1447746@3x.jpeg",
       "idiom" : "universal",
       "scale" : "3x"
     }

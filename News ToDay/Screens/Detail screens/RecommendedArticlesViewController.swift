@@ -39,6 +39,7 @@ class RecommendedArticlesViewController: BaseController {
         super.viewWillAppear(animated)
         configureDataSource()
         logoLabel.text = ScreenTitleStrings.recommended
+        activityIndicator.isHidden = false
         getNews()
     }
     
@@ -51,7 +52,7 @@ class RecommendedArticlesViewController: BaseController {
         setUI()
         configureDataSource()
         collectionView.delegate = self
-        
+        view.bringSubviewToFront(activityIndicator)
     }
     
     
@@ -114,9 +115,6 @@ class RecommendedArticlesViewController: BaseController {
         collectionView.register(StandardArticleCollectionViewCell.self,
                                 forCellWithReuseIdentifier: StandardArticleCollectionViewCell.reuseIdentifier)
         configureDataSource()
-        
-        
-        
     }
     
     func createLayout() -> UICollectionViewLayout  {
@@ -168,7 +166,6 @@ class RecommendedArticlesViewController: BaseController {
         // MARK: Snapshot Definition
         var snapshot = NSDiffableDataSourceSnapshot<Section, CollectionItem>()
         snapshot.appendSections([.recommended])
-        snapshot.appendItems(CollectionItem.bookmarkedArticles, toSection: .recommended)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
@@ -184,14 +181,15 @@ class RecommendedArticlesViewController: BaseController {
             guard let news = news else { return }
             let items = news.articles.map { CollectionItem.news($0, UUID()) }
             
-            print(items.isEmpty ? "⚠️ No recommended articles from API" : "\(items.count) recommended articles retrived from API")
             recommendedArticles = items.filter({$0.news?.title != "[Removed]"})
             DispatchQueue.main.async {
-                    // Update existing data source snapshot with new recommended articles
-                    var snapshot = self.dataSource.snapshot()
-                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .recommended))
-                    snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
-                    self.dataSource.apply(snapshot, animatingDifferences: true)
+                // Update existing data source snapshot with new recommended articles
+                var snapshot = self.dataSource.snapshot()
+                snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .recommended))
+                snapshot.appendItems(self.recommendedArticles, toSection: .recommended)
+                
+                self.activityIndicator.isHidden = true
+                self.dataSource.apply(snapshot, animatingDifferences: true)
             }
         }
         
@@ -207,8 +205,8 @@ class RecommendedArticlesViewController: BaseController {
                     country = Country.usa
                 }
             }
-            
-            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+            let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)
+            let categories = currentUser?.fafouriteCategories ?? []
             
             return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
         }

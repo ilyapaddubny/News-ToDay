@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileViewController: BaseController {
     
+    var router: RouterProtocol?
+    
     var langLabel: UILabel!
     var termsLabel: UILabel!
     var signOutLabel: UILabel!
@@ -104,8 +106,14 @@ class ProfileViewController: BaseController {
     private func setUserText() {
         self.view.addSubview(textStack)
         
-        let userName = createLabel(size: 20, font: "Inter-SemiBold", text: "Ivan I", color: .textPrimaryColor)
-        let userMail = createLabel(size: 17, font: "Inter-Regular", text: "Ivan@gmail.com", color: .textSecondaryColor)
+        let userName = createLabel(size: 20, 
+                                   font: "Inter-SemiBold",
+                                   text: UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)?.name ?? "Ivan I",
+                                   color: .textPrimaryColor)
+        let userMail = createLabel(size: 17, 
+                                   font: "Inter-Regular",
+                                   text: UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)?.email ?? "ivan@gmail.com",
+                                   color: .textSecondaryColor)
         
         textStack.addArrangedSubview(userName)
         textStack.addArrangedSubview(userMail)
@@ -239,10 +247,26 @@ class ProfileViewController: BaseController {
     
     func signAct() -> UIAction {
         let act = UIAction { [weak self] _ in
-            let vc = SignInViewController()
-            self?.navigationController?.pushViewController(vc, animated: true)
+            guard let self = self else { return }
+            
+            let alert = UIAlertController(title: AlertStrings.alertTitle,
+                                          message: AlertStrings.signOutMessage,
+                                          preferredStyle: .alert)
+            
+            // Add actions to the alert
+            alert.addAction(UIAlertAction(title: AlertStrings.signOutOption, style: .destructive) { _ in
+                // Perform sign out action
+                self.router?.onboardingFlow()
+            })
+            
+            alert.addAction(UIAlertAction(title: AlertStrings.signOutDismissOutOption, style: .cancel, handler: nil))
+            
+            // Present the alert
+            self.present(alert, animated: true, completion: nil)
         }
         return act
     }
+    
+    
     
 }

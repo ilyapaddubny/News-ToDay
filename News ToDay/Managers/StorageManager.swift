@@ -35,7 +35,7 @@ public final class StorageManager: NSObject {
         favorite.newsDescription = article.description
         favorite.content = article.content
         favorite.urlToImage = article.urlToImage
-        
+        favorite.user = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)?.email
         appDelegate.saveContext()
     }
     
@@ -43,7 +43,9 @@ public final class StorageManager: NSObject {
     func fetchFavorites() -> [Favorite] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
         do {
-            return try context.fetch(fetchRequest) as? [Favorite] ?? []
+            guard var currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return []}
+            let favoritesAll = try context.fetch(fetchRequest) as? [Favorite] ?? []
+            return favoritesAll.filter{$0.user == currentUser.email}
         } catch {
             print(error.localizedDescription)
         }
@@ -55,7 +57,9 @@ public final class StorageManager: NSObject {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
         do {
             guard let favorites = try? context.fetch(fetchRequest) as? [Favorite] else { return nil }
-            return favorites.first { $0.title == title }
+            guard var currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return nil}
+
+            return favorites.first { ($0.title == title) && ($0.user == currentUser.email) }
         }
     }
     
