@@ -149,7 +149,7 @@ private extension OnboardingView {
         
         let firstScreen = OnboardingModel(mainImage: .firstScreen)
         let secondScreen = OnboardingModel(mainImage: .secondScreen)
-        let thirdScreen = OnboardingModel(mainImage: .firstScreen)
+        let thirdScreen = OnboardingModel(mainImage: .thirdScreen)
 
         onboardingArray = [firstScreen, secondScreen, thirdScreen]
     }
