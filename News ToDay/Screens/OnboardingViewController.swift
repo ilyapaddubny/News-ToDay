@@ -23,12 +23,6 @@ final class OnboardingViewController: UIViewController {
         setConstraints()
         onboardingView.delegate = self
     }
-    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        
-//        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.onboarding)
-//    }
 }
 
 
