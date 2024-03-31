@@ -345,8 +345,8 @@ class HomeViewController: BaseController {
                     country = Country.usa
                 }
             }
-            
-            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+            let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)
+            let categories = currentUser?.fafouriteCategories ?? []
             
             return Endpoint.searchTopHeadlines(categories: categories.map{$0.rawValue}, countries: [country]).url
         }
