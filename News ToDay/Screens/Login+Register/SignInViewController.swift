@@ -267,9 +267,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     func showAlert(message: String) {
         // You need to implement your alert logic here, whether it's UIAlertController or some custom alert view
-        print("Alert: \(message)")
         // For example:
-         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: AlertStrings.alertTitle, message: message, preferredStyle: .alert)
          alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
          self.present(alertController, animated: true, completion: nil)
     }
@@ -294,19 +293,16 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                             self.router?.mainFlow()
                         }
                         
-                        
-                        print("User signed in with email: \(enteredEmail)")
                     } else {
                         // Password incorrect, show alert
-                        showAlert(message: "Incorrect password. Please try again.")
+                        showAlert(message: AlertStrings.wrongPasswordMessage)
                     }
                 } else {
                     // Email not found, show alert
                     if enteredEmail.capitalized == "Test" && enteredPassword.capitalized == "Test" {
                         self.router?.mainFlow()
                     } else {
-                        showAlert(message: "Email not registered. Please sign up or use a different email.")
-
+                        showAlert(message: AlertStrings.wrongEmail)
                     }
                 }
                 
