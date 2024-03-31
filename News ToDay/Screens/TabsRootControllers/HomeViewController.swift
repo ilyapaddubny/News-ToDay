@@ -305,7 +305,9 @@ class HomeViewController: BaseController {
                 }
             }
             
-            guard let selectedCategory = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey) else {
+            guard let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return Endpoint.searchTopHeadlines(categories: [], countries: [country]).url}
+            
+            guard let selectedCategory = currentUser.tagCategory else {
                 return Endpoint.searchTopHeadlines(categories: [], countries: [country]).url
             }
             
@@ -433,7 +435,8 @@ extension HomeViewController: UICollectionViewDelegate {
             let newsViewController = NewsViewController(category: "entertainment", article: article)
             navigationController?.pushViewController(newsViewController, animated: true)
         case .category(var category):
-            let previouslySelected = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            guard let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return}
+            let previouslySelected = currentUser.tagCategory
             category.isSelectedOnTheMainScreen.toggle()
             
             var snapshot = self.dataSource.snapshot()
@@ -452,7 +455,6 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - SeeAll header delegate
 extension HomeViewController: CollectionHeaderDelegate {
     func seeAllButtonTapped(_ header: UICollectionReusableView) {
-//        let recommendedArticlesVC = RecommendedArticlesViewController()
         let recommendedArticlesVC = RecommendedArticlesViewController()
         navigationController?.pushViewController(recommendedArticlesVC, animated: true)
 
