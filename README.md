@@ -5,7 +5,7 @@
 [![Swift](https://img.shields.io/badge/swift-5.7-brightgreen?style=for-the-badge&logo=swift&logoColor=white)](https://swift.org)
 [![UIKit](https://img.shields.io/badge/UIKit-pink?style=for-the-badge&logoColor=white)](https://developer.apple.com/documentation/uikit)
 [![UIKit](https://img.shields.io/badge/News-API-teal?style=for-the-badge)](https://newsapi.org/)
-[![Contributors](https://img.shields.io/badge/Contributors-4-cyan?style=for-the-badge&logoColor=white)](https://github.com/your-username/your-repo/contributors) 
+[![Contributors](https://img.shields.io/badge/Contributors-4-cyan?style=for-the-badge&logoColor=white)](https://github.com/ilyapaddubny/News-ToDay/graphs/contributors) 
 
 ![Your GIF](https://github.com/ilyapaddubny/News-ToDay/blob/develop/NewsToDayPromo.gif)
 
