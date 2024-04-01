@@ -11,6 +11,8 @@
 
 Welcome to News ToDay, your go-to news application for staying updated with the latest headlines and personalized news feeds. Whether you're interested in global affairs, technology breakthroughs, or lifestyle trends, News ToDay has you covered.
 
+Please Note: News ToDay utilizes the free version of the API, which includes limitations such as displaying partial articles instead of the entire content.
+
 ## Features
 
 - **Stay Informed:** Access the most popular news stories and curated news feeds.
