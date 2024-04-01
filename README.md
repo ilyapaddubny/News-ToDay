@@ -28,5 +28,5 @@ For support or questions, contact us at [ilyapaddubny@gmail.com](mailto:ilyapadd
 
 ---
 <p align="center">
-  <img src="https://github.com/ilyapaddubny/LumiCount/assets/33945343/8b09ae33-61eb-48b9-9262-0c597586656a" width="80" alt="App Icon">
+  <img src="https://github.com/ilyapaddubny/News-ToDay/blob/develop/News%20ToDay/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon~ios-marketing.png" width="80" alt="App Icon">
 </p>
