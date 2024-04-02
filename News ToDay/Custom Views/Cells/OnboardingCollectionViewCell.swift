@@ -56,16 +56,20 @@ private extension OnboardingCollectionViewCell {
     
     func setupViews() {
         addSubview(mainImage)
-        layer.cornerRadius = 12
+        
+        mainImage.contentMode = .scaleAspectFill
+        mainImage.clipsToBounds = true
+        mainImage.layer.cornerRadius = 12.0
     }
     
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            mainImage.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            mainImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            mainImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            mainImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
+            mainImage.topAnchor.constraint(equalTo: topAnchor),
+            mainImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+            mainImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mainImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
         ])
     }
 }

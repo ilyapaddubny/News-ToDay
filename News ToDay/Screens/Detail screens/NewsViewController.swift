@@ -59,6 +59,7 @@ class NewsViewController: BaseController {
     private func addTarget() {
         bookmarkButton.addTarget(self, action: #selector(bookmarkTapped), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
     }
     
     @objc func bookmarkTapped() {
@@ -185,4 +186,14 @@ extension NewsViewController {
             })
             .eraseToAnyPublisher()
         }
+    
+    
+    @objc private func shareTapped() {
+        guard let newsUrl = article.url else { return }
+        let activityViewController = UIActivityViewController(activityItems: [newsUrl], applicationActivities: [])
+        DispatchQueue.main.async {
+            activityViewController.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+            self.present(activityViewController, animated: true)
+        }
+    }
 }

@@ -37,6 +37,8 @@ enum Image {
     static let shareArrow = UIImage(named: "ForwardWhiteIcon")
     static let searchIcon = UIImage(named: "searchIcon")
     static let emptyBookmarksIcon = UIImage(named: "EmptyBookmarksIcon")
+    static let onboardingFirst = UIImage(named: "firstScreen")
+    static let onboardingSecond = UIImage(named: "secondScreen")
 }
 
 
@@ -124,6 +126,20 @@ struct CategoryStrings {
 }
 
 
+struct AlertStrings {
+    static var alertTitle: String { NSLocalizedString("Alert", value: "Alert", comment: "Alert").localized }
+    static var signOutOption: String { NSLocalizedString("Sign Out button", value: "Sign Out", comment: "Alert: Sign Out button").localized }
+    static var signOutDismissOutOption: String  { NSLocalizedString("Dismiss", value: "Dismiss", comment: "Alert: Dismiss button").localized }
+    static var signOutMessage: String  { NSLocalizedString("Are you sure you want to sign out?", value: "Are you sure you want to sign out?", comment: "Alert: Sign Out Message").localized }
+    
+    static var wrongPasswordMessage: String  { NSLocalizedString("Incorrect password. Please try again.", value: "Incorrect password. Please try again.", comment: "Alert: wrongPasswordMessage").localized }
+    
+    static var wrongEmail: String  { NSLocalizedString("Email not registered. Please sign up or use a different email.", value: "Email not registered. Please sign up or use a different email.", comment: "Alert: wrongEmail").localized }
+    
+    
+}
+
+
 
 
 
@@ -172,6 +188,10 @@ enum UserDefaultsConstants {
     static let bookmarkedCategoriesKey = "categories_bookmarked"
     static let mainScreenCategoriesSelectedKey = "category_tags"
     static let selectedLanguageKey = "selected_language"
+    
+    
+    static let userLoggedIn = "userLoggedIn"
+    static let listOfUsers = "listOfUsers"
     
 //    static let appGroup = "ddbae45c2e33483d9cec5e18eaa5a82c"
 }

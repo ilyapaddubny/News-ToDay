@@ -20,13 +20,15 @@ enum Category: String, Hashable, CaseIterable, Codable {
     // MARK: - Bookmark categories logic
     var isBookmarked: Bool {
         get {
-            let categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
+            let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn)
+            let categories = currentUser?.fafouriteCategories ?? []
             return categories.contains(self)
         }
         
         set {
-            var categories = UserDefaults.standard.categories(forKey: UserDefaultsConstants.bookmarkedCategoriesKey)
-            // если мы убираем кейс из избранного, нужно удалить его из массива
+            guard var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)  else {return}
+            guard var currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return}
+            var categories = currentUser.fafouriteCategories
             if categories.contains(self), !newValue {
                 categories.removeAll(where: {$0 == self})
             }
@@ -34,19 +36,41 @@ enum Category: String, Hashable, CaseIterable, Codable {
             if newValue {
                 categories.append(self)
             }
-            UserDefaults.standard.setValue(categories, forKey:  UserDefaultsConstants.bookmarkedCategoriesKey)
+            currentUser.fafouriteCategories = categories
+            
+            if let index = users.firstIndex(where: { $0 == currentUser }) {
+                // Update the user in the users array
+                users[index] = currentUser
+                
+                // Update the list of users in UserDefaults
+                UserDefaults.standard.setValue(users, forKey: UserDefaultsConstants.listOfUsers)
+                UserDefaults.standard.setValue(currentUser, forKey: UserDefaultsConstants.userLoggedIn)
+            }
         }
     }
     
     // MARK: - Tag Section Logic
     var isSelectedOnTheMainScreen: Bool {
         get {
-            guard let selectedCategory = UserDefaults.standard.category(forKey: UserDefaultsConstants.mainScreenCategoriesSelectedKey) else {return false}
-            return self == selectedCategory
+            guard let currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return false}
+            let tagCategory = currentUser.tagCategory
+            return self == tagCategory
         }
 
         set {
-            UserDefaults.standard.setValue(self, forKey:  UserDefaultsConstants.mainScreenCategoriesSelectedKey)
+            guard var users = UserDefaults.standard.users(forKey: UserDefaultsConstants.listOfUsers)  else {return}
+            guard var currentUser = UserDefaults.standard.user(forKey: UserDefaultsConstants.userLoggedIn) else {return}
+
+            currentUser.tagCategory = self
+            if let index = users.firstIndex(where: { $0 == currentUser }) {
+                // Update the user in the users array
+                users[index] = currentUser
+                
+                // Update the list of users in UserDefaults
+                UserDefaults.standard.setValue(users, forKey: UserDefaultsConstants.listOfUsers)
+                UserDefaults.standard.setValue(currentUser, forKey: UserDefaultsConstants.userLoggedIn)
+            }
+            
         }
     }
     

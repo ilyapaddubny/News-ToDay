@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "business-man-using-his-mobile-phone.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
