@@ -4,7 +4,8 @@
 [![iOS](https://img.shields.io/badge/iOS%20version-15_%2B-orange?style=for-the-badge&logoColor=white)](https://developer.apple.com/iOS)
 [![Swift](https://img.shields.io/badge/swift-5.7-brightgreen?style=for-the-badge&logo=swift&logoColor=white)](https://swift.org)
 [![UIKit](https://img.shields.io/badge/UIKit-pink?style=for-the-badge&logoColor=white)](https://developer.apple.com/documentation/uikit)
-[![UIKit](https://img.shields.io/badge/News-API-teal?style=for-the-badge)](https://newsapi.org/)
+[![API](https://img.shields.io/badge/News-API-teal?style=for-the-badge)](https://newsapi.org/)
+[![Figma](https://img.shields.io/badge/Figma-Style_Guide-brightgreen?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/1RuiQp6e7KzxUkQrT0BlSy/Challenge-%E2%84%962-%22NewsToDay-App%22?type=design&node-id=0-1&mode=design&t=tQXQyniJLE4LCzFc-0)
 [![Contributors](https://img.shields.io/badge/Contributors-4-cyan?style=for-the-badge&logoColor=white)](https://github.com/ilyapaddubny/News-ToDay/graphs/contributors) 
 
 ![Your GIF](https://github.com/ilyapaddubny/News-ToDay/blob/develop/NewsToDayPromo.gif)
