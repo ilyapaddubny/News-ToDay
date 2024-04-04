@@ -55,6 +55,7 @@ class HomeViewController: BaseController {
     }
     
     func updateAllStrings() {
+        title = ScreenTitleStrings.browse
         setSubtitleText(text: Subtitle.browse)
         searchBar.placeholder = Placeholder.search
         collectionView.reloadData()
